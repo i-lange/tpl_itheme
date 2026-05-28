@@ -10,7 +10,6 @@
     <version>1.0.3</version>
     <description>TPL_ITHEME_XML_DESCRIPTION</description>
     <inheritable>1</inheritable>
-    <namespace path="src">Ilange\Component\Itheme</namespace>
     <files>
         <filename>analytics.php</filename>
         <filename>component.php</filename>

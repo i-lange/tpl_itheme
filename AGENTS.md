@@ -35,7 +35,7 @@
 - Подключение CSS/JS делайте через Web Asset Manager: `joomla.asset.json` + `$wa->useStyle()`, `$wa->useScript()`, `$wa->usePreset()` и зависимости assets. Не добавляйте прямые `<script>`/`<link>` без причины.
 - Для Bootstrap JS используйте Joomla asset names вроде `bootstrap.offcanvas`, `bootstrap.dropdown`, `bootstrap.carousel`; не дублируйте Bootstrap JS вручную.
 - Overrides держите в `html/com_*`, `html/mod_*`; переиспользуемую разметку держите в `html/layouts/*` и вызывайте через `LayoutHelper::render()`.
-- Все пользовательские строки должны идти через `Text::_()` и языковые `.ini`; manifest/admin строки - в `tpl_itheme.sys.ini`, frontend строки - в `tpl_itheme.ini`.
+- Все пользовательские строки должны идти через `Text::_()` и языковые `.ini`; frontend строки - в `tpl_itheme.ini`.
 
 ## Стек и окружение
 
