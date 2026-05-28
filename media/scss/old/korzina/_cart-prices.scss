@@ -1,0 +1,37 @@
+.prices-container {
+  @include media-breakpoint-up(lg) {
+    margin-left: 2em;
+  }
+}
+
+.cart-item_price {
+  font-size: 2em;
+  font-weight: $font-weight-bold;
+
+  .currency {
+    font-size: .75em;
+    margin-left: .25em;
+    text-transform: uppercase;
+  }
+
+  &.sale {
+    color: var(--primary);
+
+    .svg {
+      width: 0.75em;
+      height: 0.75em;
+      margin-top: -.125em;
+      fill: var(--primary);
+    }
+  }
+}
+
+.cart-item_price_old_price {
+  display: none;
+  color: var(--gray-500);
+  font-size: 1.25em;
+
+  @include media-breakpoint-up(md) {
+    display: inline-block;
+  }
+}

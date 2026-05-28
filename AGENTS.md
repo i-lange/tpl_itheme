@@ -1,0 +1,99 @@
+# AGENTS.md
+
+## Назначение проекта
+
+`tpl_itheme` - устанавливаемое site-template расширение для CMS Joomla 6. Шаблон ориентирован на e-commerce: поддерживает штатный контент Joomla, компонент `com_ishop`, модули и плагины магазина iShop.
+
+Главные точки проекта:
+
+- `templateDetails.xml` - манифест Joomla-шаблона: метаданные, файлы установки, media-папка, позиции модулей, языки и параметры шаблона.
+- `index.php`, `component.php`, `error.php`, `offline.php` - основные entrypoint-файлы шаблона.
+- `head.php`, `header.php`, `footer.php`, `analytics.php` - разнесенные части разметки и подключения assets.
+- `joomla.asset.json` - декларация Joomla Web Asset Manager для CSS/JS шаблона.
+- `html/` - template overrides компонентов, модулей, layout-файлов и module chrome.
+- `media/scss/` - исходники стилей, включая импорт Bootstrap 5.3.
+- `media/js/` - исходники JS и собранные `.min.js`/`.gz`.
+- `media/css/` - собранные CSS, `.min.css` и `.gz`.
+- `language/en-GB`, `language/ru-RU` - языковые строки шаблона.
+- `build.mjs`, `pack.mjs`, `vite.config.*.mts` - сборка CSS/JS и упаковка установочного zip.
+
+## Официальный контекст Joomla 6
+
+При изменениях сверяйтесь с официальной документацией Joomla, особенно:
+
+- Getting Started: https://manual.joomla.org/docs/get-started/
+- Technical Requirements: https://manual.joomla.org/docs/get-started/technical-requirements/
+- Templates: https://manual.joomla.org/docs/building-extensions/templates/
+- Template Details File: https://manual.joomla.org/docs/building-extensions/templates/template-details-file/
+- Web Asset Manager: https://manual.joomla.org/docs/general-concepts/web-asset-manager/
+
+Практические правила для Joomla 6 template development:
+
+- `templateDetails.xml` является источником правды для установки. Новые корневые PHP/XML/JSON файлы должны быть добавлены в манифест и в `pack.mjs`; новые подпапки внутри `html`, `language`, `media` уже попадают в пакет через существующие директории.
+- Позиции модулей добавляйте в `<positions>` перед использованием через `<jdoc:include type="modules" name="..." />`.
+- Параметры шаблона добавляйте в `<config><fields name="params">` с явными `type`, `filter`, `validate`, `default`, `showon` и языковыми ключами.
+- Подключение CSS/JS делайте через Web Asset Manager: `joomla.asset.json` + `$wa->useStyle()`, `$wa->useScript()`, `$wa->usePreset()` и зависимости assets. Не добавляйте прямые `<script>`/`<link>` без причины.
+- Для Bootstrap JS используйте Joomla asset names вроде `bootstrap.offcanvas`, `bootstrap.dropdown`, `bootstrap.carousel`; не дублируйте Bootstrap JS вручную.
+- Overrides держите в `html/com_*`, `html/mod_*`; переиспользуемую разметку держите в `html/layouts/*` и вызывайте через `LayoutHelper::render()`.
+- Все пользовательские строки должны идти через `Text::_()` и языковые `.ini`; manifest/admin строки - в `tpl_itheme.sys.ini`, frontend строки - в `tpl_itheme.ini`.
+
+## Стек и окружение
+
+- Joomla CMS 6.x, template extension `client="site"`, `method="upgrade"`.
+- PHP 8.3+ по `script.php`; для Joomla 6.x ориентируйтесь на актуальные требования официальной документации.
+- Bootstrap 5.3: импортируется из `vendor/bootstrap/scss` в `media/scss/itheme.scss`; JS-компоненты подключаются через Joomla Web Asset Manager.
+- Frontend JS: vanilla JavaScript, глобальный объект `Joomla`, события `DOMContentLoaded` и `joomla:updated`.
+- Сборка: Node.js `>=24`, pnpm `>=10.3.0` (`packageManager`: `pnpm@10.33.0`), Vite, Sass, Lightning CSS, vite-plugin-compression.
+- PHP-зависимостей через Composer в проекте нет.
+
+## Команды
+
+Требуется Node.js в `PATH`. В текущем WSL/desktop окружении `pnpm` найден, но `node` не найден, поэтому npm-скрипты здесь не стартовали.
+
+- `pnpm install` - установить JS-зависимости по `pnpm-lock.yaml`.
+- `pnpm dev` - Vite dev server с дефолтным конфигом.
+- `pnpm dev:css` - watch/dev для SCSS через `vite.config.css.mts`.
+- `pnpm dev:js` - watch/dev для JS через `vite.config.js.mts`.
+- `pnpm build` - полная сборка CSS и JS через `build.mjs`.
+- `pnpm build:css` - собрать `media/css/*.css`, `*.min.css`, `*.min.css.gz`.
+- `pnpm build:js` - собрать `media/js/*.min.js`, `*.min.js.gz`.
+- `pnpm preview` - Vite preview, полезен только для статической проверки assets; Joomla PHP-шаблон полноценно не заменяет.
+- `pnpm lint` - ESLint для `media/js/**/*.js`.
+- `pnpm lint:css` - Stylelint для `media/scss/**/*.scss`.
+- `pnpm format` - Prettier для `html`, `language`, `media`.
+- `pnpm test` - сейчас заглушка `No automated tests yet`.
+- `pnpm zip` - `pnpm build` и создание установочного архива `tpl_itheme-{version}.zip`.
+
+## Правила внесения изменений
+
+- Сначала меняйте исходники: SCSS в `media/scss`, обычные JS entrypoints в `media/js`, PHP overrides в `html` или корневых template-файлах. Не правьте вручную `.min.css`, `.min.js`, `.gz`, если изменение должно генерироваться сборкой.
+- После изменения SCSS/JS запускайте соответствующую сборку и включайте сгенерированные assets, если проект ожидает готовый installable template.
+- `vite.config.css.mts` использует `emptyOutDir: true` для `media/css`; не держите там ручные файлы, которые не должны удаляться сборкой.
+- В PHP-файлах сохраняйте `defined('_JEXEC') or die;`, namespaced Joomla API (`Factory`, `HTMLHelper`, `Text`, `LayoutHelper`, `Route`) и существующий стиль шаблона.
+- Экранируйте вывод: `$this->escape()`, `htmlspecialchars()`, `HTMLHelper::cleanImageURL()`, `Text::_()` и явные приведения типов там, где данные приходят из params/input/model.
+- Формы должны содержать Joomla CSRF token через `HTMLHelper::_('form.token')`; новые POST/AJAX сценарии должны учитывать Joomla token и права доступа.
+- Новые assets регистрируйте в `joomla.asset.json` с понятными именами, `type`, `uri`, `attributes` и `dependencies`.
+- Если добавляете новый JS entrypoint, обновите `JS_ENTRY_FILES` в `vite.config.js.mts` и asset declaration в `joomla.asset.json`.
+- Если добавляете новый SCSS entrypoint, обновите `SCSS_ENTRIES` в `vite.config.css.mts` и asset declaration в `joomla.asset.json`.
+- Для Bootstrap-разметки используйте классы и data-атрибуты Bootstrap 5.3 (`data-bs-*`), а не устаревшие Bootstrap 4 подходы.
+- Поддерживайте accessibility: `aria-label`, `visually-hidden`, корректные `button`/`a`, возврат фокуса в offcanvas/modal и видимые состояния focus.
+- При добавлении языковых ключей обновляйте обе локали `en-GB` и `ru-RU`.
+- Не редактируйте `node_modules`. `vendor/bootstrap` считается vendored Bootstrap 5.3 и меняется только осознанным апгрейдом с проверкой SCSS/JS совместимости.
+
+## Проверка перед сдачей
+
+Минимальный набор:
+
+- `pnpm build`
+- `pnpm lint`
+- `pnpm lint:css`
+- `pnpm test`
+- `pnpm zip`
+
+Если Node.js недоступен, явно сообщите, что команды не запускались из-за окружения. Для функциональной проверки установите zip в Joomla 6 и проверьте как минимум главную, категорию, карточку товара, корзину, checkout, поиск, логин, 403/404 и offline page.
+
+## Ограничения и известные состояния
+
+- Это не полный сайт Joomla, а шаблон расширения. Корневые PHP-файлы нельзя полноценно запускать вне Joomla application context.
+- Автоматических тестов пока нет; `pnpm test` является заглушкой.
+- Конфиги ESLint/Stylelint/Prettier в корне не найдены; команды объявлены в `package.json`, но строгие правила зависят от добавления/настройки конфигов.

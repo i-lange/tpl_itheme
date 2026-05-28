@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="template" client="site" method="upgrade">
+    <name>itheme</name>
+    <author>Pavel Lange</author>
+    <creationDate>2026-01-21</creationDate>
+    <copyright>(C) 2026 Pavel Lange &lt;https://ilange.ru&gt;</copyright>
+    <license>GNU General Public License version 2 or later</license>
+    <authorEmail>pavel@ilange.ru</authorEmail>
+    <authorUrl>https://ilange.ru/en/contact</authorUrl>
+    <version>1.0.3</version>
+    <description>TPL_ITHEME_XML_DESCRIPTION</description>
+    <inheritable>1</inheritable>
+    <namespace path="src">Ilange\Component\Itheme</namespace>
+    <files>
+        <filename>analytics.php</filename>
+        <filename>component.php</filename>
+        <filename>error.php</filename>
+        <filename>footer.php</filename>
+        <filename>head.php</filename>
+        <filename>header.php</filename>
+        <filename>index.php</filename>
+        <filename>offline.php</filename>
+        <filename>joomla.asset.json</filename>
+        <filename>templateDetails.xml</filename>
+        <folder>html</folder>
+        <folder>src</folder>
+        <folder>language</folder>
+    </files>
+    <media destination="templates/site/itheme" folder="media">
+        <folder>css</folder>
+        <folder>js</folder>
+        <folder>images</folder>
+        <folder>scss</folder>
+    </media>
+    <positions>
+        <position>location</position>
+        <position>top-menu</position>
+        <position>search</position>
+        <position>compare</position>
+        <position>cart</position>
+        <position>navbar</position>
+        <position>breadcrumbs</position>
+        <position>banner</position>
+        <position>top-a</position>
+        <position>top-b</position>
+        <position>bottom-a</position>
+        <position>bottom-b</position>
+        <position>footer-a</position>
+        <position>footer-b</position>
+        <position>footer-c</position>
+        <position>footer-d</position>
+        <position>modals</position>
+        <position>filter</position>
+        <position>offcanvas</position>
+        <position>debug</position>
+        <position>error-403</position>
+        <position>error-404</position>
+    </positions>
+    <languages folder="language">
+        <language tag="en-GB">en-GB/tpl_itheme.ini</language>
+        <language tag="en-GB">en-GB/tpl_itheme.sys.ini</language>
+        <language tag="ru-RU">ru-RU/tpl_itheme.ini</language>
+        <language tag="ru-RU">ru-RU/tpl_itheme.sys.ini</language>
+    </languages>
+    <config>
+        <fields name="params">
+            <fieldset name="advanced">
+                <field name="logoFile"
+                       type="media"
+                       schemes="http,https,ftp,ftps,data,file"
+                       validate="url"
+                       relative="true"
+                       default=""
+                       label="TPL_ITHEME_LOGO_FILE_LABEL"/>
+                <field name="iconsFile"
+                       type="media"
+                       schemes="http,https,ftp,ftps,data,file"
+                       validate="url"
+                       relative="true"
+                       default=""
+                       label="TPL_ITHEME_ICONS_FILE_LABEL"/>
+                <field name="placeholderFile"
+                       type="media"
+                       schemes="http,https,ftp,ftps,data,file"
+                       validate="url"
+                       relative="true"
+                       default=""
+                       label="TPL_ITHEME_PLACEHOLDER_FILE_LABEL"/>
+                <field name="stickyHeader"
+                       type="radio"
+                       label="TPL_ITHEME_STICKY_LABEL"
+                       layout="joomla.form.field.radio.switcher"
+                       default="0"
+                       filter="integer">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="setJivo"
+                       type="radio"
+                       label="TPL_ITHEME_JIVO_LABEL"
+                       layout="joomla.form.field.radio.switcher"
+                       default="0"
+                       filter="integer">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="jivoUrl"
+                       type="text"
+                       default=""
+                       label="TPL_ITHEME_JIVO_URL_LABEL"
+                       showon="setJivo:1"
+                       filter="string" />
+            </fieldset>
+            <fieldset name="colors" label="TPL_ITHEME_COLORS_FIELDSET_LABEL">
+                <field name="primary-color"
+                       type="color"
+                       parentclass="span-3-inline stack"
+                       default="rgb(23, 23, 23)"
+                       format="rgb"
+                       label="TPL_ITHEME_PRIMARY_COLOR_LABEL"/>
+                <field name="body-color"
+                       type="color"
+                       parentclass="span-3-inline stack"
+                       default="rgb(23, 23, 23)"
+                       format="rgb"
+                       label="TPL_ITHEME_BODY_TEXT_COLOR_LABEL"
+                       description=""/>
+                <field name="body-background"
+                        type="color"
+                        parentclass="span-3-inline stack"
+                        default="rgb(254, 254, 254)"
+                        format="rgb"
+                        label="TPL_ITHEME_BODY_BACKGROUND_COLOR_LABEL"/>
+                <field name="link-color"
+                        type="color"
+                        parentclass="span-3-inline stack"
+                        default="rgb(29, 121, 137)"
+                        format="rgb"
+                        label="TPL_ITHEME_LINK_COLOR_LABEL"/>
+                <field name="link-color-hover"
+                        type="color"
+                        parentclass="span-3-inline stack"
+                        default="rgb(14, 59, 67)"
+                        format="rgb"
+                        label="TPL_ITHEME_LINK_HOVER_COLOR_LABEL"/>
+                <field name="footer-color"
+                       type="color"
+                       parentclass="span-3-inline stack"
+                       default="rgb(254, 254, 254)"
+                       format="rgb"
+                       label="TPL_ITHEME_FOOTER_TEXT_COLOR_LABEL"/>
+                <field name="footer-background"
+                        type="color"
+                        parentclass="span-3-inline stack"
+                        default="rgb(29, 121, 137)"
+                        format="rgb"
+                        label="TPL_ITHEME_FOOTER_BACKGROUND_COLOR_LABEL"/>
+            </fieldset>
+            <fieldset name="fonts" label="TPL_ITHEME_FONTS_FIELDSET_LABEL">
+                <field name="noteFontScheme"
+                       type="note"
+                       description="TPL_ITHEME_FONT_NOTE_TEXT"
+                       class="alert alert-warning"
+                       suffix="rem"/>
+                <field name="body-font-size"
+                       type="number"
+                       default="1"
+                       label="TPL_ITHEME_BODY_SIZE"
+                       validate="number"
+                       min="0"/>
+                <field name="h1-font-size"
+                       type="number"
+                       default="2"
+                       label="TPL_ITHEME_H1_SIZE"
+                       validate="number"
+                       min="0"/>
+                <field name="h2-font-size"
+                       type="number"
+                       default="1.7"
+                       label="TPL_ITHEME_H2_SIZE"
+                       validate="number"
+                       min="0"/>
+                <field name="h3-font-size"
+                       type="number"
+                       default="1.5"
+                       label="TPL_ITHEME_H3_SIZE"
+                       validate="number"
+                       min="0"/>
+            </fieldset>
+            <fieldset name="contacts" label="TPL_ITHEME_CONTACTS_FIELDSET_LABEL" addfieldprefix="Joomla\Component\Menus\Administrator\Field">
+                <field name="siteFoundation"
+                       type="text"
+                       default=""
+                       label="TPL_ITHEME_CONTACTS_FOUNDATION_LABEL"
+                       filter="string" />
+                <field name="siteWorkTime"
+                       type="text"
+                       default=""
+                       label="TPL_ITHEME_CONTACTS_WORKTIME_LABEL"
+                       filter="string" />
+                <field name="siteUnp"
+                       type="text"
+                       default=""
+                       label="TPL_ITHEME_CONTACTS_UNP_LABEL"
+                       filter="string" />
+                <field name="siteRegistration"
+                       type="text"
+                       default=""
+                       label="TPL_ITHEME_CONTACTS_REGISTRATION_LABEL"
+                       filter="string" />
+                <field name="siteLegal"
+                       type="radio"
+                       layout="joomla.form.field.radio.switcher"
+                       default="0"
+                       label="TPL_ITHEME_CONTACTS_LEGAL_LABEL">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="siteAddress"
+                       type="radio"
+                       layout="joomla.form.field.radio.switcher"
+                       default="0"
+                       label="TPL_ITHEME_CONTACTS_ADDRESS_LABEL">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="siteRights"
+                       type="radio"
+                       layout="joomla.form.field.radio.switcher"
+                       default="0"
+                       label="TPL_ITHEME_CONTACTS_RIGHTS_LABEL">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="siteEmail"
+                       type="text"
+                       default=""
+                       label="TPL_ITHEME_CONTACTS_EMAIL_LABEL"
+                       filter="string" />
+                <field name="sitePhone"
+                       type="text"
+                       default=""
+                       label="TPL_ITHEME_CONTACTS_PHONE_LABEL"
+                       filter="string" />
+                <field name="sitePhoneAdditional"
+                       type="subform"
+                       label="TPL_ITHEME_CONTACTS_PHONE_ADD_LABEL"
+                       multiple="true"
+                       showon="use_wb_products_import:1"
+                       layout="joomla.form.field.subform.repeatable-table">
+                    <form>
+                        <field name="menu"
+                               type="modal_menu"
+                               label="TPL_ITHEME_CONTACTS_PHONE_MENU_LABEL"
+                               disable="separator,alias,heading,url"
+                               select="true"
+                               new="false"
+                               edit="true"
+                               clear="true">
+                            <option value="">JOPTION_SELECT_MENU_ITEM</option>
+                        </field>
+                        <field name="phone"
+                               type="text"
+                               label="TPL_ITHEME_CONTACTS_PHONE_LABEL"/>
+                    </form>
+                </field>
+                <field name="siteTelegram"
+                       type="text"
+                       default=""
+                       label="TPL_ITHEME_CONTACTS_TELEGRAM_LABEL"
+                       filter="string" />
+                <field name="siteViber"
+                       type="text"
+                       default=""
+                       label="TPL_ITHEME_CONTACTS_VIBER_LABEL"
+                       filter="string" />
+                <field name="siteInstagram"
+                       type="text"
+                       default=""
+                       label="TPL_ITHEME_CONTACTS_INSTAGRAM_LABEL"
+                       filter="string" />
+                <field name="siteVk"
+                       type="text"
+                       default=""
+                       label="TPL_ITHEME_CONTACTS_VK_LABEL"
+                       filter="string" />
+                <field name="siteOk"
+                       type="text"
+                       default=""
+                       label="TPL_ITHEME_CONTACTS_OK_LABEL"
+                       filter="string" />
+                <field name="siteYouTube"
+                       type="text"
+                       default=""
+                       label="TPL_ITHEME_CONTACTS_YOUTUBE_LABEL"
+                       filter="string" />
+            </fieldset>
+            <fieldset name="analytics" label="TPL_ITHEME_ANALYTICS_FIELDSET_LABEL">
+                <field name="setGoogle"
+                       type="radio"
+                       label="TPL_ITHEME_ANALYTICS_GOOGLE_LABEL"
+                       layout="joomla.form.field.radio.switcher"
+                       default="0"
+                       filter="integer">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="googleId"
+                       type="text"
+                       default=""
+                       label="TPL_ITHEME_ANALYTICS_GOOGLE_ID_LABEL"
+                       showon="setGoogle:1"
+                       filter="string" />
+                <field name="setYandex"
+                       type="radio"
+                       label="TPL_ITHEME_ANALYTICS_YANDEX_LABEL"
+                       layout="joomla.form.field.radio.switcher"
+                       default="0"
+                       filter="integer">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="yandexId"
+                       type="text"
+                       default=""
+                       label="TPL_ITHEME_ANALYTICS_YANDEX_ID_LABEL"
+                       showon="setYandex:1"
+                       filter="string" />
+                <field name="setTiktok"
+                       type="radio"
+                       label="TPL_ITHEME_ANALYTICS_TIKTOK_LABEL"
+                       layout="joomla.form.field.radio.switcher"
+                       default="0"
+                       filter="integer">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="tiktokId"
+                       type="text"
+                       default=""
+                       label="TPL_ITHEME_ANALYTICS_TIKTOK_ID_LABEL"
+                       showon="setTiktok:1"
+                       filter="string" />
+            </fieldset>
+            <fieldset name="seo" label="TPL_ITHEME_SEO_FIELDSET_LABEL">
+                <field name="googleVerification"
+                       type="text"
+                       default=""
+                       label="TPL_ITHEME_SEO_GOOGLE_VERIFICATION"
+                       filter="string" />
+                <field name="yandexVerification"
+                       type="text"
+                       default=""
+                       label="TPL_ITHEME_SEO_YANDEX_VERIFICATION"
+                       filter="string" />
+            </fieldset>
+        </fields>
+    </config>
+    <changelogurl>https://update.ilange.ru/tpl_itheme/changelog.xml</changelogurl>
+    <updateservers>
+        <server type="extension" priority="1" name="tpl_itheme">https://update.ilange.ru/tpl_itheme/updates.xml</server>
+    </updateservers>
+</extension>

@@ -1,0 +1,67 @@
+// Bootstrap 5.3
+@import "../../vendor/bootstrap/scss/functions";
+@import "variables";
+@import "../../vendor/bootstrap/scss/variables";
+@import "../../vendor/bootstrap/scss/variables-dark";
+@import "../../vendor/bootstrap/scss/maps";
+@import "../../vendor/bootstrap/scss/mixins";
+@import "../../vendor/bootstrap/scss/utilities";
+@import "../../vendor/bootstrap/scss/bootstrap";
+
+// Общие стили
+@import "html/global";
+@import "html/card";
+@import "html/buttons";
+@import "html/forms";
+@import "html/image";
+@import "html/range";
+@import "html/svg";
+
+// Стили Header
+@import "header/header";
+@import "header/header-top";
+@import "header/header-middle";
+@import "header/header-bottom";
+@import "header/header-breadcrumbs";
+
+// Стили Footer
+@import "footer/footer";
+@import "footer/footer-main";
+@import "footer/footer-bottom";
+
+// Дополнительные блоки
+@import "blocks/alerts";
+@import "blocks/promo";
+@import "blocks/advantages";
+
+// Каталог
+@import "catalog/grids";
+@import "catalog/categories";
+@import "catalog/product_small_card";
+@import "catalog/product_full_card";
+@import "catalog/product_attribs";
+@import "catalog/product_labels";
+@import "catalog/product_prices";
+@import "catalog/product_buttons";
+@import "catalog/product_field";
+
+// Модули
+@import "modules/offcanvas-slider";
+@import "modules/search-form";
+@import "modules/scroll-items-list";
+@import "modules/jivo";
+
+// Устаревший код
+@import "old/checkout";
+@import "old/consultation";
+@import "old/part";
+@import "old/navigator";
+
+@import "old/korzina/cart";
+@import "old/korzina/cart-empty";
+@import "old/korzina/cart-grid";
+@import "old/korzina/cart-item";
+@import "old/korzina/cart-prices";
+
+@import "old/compare/list";
+//@import "old/compare/panel";

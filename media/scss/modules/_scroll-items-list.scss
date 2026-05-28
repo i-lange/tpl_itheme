@@ -1,0 +1,47 @@
+.scroll-items-list {
+  --column-width: 12em;
+  display: flex;
+  gap: 1em;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  cursor: grab;
+  user-select: none;
+  touch-action: pan-x;
+
+  &.list-20 {
+    --column-width: 20em;
+  }
+}
+
+
+.scroll-items-list::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-items-list.is-dragging {
+  cursor: grabbing;
+  scroll-behavior: auto;
+}
+
+.scroll-items-list .card {
+  flex: 0 0 var(--column-width);
+  max-width: var(--column-width);
+  min-width: var(--column-width);
+}
+
+.scroll-items-list .card-img-top {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Необязательно, но полезно для маленьких экранов */
+@media (max-width: 439px) {
+  .scroll-items-list {
+    --column-width: 80%;
+  }
+}

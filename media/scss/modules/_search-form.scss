@@ -1,0 +1,18 @@
+.form-search {
+  position: relative;
+
+  .awesomplete {
+    width: 100% ;
+  }
+
+  button {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    &.btn-close {
+      right: 3em;
+      top: .5em;
+    }
+  }
+}

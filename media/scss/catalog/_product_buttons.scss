@@ -1,0 +1,39 @@
+// =============================================================================
+// Кнопки управления товаром
+// =============================================================================
+.product_tools {
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-start;
+  right: .25em;
+  top: .75em;
+
+  .btn {
+    margin-bottom: .25em;
+    background-color: var(--gray-100);
+    border: none;
+    padding: .25em .5em;
+    opacity: .5;
+    z-index: 2;
+
+    &:hover,
+    &.active {
+      background-color: var(--white);
+      opacity: 1;
+
+      svg {
+        fill: var(--primary)
+      }
+    }
+  }
+}
+
+button[data-tocart] {
+  width: 100%;
+
+  svg {
+    margin-right: .5em;
+  }
+}

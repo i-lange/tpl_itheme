@@ -1,0 +1,33 @@
+// -----------------------------------------------------------------------------
+// Footer Bottom section
+// -----------------------------------------------------------------------------
+.footer__bottom {
+  padding: 1.25em 0;
+  color: var(--gray-500);
+}
+
+.footer__copyright {
+  font-size: 0.75em;
+  color: var(--gray-300);
+  margin-bottom: 0.5em;
+  font-weight: 600;
+}
+
+.footer__legal {
+  font-size: 0.625em;
+  margin-bottom: 0.25em;
+  line-height: 1.25;
+
+  a {
+    color: var(--gray-500);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--gray-300);
+    }
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

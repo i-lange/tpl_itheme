@@ -1,0 +1,15 @@
+.product-full__fields {
+  + .product-full__fields {
+    margin-top: 1.5em;
+  }
+}
+
+.product-full__field {
+  display: grid;
+  gap: 1.5em;
+  grid-template-columns: 3fr 2fr;
+
+  + .product-full__field {
+    margin-top: .5em;
+  }
+}

@@ -1,0 +1,49 @@
+.module-contacts {
+  text-align: right;
+
+  a {
+    color: var(--black-1);
+    font-size: 1.25em;
+    line-height: 1;
+
+    &:hover,
+    &:active,
+    &:focus {
+      color: var(--black-1);
+      text-decoration: none;
+    }
+
+    .svg {
+      width: 1.25em;
+      height: 1.25em;
+      fill: var(--black-1);
+    }
+
+    span {
+      display: none;
+    }
+  }
+
+  .contact-time {
+    display: none;
+    color: var(--grey-1);
+    font-size: .75em;
+    line-height: 1;
+  }
+
+  @include media-breakpoint-up(md) {
+    a {
+      .svg {
+        display: none;
+      }
+
+      span {
+        display: inline-block;
+      }
+    }
+
+    .contact-time {
+      display: block;
+    }
+  }
+}

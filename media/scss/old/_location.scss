@@ -1,0 +1,44 @@
+.module-location {
+  color: var(--blue-1);
+  font-size: 1.25em;
+  line-height: 1;
+  text-decoration: none;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+
+
+  &:hover,
+  &:active,
+  &:focus {
+    color: var(--blue-1);
+    text-decoration: none;
+  }
+
+  .svg {
+    width: 1.5em;
+    height: 1.5em;
+    fill: var(--blue-1);
+  }
+
+  span {
+    display: none;
+  }
+
+  @include media-breakpoint-up(md) {
+    .svg {
+      width: 1em;
+      height: 1em;
+      margin-top: -.25em;
+      margin-right: 0.25em;
+    }
+
+    span {
+      display: inline-block;
+    }
+  }
+}

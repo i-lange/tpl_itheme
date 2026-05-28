@@ -1,0 +1,21 @@
+// SVG иконки
+svg {
+  &.medium  {
+    width: 2em;
+    height: 2em;
+  }
+
+  &.large  {
+    width: 3em;
+    height: 3em;
+  }
+
+  &.mega  {
+    width: 4em;
+    height: 4em;
+  }
+
+  &.primary {
+    fill: var(--primary);
+  }
+}

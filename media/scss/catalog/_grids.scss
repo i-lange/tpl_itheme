@@ -1,0 +1,40 @@
+// =============================================================================
+// Сетка для списка категорий (бесконечная)
+// =============================================================================
+.catalog__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75em;
+
+  @include media-breakpoint-up(sm) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include media-breakpoint-up(md) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @include media-breakpoint-up(xl) {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1em;
+  }
+}
+
+// =============================================================================
+// Сетка для списка товаров (бесконечная)
+// =============================================================================
+.products__grid {
+  display: grid;
+  gap: 1em;
+  grid-template-columns: repeat(auto-fill, minmax(10em, 1fr));
+
+  @include media-breakpoint-up(md) {
+    grid-template-columns: repeat(auto-fill, minmax(12em, 1fr));
+    gap: 1.25em;
+  }
+}
+
+.catalog__grid + .pagination__wrapper,
+.products__grid + .pagination__wrapper {
+  margin-top: 2em;
+}

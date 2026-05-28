@@ -1,0 +1,122 @@
+// -----------------------------------------------------------------------------
+// Header Middle panel
+// -----------------------------------------------------------------------------
+.header__middle {
+  background-color: var(--white);
+  border-bottom: var(--border-width) var(--border-style) var(--border-color);
+
+  search {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+.header__middle-inner {
+  display: flex;
+  align-items: center;
+  gap: 2em;
+  padding: 0.75em 0 0.25em;
+
+  @include media-breakpoint-down(sm) {
+    gap: 0.5em;
+    padding: 0.5em 0;
+  }
+}
+
+.header__logo {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+
+  img {
+    margin-top: -.75em;
+    height: 2.5em;
+    width: auto;
+  }
+
+  @include media-breakpoint-down(md) {
+    display: none;
+  }
+}
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  flex-shrink: 0;
+
+  @include media-breakpoint-down(md) {
+    a.header__button {
+      display: none;
+    }
+  }
+}
+
+.header__button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25em;
+  text-decoration: none;
+  color: var(--black);
+  padding: 0.25em 0.5em;
+  border: none;
+  user-select: none;
+  border-radius: var(--border-radius-sm);
+  background-color: transparent;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease;
+
+  &:hover {
+    color: var(--link-hover-color);
+    background-color: rgba(var(--link-hover-color-rgb), 0.05);
+    text-decoration: none;
+    border: none;
+    user-select: none;
+  }
+
+  svg {
+    width: 1.75em;
+    height: 1.75em;
+  }
+}
+
+.header__button-icon-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    display: block;
+  }
+}
+
+.header__button-badge {
+  position: absolute;
+  top: -0.25em;
+  right: -0.5em;
+  background-color: var(--primary);
+  color: var(--white);
+  font-size: 0.625em;
+  font-weight: 700;
+  line-height: 1;
+  min-width: 1.5em;
+  height: 1.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  padding: 0.125em;
+}
+
+.header__button-label {
+  font-size: 0.75em;
+  line-height: 1;
+
+  @include media-breakpoint-down(sm) {
+    display: none;
+  }
+}

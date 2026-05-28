@@ -1,0 +1,130 @@
+{
+  "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
+  "name": "itheme",
+  "version": "1.0.5",
+  "description": "This file contains details of the assets used by Cassiopeia, the default Joomla site template.",
+  "license": "GPL-2.0-or-later",
+  "assets": [
+    {
+      "name": "tpl.itheme",
+      "description": "Основная таблица стилей, необходима для всех страниц",
+      "type": "style",
+      "uri": "itheme.min.css"
+    },
+    {
+      "name": "tpl.lazyload",
+      "description": "Основной файл скриптов для данного шаблона",
+      "type": "script",
+      "uri": "lazyload.js",
+      "attributes" : {
+        "defer": true
+      }
+    },
+    {
+      "name": "tpl.analytics",
+      "description": "Отслеживание событий для систем аналитики",
+      "type": "script",
+      "uri": "analytics.js",
+      "attributes" : {
+        "defer": true
+      }
+    },
+    {
+      "name": "tpl.google",
+      "description": "Локальный файл счетчика Google Аналитики",
+      "type": "script",
+      "uri": "google.js",
+      "attributes" : {
+        "async": true
+      }
+    },
+    {
+      "name": "tpl.yandex",
+      "description": "Локальный файл счетчика Яндекс Метрики",
+      "type": "script",
+      "uri": "metrika.js",
+      "attributes" : {
+        "async": true
+      }
+    },
+    {
+      "name": "tpl.tiktok",
+      "description": "Локальный файл пикселя TikTok",
+      "type": "script",
+      "uri": "tiktok.js",
+      "attributes" : {
+        "async": true
+      }
+    },
+    {
+      "name": "tpl.addtocart",
+      "description": "Добавление/удаление товаров в корзину",
+      "type": "script",
+      "uri": "addtocart.js",
+      "attributes" : {
+        "defer": true
+      },
+      "dependencies": [
+        "core",
+        "tpl.analytics"
+      ]
+    },
+    {
+      "name": "tpl.addtocompare",
+      "description": "Добавление/удаление товаров в сравнение",
+      "type": "script",
+      "uri": "addtocompare.js",
+      "attributes" : {
+        "defer": true
+      },
+      "dependencies": [
+        "core",
+        "tpl.analytics"
+      ]
+    },
+    {
+      "name": "tpl.addtowishlist",
+      "description": "Добавление/удаление товаров в избранное",
+      "type": "script",
+      "uri": "addtowishlist.js",
+      "attributes" : {
+        "defer": true
+      },
+      "dependencies": [
+        "core",
+        "tpl.analytics"
+      ]
+    },
+    {
+      "name": "tpl.itheme",
+      "description": "Основной файл скриптов для данного шаблона",
+      "type": "script",
+      "uri": "itheme.js",
+      "attributes" : {
+        "type": "module",
+        "defer": true
+      },
+      "dependencies": [
+        "core",
+        "tpl.lazyload",
+        "tpl.analytics"
+      ]
+    },
+    {
+      "name": "tpl.header-sticky",
+      "description": "Скрипт для фиксации шапки сайта",
+      "type": "script",
+      "uri": "headersticky.js"
+    },
+    {
+      "name": "tpl.offcanvas-slider",
+      "description": "Скрипт вложенных панелей offcanvas",
+      "type": "script",
+      "uri": "offcanvas-slider.js",
+      "dependencies": [
+        "core",
+        "bootstrap.offcanvas"
+      ]
+    }
+  ]
+}

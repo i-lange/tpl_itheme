@@ -1,0 +1,115 @@
+// -----------------------------------------------------------------------------
+// Footer Main section (columns)
+// -----------------------------------------------------------------------------
+.footer__main {
+  padding: 1em 0;
+  border-bottom: var(--border-width) var(--border-style) var(--gray-700);
+
+  @include media-breakpoint-up(sm) {
+    padding: 3em 0 2em;
+  }
+
+  h3 {
+    font-weight: 700;
+    color: var(--gray-200);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 1em;
+  }
+
+  .nav-link {
+    --nav-link-padding-x: 0;
+    --nav-link-padding-y: .25em;
+    --nav-link-color: var(--gray-400);
+
+    &:hover {
+      color: var(--primary);
+    }
+  }
+}
+
+.footer__logo {
+  margin-bottom: 0.5em;
+
+  img {
+    filter: brightness(0) invert(1);
+    max-height: 3em;
+    width: auto;
+
+    @include media-breakpoint-down(sm) {
+      height: 1.25em;
+    }
+  }
+}
+
+.footer__sitename {
+  color: var(--gray-500);
+  @include media-breakpoint-up(sm) {
+    font-size: 1em;
+  }
+}
+
+.footer__socials {
+  display: flex;
+  align-items: center;
+  gap: 0.35em;
+  flex-wrap: wrap;
+  margin-top: 2em;
+  justify-content: center;
+
+  @include media-breakpoint-up(sm) {
+    justify-content: start;
+  }
+}
+
+.footer__social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5em;
+  height: 3.5em;
+  border-radius: 50%;
+  background-color: var(--gray-700);
+  color: var(--gray-300);
+  text-decoration: none;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+
+  svg {
+    fill: currentColor;
+    display: block;
+    width: 1.5em;
+    height: 1.5em;
+  }
+
+  &:hover {
+    background-color: var(--primary);
+    color: var(--white);
+    text-decoration: none;
+  }
+}
+
+.footer__contact {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 1em;
+  line-height: 1.4;
+  color: var(--gray-400);
+
+  a {
+    color: var(--gray-400);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--primary);
+    }
+  }
+
+  svg {
+    fill: var(--primary);
+    flex-shrink: 0;
+    margin-top: 0.125em;
+    margin-right: 0.25em;
+  }
+}

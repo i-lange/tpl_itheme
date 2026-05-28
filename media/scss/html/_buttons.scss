@@ -1,0 +1,71 @@
+.btn svg {
+  vertical-align: -.125em;
+}
+
+.btn small {
+  display: inline-block;
+  font-size: 0.625em;
+  font-weight: 700;
+  min-width: 1.75em;
+  height: 1.75em;
+  border-radius: 50%;
+  padding: 0.125em;
+  color: var(--white);
+  background-color: var(--primary);
+}
+
+.btn-primary {
+  --btn-bg: var(--primary);
+  --btn-border-color: var(--primary);
+  --btn-hover-bg: color-mix(in srgb, #000 15%, var(--primary) 100%);
+  --btn-hover-border-color: color-mix(in srgb, #000 20%, var(--primary) 100%);
+  --btn-active-bg: color-mix(in srgb, #000 20%, var(--primary) 100%);
+  --btn-active-border-color: color-mix(in srgb, #000 25%, var(--primary) 100%);
+  --btn-disabled-bg: var(--primary);
+  --btn-disabled-border-color: var(--primary);
+}
+
+.btn-telegram {
+  --btn-color: #fff;
+  --btn-bg: #3390ec;
+  --btn-border-color: #3390ec;
+  --btn-hover-color: #fff;
+  --btn-hover-bg: color-mix(in srgb, #000 15%, #3390ec 100%);
+  --btn-hover-border-color: color-mix(in srgb, #000 20%, #3390ec 100%);
+  --btn-active-color: #fff;
+  --btn-active-bg: color-mix(in srgb, #000 20%, #3390ec 100%);
+  --btn-active-border-color: color-mix(in srgb, #000 25%, #3390ec 100%);
+  --btn-disabled-color: #fff;
+  --btn-disabled-bg: #3390ec;
+  --btn-disabled-border-color: #3390ec;
+}
+
+.btn-viber {
+  --btn-color: #fff;
+  --btn-bg: #7360f2;
+  --btn-border-color: #7360f2;
+  --btn-hover-color: #fff;
+  --btn-hover-bg: color-mix(in srgb, #000 15%, #7360f2 100%);
+  --btn-hover-border-color: color-mix(in srgb, #000 20%, #7360f2 100%);
+  --btn-active-color: #fff;
+  --btn-active-bg: color-mix(in srgb, #000 20%, #7360f2 100%);
+  --btn-active-border-color: color-mix(in srgb, #000 25%, #7360f2 100%);
+  --btn-disabled-color: #fff;
+  --btn-disabled-bg: #7360f2;
+  --btn-disabled-border-color: #7360f2;
+}
+
+.btn[data-tocart] {
+  &.active {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: center;
+    overflow: hidden;
+  }
+}
+
+.btn-light[data-bs-toggle] {
+  svg {
+    fill: var(--primary);
+  }
+}

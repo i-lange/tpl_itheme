@@ -1,0 +1,114 @@
+// =============================================================================
+// Frontpage Carousel — BEM block
+// =============================================================================
+.promo__slide {
+  position: relative;
+}
+
+.promo__slide-body {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  @include media-breakpoint-down(md) {
+    display: none;
+  }
+}
+
+.promo__slide-content {
+  max-width: 32em;
+  padding: 2.5em 5em;
+
+  @include media-breakpoint-up(md) {
+    padding: 3em 0;
+  }
+
+  @include media-breakpoint-down(lg) {
+    .btn {
+      display: none;
+    }
+  }
+}
+
+.promo__slide-badge {
+  display: inline-block;
+  font-size: 0.75em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+  margin-bottom: 0.5em;
+}
+
+.promo__slide-title {
+  font-size: clamp(1.5em, 4vw, 2.5em);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 0.75em;
+}
+
+.promo__slide-text {
+  color: var(--gray-100);
+  margin-bottom: 1.5em;
+  line-height: 1.55;
+  max-width: 25em;
+}
+
+.promo__slide-cover:after {
+  position: absolute;
+  content: "";
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+}
+
+// Controls
+.carousel-control-prev,
+.carousel-control-next {
+  width: 3em;
+  background-color: rgba(135, 135, 135, 0.15);
+  backdrop-filter: blur(.25em);
+  border-radius: $border-radius;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 3em;
+  margin: 0 0.5rem;
+  opacity: 0.8;
+  transition:
+          opacity 0.2s ease,
+          background-color 0.2s ease;
+
+  &:hover {
+    opacity: 1;
+    background-color: rgba(135, 135, 135, 0.3);
+  }
+}
+
+.carousel-indicators {
+  margin-bottom: 1em;
+
+  [data-bs-target] {
+    width: .5em;
+    height: .5em;
+    border-radius: 50%;
+    background-color: rgba($white, 0.5);
+    border: none;
+    opacity: 1;
+    transition:
+            background-color 0.2s ease,
+            transform 0.2s ease;
+
+    &.active {
+      background-color: $white;
+      transform: scale(1.3);
+    }
+  }
+}

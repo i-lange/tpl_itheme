@@ -1,0 +1,29 @@
+.checkout-grid {
+  display: grid;
+  grid-gap: 2em;
+
+  h3 {
+    color: var(--blue-1);
+  }
+
+  @include media-breakpoint-up(md) {
+    grid-gap: 4em;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.checkout-shipping-params {
+  display: none;
+
+  &.active {
+    display: block;
+  }
+}
+
+.checkout_thank_you {
+  display: none;
+
+  &.active {
+    display: block;
+  }
+}

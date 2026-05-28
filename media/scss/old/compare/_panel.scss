@@ -1,0 +1,131 @@
+.module-user-lists {
+  position: fixed;
+  align-items: center;
+  display: none;
+  left: .5em;
+  bottom: 4em;
+  color: var(--white);
+  z-index: $zindex-dropdown;
+
+  @include media-breakpoint-up(md) {
+    left: 1em;
+    bottom: 0;
+  }
+
+  @include media-breakpoint-up(lg) {
+    left: 1.75em;
+  }
+
+  @include media-breakpoint-up(xl) {
+    left: 4em;
+  }
+
+  &.active {
+    display: flex;
+  }
+
+  .compare-count {
+    display: flex;
+    align-items: center;
+    height: 2.25em;
+    border-radius: 0.75rem 0 0 0;
+    background: var(--blue-2);
+
+    .link {
+      position: relative;
+      font-size: .75em;
+      line-height: 1.1;
+      padding: 0 .75em;
+      text-transform: uppercase;
+      border-right: 0.125em solid var(--white);
+
+      @include media-breakpoint-up(md) {
+        font-size: 1em;
+      }
+    }
+
+    small {
+      font-weight: bold;
+      font-size: 1.25em;
+      line-height: 1;
+    }
+
+    .btn-delete {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--white);
+      background: var(--red-light);
+      padding: 0;
+      width: 1.5em;
+      height: 1.5em;
+
+      .svg {
+        fill: var(--white);
+        margin-top: .125em;
+        width: .75em;
+        height: .75em;
+      }
+
+      @include media-breakpoint-up(md) {
+        width: 2em;
+        height: 2em;
+
+        .svg {
+          width: 1em;
+          height: 1em;
+        }
+      }
+    }
+  }
+
+  .wishlist-count {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2.25em;
+    padding: 0 .75em;
+    border-left: 0.125em solid var(--white);
+    background: var(--red-1);
+    border-radius: 0 0.75rem 0 0;
+
+    .link {
+      position: relative;
+      display: flex;
+      align-items: center;
+
+      small {
+        font-weight: bold;
+        font-size: 1em;
+      }
+
+      .svg {
+        fill: var(--white);
+        margin-top: .25em;
+        width: 1em;
+        height: 1em;
+      }
+
+      @include media-breakpoint-up(md) {
+        small {
+          font-size: 1.25em;
+        }
+
+        .svg {
+          width: 1.25em;
+          height: 1.25em;
+        }
+      }
+    }
+  }
+}
+
+.page_com_ishop_product {
+  .module-user-lists.active {
+    display: none;
+
+    @include media-breakpoint-up(lg) {
+      display: flex;
+    }
+  }
+}

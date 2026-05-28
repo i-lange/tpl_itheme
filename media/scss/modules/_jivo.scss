@@ -1,0 +1,12 @@
+// Кнопка Jivo
+jdiv[class^=wrap__] {
+  @include media-breakpoint-down(md) {
+    bottom: 3.5em;
+  }
+}
+
+body[style*="hidden"] {
+  jdiv {
+    display: none !important;
+  }
+}

@@ -1,0 +1,39 @@
+// =============================================================================
+// Метки товаров (Новинка, хит, не выпускается и т.д.)
+// =============================================================================
+.product__attribs {
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-start;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+.product__attrib {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: .25em .75em;
+  border-radius: 0 1em 1em 0;
+  background-color: var(--black);
+  color: var(--white);
+  line-height: 1;
+
+  &.label_new {
+    background-color: var(--green);
+
+    &:before {
+      border-top-color: var(--green);
+    }
+  }
+
+  &.label_hit {
+    background-color: var(--primary);
+
+    &:before {
+      border-top-color: var(--primary);
+    }
+  }
+}

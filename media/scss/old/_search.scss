@@ -1,0 +1,123 @@
+.module-search {
+  position: relative;
+  width: 100%;
+
+  .form-control {
+    padding-left: 3.125em;
+  }
+
+  .btn {
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    bottom: 1px;
+
+    .svg {
+      width: 1.25em;
+      height: 1.25em;
+      fill: var(--grey-1);
+    }
+  }
+
+  @include media-breakpoint-up(lg) {
+    .form-control {
+      min-height: 2.5em;
+      padding: 0.5em 1em;
+      padding-left: 3em;
+      font-size: 1.25em;
+    }
+
+    .btn {
+      .svg {
+        width: 1.5em;
+        height: 1.5em;
+      }
+    }
+  }
+}
+
+.module-search .sagest {
+  display: none;
+
+  > div {
+    position: relative;
+    display: grid;
+    align-items: center;
+    grid-gap: 0 0.5rem;
+    grid-template-columns: 2.25em auto;
+    padding: 0.25em 0;
+    border-top: 1px solid var(--grey);
+
+    &:first-child {
+      padding-top: 0;
+      border-top: none;
+    }
+
+    > div {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow-wrap: anywhere;
+      min-height: 2.25em;
+
+      img {
+        width: auto;
+        max-width: 2.25em;
+        max-height: 2.25em;
+      }
+    }
+
+    h3 {
+      font-size: 1rem;
+      line-height: 1;
+      margin: 0;
+    }
+
+    span {
+      font-size: 1em;
+      line-height: 1;
+      color: var(--blue-2);
+      font-weight: $font-weight-bold;
+      text-shadow: 0.05em 0 0.05em var(--white);
+    }
+
+    a {
+      &:after {
+        position: absolute;
+        content: '';
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: $zindex-dropdown;
+      }
+    }
+  }
+}
+
+.module-search.show .sagest {
+  position: absolute;
+  display: block;
+  top: 98%;
+  left: 0;
+  right: 0;
+  padding: 1em;
+  border-radius: 1.5em;
+  background: var(--white);
+  z-index: $zindex-dropdown;
+  box-shadow: 0 1px 4px rgba(18, 17, 36, .12), 0 2px 16px rgba(18, 17, 36, .14);
+}
+
+.search-result-element {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 1em;
+
+  .search-result-meta {
+    flex: 1;
+  }
+}
