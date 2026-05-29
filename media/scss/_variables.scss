@@ -1,5 +1,3 @@
-@use "sass:color";
-
 // Remove prefix added in BS5
 $prefix: "";
 
@@ -17,7 +15,7 @@ $font-family-monospace:       SFMono-Regular, Menlo, Monaco, Consolas, "Liberati
 
 $font-size-root:              null    !default;
 $font-size:                   1rem    !default;
-$font-size-base:              1em     !default;
+$font-size-base:              1rem     !default;
 
 $display-font-sizes: (
         1: 5em,
@@ -27,78 +25,6 @@ $display-font-sizes: (
         5: 3em,
         6: 2.5em
 ) !default;
-
-// Отступы
-$spacer: 1em !default;
-$legend-margin-bottom: .5em !default;
-$legend-font-size: 1.5em !default;
-$list-inline-padding: .5em !default;
-$table-cell-padding-y: .5em !default;
-$table-cell-padding-x: .5em !default;
-$table-cell-padding-y-sm: .25em !default;
-$table-cell-padding-x-sm: .25em !default;
-$input-btn-padding-y:         .375em !default;
-$input-btn-padding-x:         .75em !default;
-$input-btn-padding-y-sm:      .25em !default;
-$input-btn-padding-x-sm:      .5em !default;
-$input-btn-padding-y-lg:      .5em !default;
-$input-btn-padding-x-lg:      1em !default;
-$form-text-margin-top: .25em !default;
-$form-label-margin-bottom: .5em !default;
-$form-check-margin-bottom: .125em !default;
-$form-check-inline-margin-end: 1em !default;
-$form-range-track-height: .5em !default;
-$form-range-thumb-width: 1em !default;
-$form-range-thumb-border-radius: 1em !default;
-$form-range-thumb-box-shadow: 0 .1em .25em rgba($black, .1) !default;
-$form-floating-padding-y:               1em !default;
-$form-floating-input-padding-t:         1.625em !default;
-$form-floating-input-padding-b:         .625em !default;
-$form-floating-label-height:            1.5em !default;
-$form-floating-label-transform:         scale(.85) translateY(-.5em) translateX(.15em) !default;
-$nav-link-padding-y:                .5em !default;
-$nav-link-padding-x:                1em !default;
-$nav-underline-gap:                 1em !default;
-$nav-underline-border-width:        .125em !default;
-$navbar-nav-link-padding-x:         .5em !default;
-$navbar-brand-margin-end:           1em !default;
-$navbar-toggler-padding-y:          .25em !default;
-$navbar-toggler-padding-x:          .75em !default;
-$dropdown-min-width:                10em !default;
-$dropdown-padding-y:                .5em !default;
-$dropdown-spacer:                   .125em !default;
-$pagination-padding-y:              .375em !default;
-$pagination-padding-x:              .75em !default;
-$pagination-padding-y-sm:           .25em !default;
-$pagination-padding-x-sm:           .5em !default;
-$pagination-padding-y-lg:           .75em !default;
-$pagination-padding-x-lg:           1.5em !default;
-$accordion-padding-y:                     1em !default;
-$accordion-padding-x:                     1.25em !default;
-$accordion-icon-width:                    1.25em !default;
-$tooltip-arrow-width:               .8em !default;
-$tooltip-arrow-height:              .4em !default;
-$popover-header-padding-y:          .5em !default;
-$popover-arrow-width:               1em !default;
-$popover-arrow-height:              .5em !default;
-$toast-padding-x:                   .75em !default;
-$toast-padding-y:                   .5em !default;
-$toast-font-size:                   .875em !default;
-$modal-footer-margin-between:       .5em !default;
-$modal-dialog-margin:               .5em !default;
-$modal-dialog-margin-y-sm-up:       1.75em !default;
-$alert-margin-bottom:           1em !default;
-$progress-height:                   1em !default;
-$thumbnail-padding:                 .25em !default;
-$breadcrumb-item-padding-x:         .5em !default;
-$breadcrumb-margin-bottom:          1em !default;
-$carousel-caption-padding-y:         1.25em !default;
-$carousel-caption-spacer:            1.25em !default;
-$carousel-control-icon-width:        2em !default;
-$spinner-width:           2em !default;
-$spinner-width-sm:        1em !default;
-$kbd-padding-y:                     .1875em !default;
-$kbd-padding-x:                     .375em !default;
 
 // Брейкпоинты
 $grid-breakpoints: (
@@ -112,39 +38,30 @@ $grid-breakpoints: (
 
 // Ширина контейнеров
 $container-max-widths: (
-  xl: 78em,
-  xxl: 80em
+  xl: 78rem,
+  xxl: 80rem
 ) !default;
 
 // Модальные окна
-$modal-sm: 18em !default;
-$modal-md: 28em !default;
-$modal-lg: 50em !default;
-$modal-xl: 70em !default;
+$modal-sm: 18rem !default;
+$modal-md: 28rem !default;
+$modal-lg: 50rem !default;
+$modal-xl: 70rem !default;
 
 // Offcanvas
-$offcanvas-horizontal-width: 22em !default;
+$offcanvas-horizontal-width: 22rem !default;
 $offcanvas-vertical-height:  75vh !default;
 
 // Параграфы
-$paragraph-margin-bottom: 1em !default;
+$paragraph-margin-bottom: 1rem !default;
 
 // Сетка
-$grid-gutter-width:           1.5em !default;
+$grid-gutter-width:           1.5rem !default;
 
 // Закругления
-$border-radius:               .375em !default;
-$border-radius-sm:            .25em !default;
-$border-radius-lg:            .5em !default;
-$border-radius-xl:            1em !default;
-$border-radius-xxl:           2em !default;
-$border-radius-pill:          50em !default;
-
-// Тени
-$box-shadow:                  0 .5em 1em rgba($black, .15) !default;
-$box-shadow-sm:               0 .125em .25em rgba($black, .075) !default;
-$box-shadow-lg:               0 1em 3em rgba($black, .175) !default;
-$box-shadow-inset:            inset 0 1px 2px rgba($black, .075) !default;
-
-// Ширина обводки
-$focus-ring-width:      .25em !default;
+$border-radius:               .375rem !default;
+$border-radius-sm:            .25rem !default;
+$border-radius-lg:            .5rem !default;
+$border-radius-xl:            1rem !default;
+$border-radius-xxl:           2rem !default;
+$border-radius-pill:          50rem !default;

@@ -25,7 +25,19 @@
 - на локальном сервере (сервер всегда запущен по-умолчанию) панель администратора доступна по адресу: https://magazin-gefest-new.local/administrator/
 - на локальном сервере (сервер всегда запущен по-умолчанию) фронтенд сайта доступен по адресу: https://magazin-gefest-new.local
 
+Расширения, которые работают вместе в рамках magazin-gefest-new.local:
+- com_ishop (в окружении Windows путь "c:\OSPanel\home\com_ishop\") это компонент Joomla непосредственно интернет-магазина.
+- com_ishopintegro (в окружении Windows путь "c:\OSPanel\home\com_ishopintegro\") это компонент Joomla для интернет-магазина com_ishop со сторонними сервисами, для обмена данными.
+- mod_ishop_cart (в окружении Windows путь "c:\OSPanel\home\mod_ishop_cart\") это модуль Joomla для реализации функций корзины пользователя.
+- mod_ishop_compare (в окружении Windows путь "c:\OSPanel\home\mod_ishop_compare\") это модуль Joomla для реализации функций сравнения товаров.
+- mod_ishop_filter (в окружении Windows путь "c:\OSPanel\home\mod_ishop_filter\") это модуль Joomla для реализации фильтрации товаров в категории по параметрам.
+- mod_ishop_zone (в окружении Windows путь "c:\OSPanel\home\mod_ishop_zone\") это модуль Joomla для реализации выбора подходящей зоны доставки (местоположения) пользователем.
+- plg_ishopfinder (в окружении Windows путь "c:\OSPanel\home\plg_ishopfinder\") это плагин Joomla для индексации товаров в штатном поиск CMS Joomla.
+- plg_ishopintegrocron (в окружении Windows путь "c:\OSPanel\home\plg_ishopintegrocron\") это плагин Joomla для запуска некоторых методов com_ishopintegro из планировщика задач CMS Joomla.
+- tpl_itheme (в окружении Windows путь "c:\OSPanel\home\tpl_itheme\") это шаблон Joomla который используется на всей клиентской части сайта
+- plg_ithemecsscompiler (в окружении Windows путь "c:\OSPanel\home\plg_ithemecsscompiler\") это плагин Joomla который добавляет в шаблон tpl_itheme возможность компилировать стили прямо из административной панели Joomla
 
+При внесении изменений в проект нужно держать во внимании данный контекст. Все эти расширения дополняют друг друга и имеют некоторые зависимости одно от другого!
 
 ## Официальный контекст Joomla 6
 
@@ -58,15 +70,12 @@
 
 ## Команды
 
-Требуется Node.js в `PATH`. В текущем WSL/desktop окружении `pnpm` найден, но `node` не найден, поэтому npm-скрипты здесь не стартовали.
-
 - `pnpm install` - установить JS-зависимости по `pnpm-lock.yaml`.
-- `pnpm dev` - Vite dev server с дефолтным конфигом.
-- `pnpm dev:css` - watch/dev для SCSS через `vite.config.css.mts`.
-- `pnpm dev:js` - watch/dev для JS через `vite.config.js.mts`.
 - `pnpm build` - полная сборка CSS и JS через `build.mjs`.
 - `pnpm build:css` - собрать `media/css/*.css`, `*.min.css`, `*.min.css.gz`.
 - `pnpm build:js` - собрать `media/js/*.min.js`, `*.min.js.gz`.
+- `pnpm watch:js` - наблюдать `media/js/*.min.js`, `*.min.js.gz`.
+- `pnpm watch:css` - наблюдать `media/js/*.min.js`, `*.min.js.gz`.
 - `pnpm test` - сейчас заглушка `No automated tests yet`.
 - `pnpm zip` - `pnpm build` и создание установочного архива `tpl_itheme-{version}.zip`.
 
@@ -94,9 +103,10 @@
 - `pnpm test`
 - `pnpm zip`
 
-Если Node.js недоступен, явно сообщите, что команды не запускались из-за окружения. Для функциональной проверки установите zip в Joomla 6 и проверьте как минимум главную, категорию, карточку товара, корзину, checkout, поиск, логин, 403/404 и offline page.
+Если Node.js недоступен, явно сообщите, что команды не запускались из-за окружения. 
+Для функциональной проверки установите zip в Joomla 6 по адресу https://magazin-gefest-new.local/administrator/index.php?option=com_installer&view=install и проверьте как минимум главную, категорию, карточку товара, корзину, checkout, поиск, логин, 403/404 и offline page.
 
 ## Ограничения и известные состояния
 
-- Это не полный сайт Joomla, а шаблон расширения. Корневые PHP-файлы нельзя полноценно запускать вне Joomla application context.
+- Это не полный сайт Joomla, а только шаблон для сайта, устанавливаемый как расширение. Корневые PHP-файлы нельзя полноценно запускать вне Joomla application context.
 - Автоматических тестов пока нет; `pnpm test` является заглушкой.
