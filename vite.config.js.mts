@@ -1,11 +1,3 @@
-/*
-* @package tpl_itheme
-* @author Pavel Lange
-* @link https://github.com/i-lange/tpl_itheme
-* @copyright (C) 2026 Pavel Lange
-* @license GNU General Public License version 2 or later
-*/
-
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -15,7 +7,7 @@ import viteCompression from 'vite-plugin-compression'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-const JS_ENTRY_FILES = [
+const JS_ENTRY_FILES = [  
   'itheme.js',
   'analytics.js',
   'addtocart.js',

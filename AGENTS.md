@@ -17,6 +17,16 @@
 - `language/en-GB`, `language/ru-RU` - языковые строки шаблона.
 - `build.mjs`, `pack.mjs`, `vite.config.*.mts` - сборка CSS/JS и упаковка установочного zip.
 
+## Связанные проекты и расширения
+Данный шаблон разрабатывается для интернет-магазина на Joomla.
+Собранный production-ready проект это magazin-gefest-new.local, он доступен:
+- в окружении Windows путь к директории проекта: "c:\OSPanel\home\magazin-gefest-new.local\"
+- в окружении WSL путь к директории проекта: "mnt/c/OSPanel/home/magazin-gefest-new.local"
+- на локальном сервере (сервер всегда запущен по-умолчанию) панель администратора доступна по адресу: https://magazin-gefest-new.local/administrator/
+- на локальном сервере (сервер всегда запущен по-умолчанию) фронтенд сайта доступен по адресу: https://magazin-gefest-new.local
+
+
+
 ## Официальный контекст Joomla 6
 
 При изменениях сверяйтесь с официальной документацией Joomla, особенно:
@@ -40,7 +50,7 @@
 ## Стек и окружение
 
 - Joomla CMS 6.x, template extension `client="site"`, `method="upgrade"`.
-- PHP 8.3+ по `script.php`; для Joomla 6.x ориентируйтесь на актуальные требования официальной документации.
+- PHP 8.3+; для Joomla 6.x ориентируйтесь на актуальные требования официальной документации.
 - Bootstrap 5.3: импортируется из `vendor/bootstrap/scss` в `media/scss/itheme.scss`; JS-компоненты подключаются через Joomla Web Asset Manager.
 - Frontend JS: vanilla JavaScript, глобальный объект `Joomla`, события `DOMContentLoaded` и `joomla:updated`.
 - Сборка: Node.js `>=24`, pnpm `>=10.3.0` (`packageManager`: `pnpm@10.33.0`), Vite, Sass, Lightning CSS, vite-plugin-compression.
@@ -57,10 +67,6 @@
 - `pnpm build` - полная сборка CSS и JS через `build.mjs`.
 - `pnpm build:css` - собрать `media/css/*.css`, `*.min.css`, `*.min.css.gz`.
 - `pnpm build:js` - собрать `media/js/*.min.js`, `*.min.js.gz`.
-- `pnpm preview` - Vite preview, полезен только для статической проверки assets; Joomla PHP-шаблон полноценно не заменяет.
-- `pnpm lint` - ESLint для `media/js/**/*.js`.
-- `pnpm lint:css` - Stylelint для `media/scss/**/*.scss`.
-- `pnpm format` - Prettier для `html`, `language`, `media`.
 - `pnpm test` - сейчас заглушка `No automated tests yet`.
 - `pnpm zip` - `pnpm build` и создание установочного архива `tpl_itheme-{version}.zip`.
 
@@ -85,8 +91,6 @@
 Минимальный набор:
 
 - `pnpm build`
-- `pnpm lint`
-- `pnpm lint:css`
 - `pnpm test`
 - `pnpm zip`
 
@@ -96,4 +100,3 @@
 
 - Это не полный сайт Joomla, а шаблон расширения. Корневые PHP-файлы нельзя полноценно запускать вне Joomla application context.
 - Автоматических тестов пока нет; `pnpm test` является заглушкой.
-- Конфиги ESLint/Stylelint/Prettier в корне не найдены; команды объявлены в `package.json`, но строгие правила зависят от добавления/настройки конфигов.

@@ -23,7 +23,6 @@
         <filename>templateDetails.xml</filename>
         <folder>html</folder>
         <folder>src</folder>
-        <folder>language</folder>
     </files>
     <media destination="templates/site/itheme" folder="media">
         <folder>css</folder>
