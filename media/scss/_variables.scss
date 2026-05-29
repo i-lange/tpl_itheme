@@ -4,64 +4,8 @@ $prefix: "";
 // Disable dark mode
 $enable-dark-mode: false;
 
-$black: #000 !default;
-$red: #c40e38 !default;
-$primary: $red !default;
-
-// Типографика
-//==========================================================================//
-$font-family-sans-serif:      system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
-$font-family-monospace:       SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
-
-$font-size-root:              null    !default;
-$font-size:                   1rem    !default;
-$font-size-base:              1rem     !default;
-
-$display-font-sizes: (
-        1: 5em,
-        2: 4.5em,
-        3: 4em,
-        4: 3.5em,
-        5: 3em,
-        6: 2.5em
-) !default;
-
-// Брейкпоинты
-$grid-breakpoints: (
-        xs: 0,
-        sm: 440px,
-        md: 768px,
-        lg: 992px,
-        xl: 1200px,
-        xxl: 2560px
-) !default;
-
 // Ширина контейнеров
 $container-max-widths: (
   xl: 78rem,
   xxl: 80rem
 ) !default;
-
-// Модальные окна
-$modal-sm: 18rem !default;
-$modal-md: 28rem !default;
-$modal-lg: 50rem !default;
-$modal-xl: 70rem !default;
-
-// Offcanvas
-$offcanvas-horizontal-width: 22rem !default;
-$offcanvas-vertical-height:  75vh !default;
-
-// Параграфы
-$paragraph-margin-bottom: 1rem !default;
-
-// Сетка
-$grid-gutter-width:           1.5rem !default;
-
-// Закругления
-$border-radius:               .375rem !default;
-$border-radius-sm:            .25rem !default;
-$border-radius-lg:            .5rem !default;
-$border-radius-xl:            1rem !default;
-$border-radius-xxl:           2rem !default;
-$border-radius-pill:          50rem !default;

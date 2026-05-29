@@ -73,28 +73,28 @@
   --body-font-size: 1rem;
   --body-font-weight: 400;
   --body-line-height: 1.5;
-  --body-color: #212529;
-  --body-color-rgb: 33, 37, 41;
-  --body-bg: #fff;
-  --body-bg-rgb: 255, 255, 255;
+  --body-color: #171717;
+  --body-color-rgb: 23, 23, 23;
+  --body-bg: #fefefe;
+  --body-bg-rgb: 254, 254, 254;
   --emphasis-color: #000;
   --emphasis-color-rgb: 0, 0, 0;
-  --secondary-color: rgba(33, 37, 41, 0.75);
-  --secondary-color-rgb: 33, 37, 41;
+  --secondary-color: rgba(23, 23, 23, 0.75);
+  --secondary-color-rgb: 23, 23, 23;
   --secondary-bg: #e9ecef;
   --secondary-bg-rgb: 233, 236, 239;
-  --tertiary-color: rgba(33, 37, 41, 0.5);
-  --tertiary-color-rgb: 33, 37, 41;
+  --tertiary-color: rgba(23, 23, 23, 0.5);
+  --tertiary-color-rgb: 23, 23, 23;
   --tertiary-bg: #f8f9fa;
   --tertiary-bg-rgb: 248, 249, 250;
   --heading-color: inherit;
-  --link-color: #c40e38;
-  --link-color-rgb: 196, 14, 56;
+  --link-color: #1d7989;
+  --link-color-rgb: 29, 121, 137;
   --link-decoration: underline;
-  --link-hover-color: rgb(156.8, 11.2, 44.8);
-  --link-hover-color-rgb: 157, 11, 45;
+  --link-hover-color: #0e3b43;
+  --link-hover-color-rgb: 14, 59, 67;
   --code-color: #d63384;
-  --highlight-color: #212529;
+  --highlight-color: #171717;
   --highlight-bg: rgb(255, 242.6, 205.4);
   --border-width: 1px;
   --border-style: solid;
@@ -2343,10 +2343,10 @@ textarea.form-control-lg {
   outline: 0;
 }
 .form-range:focus::-webkit-slider-thumb {
-  box-shadow: 0 0 0 1px #fff, 0 0 0 0.25rem rgba(196, 14, 56, 0.25);
+  box-shadow: 0 0 0 1px #fefefe, 0 0 0 0.25rem rgba(196, 14, 56, 0.25);
 }
 .form-range:focus::-moz-range-thumb {
-  box-shadow: 0 0 0 1px #fff, 0 0 0 0.25rem rgba(196, 14, 56, 0.25);
+  box-shadow: 0 0 0 1px #fefefe, 0 0 0 0.25rem rgba(196, 14, 56, 0.25);
 }
 .form-range::-moz-focus-outer {
   border: 0;
@@ -3135,7 +3135,7 @@ textarea.form-control-lg {
   --btn-disabled-color: #6c757d;
   --btn-disabled-border-color: transparent;
   --btn-box-shadow: 0 0 0 #000;
-  --btn-focus-shadow-rgb: 205, 50, 86;
+  --btn-focus-shadow-rgb: 63, 141, 155;
   text-decoration: underline;
 }
 .btn-link:focus-visible {
@@ -3765,7 +3765,7 @@ textarea.form-control-lg {
   --navbar-toggler-padding-y: 0.25rem;
   --navbar-toggler-padding-x: 0.75rem;
   --navbar-toggler-font-size: 1.25rem;
-  --navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2833, 37, 41, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  --navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2823, 23, 23, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
   --navbar-toggler-border-color: rgba(var(--emphasis-color-rgb), 0.15);
   --navbar-toggler-border-radius: var(--border-radius);
   --navbar-toggler-focus-width: 0.25rem;
@@ -4368,7 +4368,7 @@ textarea.form-control-lg {
   --accordion-btn-padding-y: 1rem;
   --accordion-btn-color: var(--body-color);
   --accordion-btn-bg: var(--accordion-bg);
-  --accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23212529' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+  --accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23171717' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
   --accordion-btn-icon-width: 1.25rem;
   --accordion-btn-icon-transform: rotate(-180deg);
   --accordion-btn-icon-transition: transform 0.2s ease-in-out;

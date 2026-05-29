@@ -85,26 +85,6 @@ if ($this->params->get('logoFile')) {
 $wa->useStyle('tpl.itheme');
 // Подключаем основные таблицы скрипты шаблона:
 $wa->useScript('tpl.itheme');
-// Подключаем дополнительные inline стили для тонкой настройки отображения:
-$wa->addInlineStyle(":root {
-	--primary: " . $this->params->get('primary-color') . ";
-	--primary-rgb: " . str_replace(['rgb(', ')'], '', $this->params->get('primary-color')) . ";
-	--body-color: " . $this->params->get('body-color') . ";
-	--body-color-rgb: " . str_replace(['rgb(', ')'], '', $this->params->get('body-color')) . ";
-	--body-bg: " . $this->params->get('body-background') . ";
-	--body-bg-rgb: " . str_replace(['rgb(', ')'], '', $this->params->get('body-background')) . ";
-	--link-color: " . $this->params->get('link-color') . ";
-	--link-color-rgb: " . str_replace(['rgb(', ')'], '', $this->params->get('link-color')) . ";
-	--link-hover-color: " . $this->params->get('link-color-hover') . ";
-	--link-hover-color-rgb: " . str_replace(['rgb(', ')'], '', $this->params->get('link-color-hover')) . ";
-	--footer-color: " . $this->params->get('footer-color') . ";
-	--footer-background: " . $this->params->get('footer-background') . ";
-	--body-font-size: " . $this->params->get('body-font-size') . ";
-	--nav-link-font-size: 1em;
-	--h1-font-size: " . $this->params->get('h1-font-size') . ";
-	--h2-font-size: " . $this->params->get('h2-font-size') . ";
-	--h3-font-size: " . $this->params->get('h3-font-size') . ";}");
-
 // Рендеринг модулей не будет работать должным образом при неполной инициализации приложения
 $renderModules = $app->getIdentity() && $app->getLanguage();
 
