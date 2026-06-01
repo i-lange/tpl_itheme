@@ -21,6 +21,7 @@
 @import "footer/footer";
 @import "footer/footer-main";
 @import "footer/footer-bottom";
+@import "footer/navigator";
 
 // Дополнительные блоки
 @import "blocks/alerts";
@@ -37,24 +38,16 @@
 @import "catalog/product_prices";
 @import "catalog/product_buttons";
 @import "catalog/product_field";
+@import "catalog/product_parts";
+
+// iShop pages
+@import "ishop/cart";
+@import "ishop/checkout";
+@import "ishop/compare";
 
 // Модули
+@import "modules/consultation";
 @import "modules/offcanvas-slider";
 @import "modules/search-form";
 @import "modules/scroll-items-list";
 @import "modules/jivo";
-
-// Устаревший код
-@import "old/checkout";
-@import "old/consultation";
-@import "old/part";
-@import "old/navigator";
-
-@import "old/korzina/cart";
-@import "old/korzina/cart-empty";
-@import "old/korzina/cart-grid";
-@import "old/korzina/cart-item";
-@import "old/korzina/cart-prices";
-
-@import "old/compare/list";
-//@import "old/compare/panel";

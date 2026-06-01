@@ -58,7 +58,7 @@ $user = Factory::getApplication()->getIdentity();
             </div>
         </div>
     <?php else: ?>
-        <div class="card_not_available"><?php echo Text::_('COM_ISHOP_PRODUCT_NOT_AVAILABLE'); ?></div>
+        <div class="product-full__not-available"><?php echo Text::_('COM_ISHOP_PRODUCT_NOT_AVAILABLE'); ?></div>
     <?php endif; ?>
         <div class="text-center mt-3">
             <p class="mb-1 fw-medium"><?php echo Text::_('TPL_ITHEME_BUY_BY_PHONE'); ?></p>

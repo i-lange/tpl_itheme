@@ -22,7 +22,7 @@
 body {
   position: relative;
   min-height: 100vh;
-  font-size: $font-size;
+  font-size: $font-size-base;
 
   @include media-breakpoint-up(xxl) {
     //font-size: calc( (100vw - 480px)/(1280 - 480) * (24 - 16) + 16px);

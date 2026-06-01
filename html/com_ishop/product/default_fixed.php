@@ -70,5 +70,5 @@ $product_price = ($product->sale_price > 0) ? $product->sale_price : $product->p
     <?php endif; ?>
 </div>
 <?php else : ?>
-    <div class="card_not_available"><?php echo Text::_('COM_ISHOP_PRODUCT_NOT_AVAILABLE'); ?></div>
+    <div class="product-full__not-available"><?php echo Text::_('COM_ISHOP_PRODUCT_NOT_AVAILABLE'); ?></div>
 <?php endif; ?>

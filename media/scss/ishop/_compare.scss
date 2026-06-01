@@ -10,14 +10,14 @@
 .module-compare {
   display: grid;
   grid-gap: 1em;
-  grid-auto-flow: column; /* элементы создают новые колонки */
-  grid-auto-columns: minmax(10em, 1fr); /* ширина каждой колонки */
-  overflow-x: visible; /* горизонтальная прокрутка */
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(10em, 1fr);
+  overflow-x: visible;
   padding: .25em 0;
 
   @include media-breakpoint-up(md) {
     grid-gap: 2em;
-    grid-auto-columns: minmax(12em, 1fr); /* ширина каждой колонки */
+    grid-auto-columns: minmax(12em, 1fr);
   }
 }
 

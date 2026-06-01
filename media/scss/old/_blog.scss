@@ -1,8 +1,0 @@
-.module-blog {
-  display: grid;
-  grid-gap: 2em;
-
-  @include media-breakpoint-up(md) {
-    grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
-  }
-}
