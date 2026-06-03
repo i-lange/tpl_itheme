@@ -141,5 +141,4 @@ Joomla = window.Joomla || {};
 import './__validate.js';
 import './__submit.js';
 import './__dragscroller.js';
-import './__cart.js';
 import './__checkout.js';

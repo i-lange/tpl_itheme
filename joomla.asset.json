@@ -137,6 +137,12 @@
       "description": "Скрипт обновления модальной формы заказа в 1 клик",
       "type": "script",
       "uri": "buy1click.js"
+    },
+    {
+      "name": "tpl.shopping-cart",
+      "description": "Скрипт управления корзиной на странице корзины",
+      "type": "script",
+      "uri": "shopping-cart.js"
     }
   ]
 }

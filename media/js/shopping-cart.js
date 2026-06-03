@@ -224,5 +224,7 @@ const iShoppingCart = {
 	}
 };
 
-// Инициализация при загрузке страницы
-iShoppingCart.init();
+document.addEventListener("DOMContentLoaded", function () {
+	// Инициализация при загрузке страницы
+	iShoppingCart.init();
+});
