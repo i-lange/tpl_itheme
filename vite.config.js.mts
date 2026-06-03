@@ -20,6 +20,7 @@ const JS_ENTRY_FILES = [
   'shopping-cart.js',
   'form-validate.js',
   'checkout.js',
+  'form-submit.js',
 ]
 
 function getJsEntries(): Record<string, string> {

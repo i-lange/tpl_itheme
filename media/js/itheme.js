@@ -138,5 +138,4 @@ Joomla = window.Joomla || {};
 
 })(Joomla, document);
 
-import './__submit.js';
 import './__dragscroller.js';

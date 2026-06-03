@@ -158,6 +158,15 @@
       "dependencies": [
         "tpl.form-validate"
       ]
+    },
+    {
+      "name": "tpl.submit",
+      "description": "Скрипт отправки формы",
+      "type": "script",
+      "uri": "form-submit.js",
+      "dependencies": [
+        "tpl.form-validate"
+      ]
     }
   ]
 }
