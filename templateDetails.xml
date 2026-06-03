@@ -107,6 +107,291 @@
                        label="TPL_ITHEME_JIVO_URL_LABEL"
                        showon="setJivo:1"
                        filter="string" />
+                <field name="noteBootstrapImports"
+                       type="note"
+                       label="TPL_ITHEME_BOOTSTRAP_IMPORTS_LABEL"
+                       description="TPL_ITHEME_BOOTSTRAP_IMPORTS_NOTE"
+                       class="alert alert-info"/>
+                <field name="itheme-enable-bootstrap-images"
+                       type="radio"
+                       label="$itheme-enable-bootstrap-images"
+                       layout="joomla.form.field.radio.switcher"
+                       parentclass="span-3-inline stack"
+                       default="1"
+                       filter="integer">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="itheme-enable-bootstrap-containers"
+                       type="radio"
+                       label="$itheme-enable-bootstrap-containers"
+                       layout="joomla.form.field.radio.switcher"
+                       parentclass="span-3-inline stack"
+                       default="1"
+                       filter="integer">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="itheme-enable-bootstrap-grid"
+                       type="radio"
+                       label="$itheme-enable-bootstrap-grid"
+                       layout="joomla.form.field.radio.switcher"
+                       parentclass="span-3-inline stack"
+                       default="1"
+                       filter="integer">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="itheme-enable-bootstrap-tables"
+                       type="radio"
+                       label="$itheme-enable-bootstrap-tables"
+                       layout="joomla.form.field.radio.switcher"
+                       parentclass="span-3-inline stack"
+                       default="1"
+                       filter="integer">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="itheme-enable-bootstrap-forms"
+                       type="radio"
+                       label="$itheme-enable-bootstrap-forms"
+                       layout="joomla.form.field.radio.switcher"
+                       parentclass="span-3-inline stack"
+                       default="1"
+                       filter="integer">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="itheme-enable-bootstrap-buttons"
+                       type="radio"
+                       label="$itheme-enable-bootstrap-buttons"
+                       layout="joomla.form.field.radio.switcher"
+                       parentclass="span-3-inline stack"
+                       default="1"
+                       filter="integer">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="itheme-enable-bootstrap-transitions"
+                       type="radio"
+                       label="$itheme-enable-bootstrap-transitions"
+                       layout="joomla.form.field.radio.switcher"
+                       parentclass="span-3-inline stack"
+                       default="1"
+                       filter="integer">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="itheme-enable-bootstrap-dropdown"
+                       type="radio"
+                       label="$itheme-enable-bootstrap-dropdown"
+                       layout="joomla.form.field.radio.switcher"
+                       parentclass="span-3-inline stack"
+                       default="1"
+                       filter="integer">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="itheme-enable-bootstrap-button-group"
+                       type="radio"
+                       label="$itheme-enable-bootstrap-button-group"
+                       layout="joomla.form.field.radio.switcher"
+                       parentclass="span-3-inline stack"
+                       default="1"
+                       filter="integer">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="itheme-enable-bootstrap-nav"
+                       type="radio"
+                       label="$itheme-enable-bootstrap-nav"
+                       layout="joomla.form.field.radio.switcher"
+                       parentclass="span-3-inline stack"
+                       default="1"
+                       filter="integer">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="itheme-enable-bootstrap-navbar"
+                       type="radio"
+                       label="$itheme-enable-bootstrap-navbar"
+                       layout="joomla.form.field.radio.switcher"
+                       parentclass="span-3-inline stack"
+                       default="1"
+                       filter="integer">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="itheme-enable-bootstrap-card"
+                       type="radio"
+                       label="$itheme-enable-bootstrap-card"
+                       layout="joomla.form.field.radio.switcher"
+                       parentclass="span-3-inline stack"
+                       default="1"
+                       filter="integer">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="itheme-enable-bootstrap-accordion"
+                       type="radio"
+                       label="$itheme-enable-bootstrap-accordion"
+                       layout="joomla.form.field.radio.switcher"
+                       parentclass="span-3-inline stack"
+                       default="1"
+                       filter="integer">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="itheme-enable-bootstrap-breadcrumb"
+                       type="radio"
+                       label="$itheme-enable-bootstrap-breadcrumb"
+                       layout="joomla.form.field.radio.switcher"
+                       parentclass="span-3-inline stack"
+                       default="1"
+                       filter="integer">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="itheme-enable-bootstrap-pagination"
+                       type="radio"
+                       label="$itheme-enable-bootstrap-pagination"
+                       layout="joomla.form.field.radio.switcher"
+                       parentclass="span-3-inline stack"
+                       default="1"
+                       filter="integer">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="itheme-enable-bootstrap-badge"
+                       type="radio"
+                       label="$itheme-enable-bootstrap-badge"
+                       layout="joomla.form.field.radio.switcher"
+                       parentclass="span-3-inline stack"
+                       default="1"
+                       filter="integer">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="itheme-enable-bootstrap-alert"
+                       type="radio"
+                       label="$itheme-enable-bootstrap-alert"
+                       layout="joomla.form.field.radio.switcher"
+                       parentclass="span-3-inline stack"
+                       default="1"
+                       filter="integer">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="itheme-enable-bootstrap-progress"
+                       type="radio"
+                       label="$itheme-enable-bootstrap-progress"
+                       layout="joomla.form.field.radio.switcher"
+                       parentclass="span-3-inline stack"
+                       default="1"
+                       filter="integer">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="itheme-enable-bootstrap-list-group"
+                       type="radio"
+                       label="$itheme-enable-bootstrap-list-group"
+                       layout="joomla.form.field.radio.switcher"
+                       parentclass="span-3-inline stack"
+                       default="1"
+                       filter="integer">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="itheme-enable-bootstrap-close"
+                       type="radio"
+                       label="$itheme-enable-bootstrap-close"
+                       layout="joomla.form.field.radio.switcher"
+                       parentclass="span-3-inline stack"
+                       default="1"
+                       filter="integer">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="itheme-enable-bootstrap-toasts"
+                       type="radio"
+                       label="$itheme-enable-bootstrap-toasts"
+                       layout="joomla.form.field.radio.switcher"
+                       parentclass="span-3-inline stack"
+                       default="1"
+                       filter="integer">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="itheme-enable-bootstrap-modal"
+                       type="radio"
+                       label="$itheme-enable-bootstrap-modal"
+                       layout="joomla.form.field.radio.switcher"
+                       parentclass="span-3-inline stack"
+                       default="1"
+                       filter="integer">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="itheme-enable-bootstrap-tooltip"
+                       type="radio"
+                       label="$itheme-enable-bootstrap-tooltip"
+                       layout="joomla.form.field.radio.switcher"
+                       parentclass="span-3-inline stack"
+                       default="1"
+                       filter="integer">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="itheme-enable-bootstrap-popover"
+                       type="radio"
+                       label="$itheme-enable-bootstrap-popover"
+                       layout="joomla.form.field.radio.switcher"
+                       parentclass="span-3-inline stack"
+                       default="1"
+                       filter="integer">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="itheme-enable-bootstrap-carousel"
+                       type="radio"
+                       label="$itheme-enable-bootstrap-carousel"
+                       layout="joomla.form.field.radio.switcher"
+                       parentclass="span-3-inline stack"
+                       default="1"
+                       filter="integer">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="itheme-enable-bootstrap-spinners"
+                       type="radio"
+                       label="$itheme-enable-bootstrap-spinners"
+                       layout="joomla.form.field.radio.switcher"
+                       parentclass="span-3-inline stack"
+                       default="1"
+                       filter="integer">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="itheme-enable-bootstrap-offcanvas"
+                       type="radio"
+                       label="$itheme-enable-bootstrap-offcanvas"
+                       layout="joomla.form.field.radio.switcher"
+                       parentclass="span-3-inline stack"
+                       default="1"
+                       filter="integer">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="itheme-enable-bootstrap-placeholders"
+                       type="radio"
+                       label="$itheme-enable-bootstrap-placeholders"
+                       layout="joomla.form.field.radio.switcher"
+                       parentclass="span-3-inline stack"
+                       default="1"
+                       filter="integer">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
             </fieldset>
             <fieldset name="colors" label="TPL_ITHEME_COLORS_FIELDSET_LABEL">
                 <field name="noteScssColors"
