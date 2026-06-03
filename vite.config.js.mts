@@ -15,6 +15,7 @@ const JS_ENTRY_FILES = [
   'addtowishlist.js',
   'headersticky.js',
   'offcanvas-slider.js',
+  'phone_masker.js',
 ]
 
 function getJsEntries(): Record<string, string> {

@@ -25,6 +25,7 @@ defined('_JEXEC') or die;
  * @var string $captcha
  */
 
+$wa->useScript('tpl.phone-masker');
 $session = Factory::getApplication()->getSession();
 $UTM = $session->get('UTM');
 

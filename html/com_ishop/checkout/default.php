@@ -18,6 +18,7 @@ use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Router\Route;
 
 $wa = Factory::getApplication()->getDocument()->getWebAssetManager();
+$wa->useScript('tpl.phone-masker');
 $currency = strtoupper($this->params->get('defaultCurrency', 'BYN'));
 
 if (!empty($this->checkout->products)) {

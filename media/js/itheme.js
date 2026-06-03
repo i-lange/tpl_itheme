@@ -80,24 +80,6 @@ Joomla = window.Joomla || {};
             // }).observe();
         }
 
-        // Сброс фильтра
-        const el = document.getElementById('resetFilterBtn');
-        if (el) {
-            document.getElementById('resetFilterBtn').addEventListener('click', () => {
-                const form = document.querySelector('form[name=ishop_filter]');
-
-                form.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-                    cb.checked = false;
-                });
-
-                form.querySelectorAll('input:not([type="checkbox"]):not([type="hidden"])').forEach(input => {
-                    input.value = '';
-                });
-
-                form.requestSubmit();
-            });
-        }
-
         // блоки с прокруткой
         document.querySelectorAll('.scroll-items-list').forEach((list) => {
             let isDown = false;
@@ -162,4 +144,3 @@ import './__dragscroller.js';
 import './__cart.js';
 import './__checkout.js';
 import './__buy1click.js';
-import './__mask.js';
