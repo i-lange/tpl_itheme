@@ -97,6 +97,52 @@
 		}
 	}
 
+	function setSubmitButtonLoading(button, isLoading) {
+		if (!button) {
+			return;
+		}
+
+		if (isLoading) {
+			if (button.dataset.loading === '1') {
+				return;
+			}
+
+			button.dataset.loading = '1';
+			button.dataset.wasDisabled = button.disabled ? '1' : '0';
+			button.dataset.hadAriaBusy = button.hasAttribute('aria-busy') ? '1' : '0';
+			button.dataset.previousAriaBusy = button.getAttribute('aria-busy') || '';
+			button.disabled = true;
+			button.setAttribute('aria-busy', 'true');
+
+			if (!button.querySelector('[data-submit-spinner="1"]')) {
+				var spinner = document.createElement('i');
+				spinner.className = 'spinner spinner-border spinner-border-sm ms-2';
+				spinner.setAttribute('aria-hidden', 'true');
+				spinner.dataset.submitSpinner = '1';
+				button.appendChild(spinner);
+			}
+
+			return;
+		}
+
+		button.dataset.loading = '0';
+		button.querySelectorAll('[data-submit-spinner="1"]').forEach(function (spinner) {
+			spinner.remove();
+		});
+
+		button.disabled = button.dataset.wasDisabled === '1';
+
+		if (button.dataset.hadAriaBusy === '1') {
+			button.setAttribute('aria-busy', button.dataset.previousAriaBusy || '');
+		} else {
+			button.removeAttribute('aria-busy');
+		}
+
+		delete button.dataset.wasDisabled;
+		delete button.dataset.hadAriaBusy;
+		delete button.dataset.previousAriaBusy;
+	}
+
 	function iformProcess(form) {
 		if (!window.iTheme || typeof window.iTheme.Validate !== 'function') {
 			console.error('iTheme.Validate is not available');
@@ -115,13 +161,7 @@
 		form.dataset.loading = '1';
 
 		var submitButton = form.querySelector('[type="submit"]');
-		var spinner = null;
-
-		if (submitButton) {
-			spinner = document.createElement('i');
-			spinner.className = 'spinner';
-			submitButton.appendChild(spinner);
-		}
+		setSubmitButtonLoading(submitButton, true);
 
 		var formData = new FormData(form);
 		var tokenName = getCsrfTokenName(form);
@@ -139,10 +179,7 @@
 			}
 
 			form.dataset.loading = '0';
-
-			if (spinner) {
-				spinner.remove();
-			}
+			setSubmitButtonLoading(submitButton, false);
 
 			if (xhr.status !== 200) {
 				console.error('Form request failed with status:', xhr.status);
