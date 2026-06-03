@@ -137,5 +137,3 @@ Joomla = window.Joomla || {};
     document.addEventListener('joomla:updated', initTemplate);
 
 })(Joomla, document);
-
-import './__dragscroller.js';

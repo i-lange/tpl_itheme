@@ -21,6 +21,7 @@ const JS_ENTRY_FILES = [
   'form-validate.js',
   'checkout.js',
   'form-submit.js',
+  'drag-scroller.js',
 ]
 
 function getJsEntries(): Record<string, string> {

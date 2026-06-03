@@ -107,7 +107,8 @@
       "dependencies": [
         "core",
         "tpl.lazyload",
-        "tpl.analytics"
+        "tpl.analytics",
+        "tpl.drag-scroller"
       ]
     },
     {
@@ -167,6 +168,12 @@
       "dependencies": [
         "tpl.form-validate"
       ]
+    },
+    {
+      "name": "tpl.drag-scroller",
+      "description": "Скрипт горизонтальной прокрутки элементов",
+      "type": "script",
+      "uri": "drag-scroller.js"
     }
   ]
 }
