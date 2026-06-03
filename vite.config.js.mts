@@ -18,6 +18,8 @@ const JS_ENTRY_FILES = [
   'phone_masker.js',
   'buy1click.js',
   'shopping-cart.js',
+  'form-validate.js',
+  'checkout.js',
 ]
 
 function getJsEntries(): Record<string, string> {

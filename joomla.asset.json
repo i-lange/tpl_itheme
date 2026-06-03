@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
   "name": "itheme",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "This file contains details of the assets used by Cassiopeia, the default Joomla site template.",
   "license": "GPL-2.0-or-later",
   "assets": [
@@ -143,6 +143,21 @@
       "description": "Скрипт управления корзиной на странице корзины",
       "type": "script",
       "uri": "shopping-cart.js"
+    },
+    {
+      "name": "tpl.form-validate",
+      "description": "Скрипт валидации полей формы",
+      "type": "script",
+      "uri": "form-validate.js"
+    },
+    {
+      "name": "tpl.checkout",
+      "description": "Скрипт подтверждения заказа",
+      "type": "script",
+      "uri": "checkout.js",
+      "dependencies": [
+        "tpl.form-validate"
+      ]
     }
   ]
 }
