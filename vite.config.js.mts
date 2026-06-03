@@ -16,6 +16,7 @@ const JS_ENTRY_FILES = [
   'headersticky.js',
   'offcanvas-slider.js',
   'phone_masker.js',
+  'buy1click.js',
 ]
 
 function getJsEntries(): Record<string, string> {

@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
   "name": "itheme",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "This file contains details of the assets used by Cassiopeia, the default Joomla site template.",
   "license": "GPL-2.0-or-later",
   "assets": [
@@ -131,6 +131,12 @@
       "description": "Скрипт для маски телефона в полях input",
       "type": "script",
       "uri": "phone_masker.js"
+    },
+    {
+      "name": "tpl.buy1click",
+      "description": "Скрипт обновления модальной формы заказа в 1 клик",
+      "type": "script",
+      "uri": "buy1click.js"
     }
   ]
 }

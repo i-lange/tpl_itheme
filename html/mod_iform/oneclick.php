@@ -28,6 +28,7 @@ defined('_JEXEC') or die;
  */
 
 $wa->useScript('tpl.phone-masker');
+$wa->useScript('tpl.buy1click');
 $session = Factory::getApplication()->getSession();
 $formId = 'i-form-' . $module->id;
 ?>

@@ -143,4 +143,3 @@ import './__submit.js';
 import './__dragscroller.js';
 import './__cart.js';
 import './__checkout.js';
-import './__buy1click.js';
