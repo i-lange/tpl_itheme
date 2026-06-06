@@ -29,13 +29,14 @@ $text = ltrim($ordering, 'a.') . '_' . $direction;
 $sort = ($direction === 'DESC') ? 'down' : 'up';
 $orderingList = $this->params->get('category_ordering', []);
 $showFilter = (!empty(ModuleHelper::getModules('filter'))) && !empty($this->filter_object) && !$this->filter_object->empty;
+$categoryTitle = !empty($this->filter_seo_page->heading) ? $this->filter_seo_page->heading : $this->category->title;
 ?>
 <div class="container">
     <?php if ($this->params->get('show_page_heading')) : ?>
         <h1><?php echo $this->escape($this->params->get('page_heading')); ?></h1>
     <?php endif; ?>
     <?php if ($this->params->get('show_category_title')) : ?>
-        <h2><?php echo $this->category->title; ?> <span class="category-products-count">(<?php echo $this->pagination->total; ?>)</span></h2>
+        <h2><?php echo $categoryTitle; ?> <span class="category-products-count">(<?php echo $this->pagination->total; ?>)</span></h2>
     <?php endif; ?>
     <?php if ($this->maxLevel != 0 && $this->get('children')) : ?>
         <?php echo $this->loadTemplate('children'); ?>
@@ -93,10 +94,15 @@ $showFilter = (!empty(ModuleHelper::getModules('filter'))) && !empty($this->filt
         <?php echo $this->pagination->getPagesLinks(); ?>
     <?php endif; ?>
 </div>
-<?php if ($this->params->get('show_description', 1) && $this->category->description) : ?>
+<?php
+$filterSeoDescription = !empty($this->filter_seo_page->description) ? $this->filter_seo_page->description : '';
+$categoryDescription = $filterSeoDescription ?: $this->category->description;
+$showCategoryDescription = $filterSeoDescription || $this->params->get('show_description', 1);
+?>
+<?php if ($showCategoryDescription && $categoryDescription) : ?>
 <div class="bg-light py-5">
     <div class="container">
-        <?php echo HTMLHelper::_('content.prepare', $this->category->description, '', 'com_ishop.category'); ?>
+        <?php echo HTMLHelper::_('content.prepare', $categoryDescription, '', 'com_ishop.category'); ?>
     </div>
 </div>
 <?php endif; ?>
