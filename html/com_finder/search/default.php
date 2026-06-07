@@ -13,6 +13,12 @@ defined('_JEXEC') or die;
 $this->getDocument()->getWebAssetManager()
     ->useStyle('com_finder.finder')
     ->useScript('com_finder.finder');
+
+if ($this->query->search === true && (int) $this->total > 0) {
+    $wa = $this->getDocument()->getWebAssetManager();
+    $wa->getRegistry()->addExtensionRegistryFile('com_ishop');
+    $wa->useScript('com_ishop.products-loader');
+}
 ?>
 <?php if ($this->params->get('show_page_heading')) : ?>
     <h1 class="d-none d-md-block mt-3">

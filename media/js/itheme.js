@@ -14,6 +14,12 @@ Joomla = window.Joomla || {};
         const modalEl = document.getElementById('ishopZonesModal');
         let returnFocusEl = null;
 
+        if (!modalEl || modalEl.dataset.ithemeModalBound === '1') {
+            return;
+        }
+
+        modalEl.dataset.ithemeModalBound = '1';
+
         modalEl.addEventListener('show.bs.modal', (event) => {
             returnFocusEl = event.relatedTarget || document.activeElement;
         });
@@ -48,6 +54,23 @@ Joomla = window.Joomla || {};
         document.addEventListener('click', this.handleClick);
     }
 
+    function refreshLazyload(root = document) {
+        if (typeof window.lozad !== 'function') {
+            console.error('Lozad не загружен');
+            return;
+        }
+
+        const elements = root === document ? 'img[data-srcset]' : root.querySelectorAll('img[data-srcset]');
+
+        window.lozad(elements, {
+            rootMargin: '300px 500px',
+            threshold: 0.1,
+            enableAutoReload: true
+        }).observe();
+    }
+
+    window.iTheme = window.iTheme || {};
+    window.iTheme.refreshLazyload = refreshLazyload;
 
     document.addEventListener('DOMContentLoaded', event => {
         // Инициализация
@@ -63,22 +86,8 @@ Joomla = window.Joomla || {};
         });
 
 
-        if (typeof window.lozad !== 'function') {
-            console.error('Lozad не загружен');
-        } else {
-            // Ленивая загрузка изображений и фреймов
-            window.lozad('img[data-srcset]', {
-                rootMargin: '300px 500px',
-                threshold: 0.1,
-                enableAutoReload: true
-            }).observe();
-
-            // window.lozad('iframe[data-src]', {
-            //     rootMargin: '10px 0px',
-            //     threshold: 0.1,
-            //     enableAutoReload: true
-            // }).observe();
-        }
+        // Ленивая загрузка изображений и фреймов
+        refreshLazyload(document);
 
         // блоки с прокруткой
         document.querySelectorAll('.scroll-items-list').forEach((list) => {
@@ -135,5 +144,8 @@ Joomla = window.Joomla || {};
 
     // Инициализируется при обновлении части страницы
     document.addEventListener('joomla:updated', initTemplate);
+    document.addEventListener('com_ishop:products-loaded', event => {
+        refreshLazyload(event.detail && event.detail.container ? event.detail.container : document);
+    });
 
 })(Joomla, document);

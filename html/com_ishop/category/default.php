@@ -14,13 +14,17 @@ use Joomla\CMS\Helper\ModuleHelper;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
+use Joomla\CMS\Router\Route;
+use Joomla\CMS\Session\Session;
 use Joomla\CMS\Uri\Uri;
 
 /** @var Ilange\Component\Ishop\Site\View\Category\HtmlView $this */
 /** @var Joomla\CMS\WebAsset\WebAssetManager $wa */
 $app = Factory::getApplication();
 $wa = $app->getDocument()->getWebAssetManager();
-$wa->useScript('bootstrap.dropdown');
+$wa->getRegistry()->addExtensionRegistryFile('com_ishop');
+$wa->useScript('bootstrap.dropdown')
+    ->useScript('com_ishop.products-loader');
 
 $ordering = $this->escape($this->state->get('list.ordering', 'a.price'));
 $direction = $this->escape($this->state->get('list.direction', 'DESC'));
@@ -30,6 +34,41 @@ $sort = ($direction === 'DESC') ? 'down' : 'up';
 $orderingList = $this->params->get('category_ordering', []);
 $showFilter = (!empty(ModuleHelper::getModules('filter'))) && !empty($this->filter_object) && !$this->filter_object->empty;
 $categoryTitle = !empty($this->filter_seo_page->heading) ? $this->filter_seo_page->heading : $this->category->title;
+$limit = max(1, (int) $this->state->get('list.limit', $app->get('list_limit', 20)));
+$limitstart = (int) $this->state->get('list.start', 0);
+$total = (int) $this->pagination->total;
+$nextLimitstart = $limitstart + $limit;
+$hasMore = !empty($this->items) && $nextLimitstart < $total;
+$loaderStateId = 'ishop-category-loader-state-' . (int) $this->category->id;
+$loaderState = [
+    'id'              => (int) $this->category->id,
+    'category_id'     => (int) $this->category->id,
+    'Itemid'          => $app->getInput()->getInt('Itemid', 0),
+    'filter_order'    => $ordering,
+    'filter_order_Dir'=> $direction,
+    'filter_tag'      => (int) $this->state->get('filter.tag', 0),
+    'filter-search'   => (string) $this->state->get('list.filter', ''),
+    'filter_route'    => (int) $this->state->get('filter.route', 0),
+    'min_price'       => (int) $this->state->get('filter.min_price', 0),
+    'max_price'       => (int) $this->state->get('filter.max_price', 0),
+    'good_price'      => (int) $this->state->get('filter.good_price', 0),
+    'min_width'       => (int) $this->state->get('filter.min_width', 0),
+    'max_width'       => (int) $this->state->get('filter.max_width', 0),
+    'min_height'      => (int) $this->state->get('filter.min_height', 0),
+    'max_height'      => (int) $this->state->get('filter.max_height', 0),
+    'min_depth'       => (int) $this->state->get('filter.min_depth', 0),
+    'max_depth'       => (int) $this->state->get('filter.max_depth', 0),
+    'min_weight'      => (int) $this->state->get('filter.min_weight', 0),
+    'max_weight'      => (int) $this->state->get('filter.max_weight', 0),
+    'manufacturers'   => (array) $this->state->get('filter.manufacturers', []),
+    'warehouses'      => (array) $this->state->get('filter.warehouses', []),
+    'ishop_fields'    => (array) $this->state->get('filter.ishop_fields', []),
+    'manufacturer_id' => (int) $this->state->get('filter.manufacturer_id', 0),
+];
+
+if ($this->state->get('filter.warehouse_id', false) !== false) {
+    $loaderState['warehouse_id'] = (int) $this->state->get('filter.warehouse_id', 0);
+}
 ?>
 <div class="container">
     <?php if ($this->params->get('show_page_heading')) : ?>
@@ -87,12 +126,20 @@ $categoryTitle = !empty($this->filter_seo_page->heading) ? $this->filter_seo_pag
             </button>
         <?php endif; ?>
     </div>
-    <div class="products__grid">
+    <div class="products__grid"
+         data-ishop-products
+         data-ishop-context="category"
+         data-ishop-endpoint="<?php echo Route::_('index.php?option=com_ishop&task=products.load&format=json', false); ?>"
+         data-ishop-state="<?php echo $loaderStateId; ?>"
+         data-ishop-token="<?php echo Session::getFormToken(); ?>"
+         data-ishop-limit="<?php echo $limit; ?>"
+         data-ishop-total="<?php echo $total; ?>"
+         data-ishop-next-limitstart="<?php echo $nextLimitstart; ?>"
+         data-ishop-has-more="<?php echo $hasMore ? '1' : '0'; ?>"
+         data-ishop-currency="<?php echo strtoupper($this->params->get('defaultCurrency', 'BYN')); ?>">
     <?php echo $this->loadTemplate('items'); ?>
     </div>
-    <?php if (!empty($this->items) && $this->pagination->pagesTotal > 1) : ?>
-        <?php echo $this->pagination->getPagesLinks(); ?>
-    <?php endif; ?>
+    <script type="application/json" id="<?php echo $loaderStateId; ?>"><?php echo json_encode($loaderState, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE); ?></script>
 </div>
 <?php
 $filterSeoDescription = !empty($this->filter_seo_page->description) ? $this->filter_seo_page->description : '';

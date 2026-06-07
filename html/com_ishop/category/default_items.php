@@ -31,9 +31,9 @@ foreach ($this->items as $i => $product) {
     ];
 }
 $jsonLayerItems = json_encode($dataLayerItems, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-$dataLayer = 'const dataLayerItems = ' . $jsonLayerItems . ';';
+$dataLayer = 'window.dataLayerItems=' . $jsonLayerItems . ';window.iThemePendingEcommerceItems=(window.iThemePendingEcommerceItems||[]).concat(window.dataLayerItems);if(window.iTheme&&typeof window.iTheme.registerEcommerceItems==="function"){window.iTheme.registerEcommerceItems(window.dataLayerItems);}';
 $wa->addInlineScript($dataLayer);
-$dataLayer = 'gtag("event","view_item_list",{currency:"' . $currency . '",item_list_id:"' . $this->category->id . '",item_list_name:"' . $this->category->title . '",items:dataLayerItems});';
+$dataLayer = 'gtag("event","view_item_list",{currency:"' . $currency . '",item_list_id:"' . $this->category->id . '",item_list_name:"' . $this->category->title . '",items:window.dataLayerItems});';
 $wa->addInlineScript($dataLayer);
 ?>
 <?php foreach ($this->items as $product) : ?>

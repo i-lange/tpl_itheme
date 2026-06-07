@@ -10,13 +10,87 @@
     'use strict';
 
     window.iTheme = window.iTheme || {};
+    window.iTheme.ecommerceItems = window.iTheme.ecommerceItems || [];
 
-    function setEcommerce(action, productId, quantity) {
-        if (typeof dataLayerItems === 'undefined' || !Array.isArray(dataLayerItems)) {
-            console.error('Ошибка dataLayerItems');
+    function getLegacyEcommerceItems() {
+        if (typeof dataLayerItems !== 'undefined' && Array.isArray(dataLayerItems)) {
+            return dataLayerItems;
+        }
+
+        if (Array.isArray(window.dataLayerItems)) {
+            return window.dataLayerItems;
+        }
+
+        return [];
+    }
+
+    function registerEcommerceItems(items) {
+        if (!Array.isArray(items) || items.length === 0) {
             return;
         }
 
+        items.forEach(function (item) {
+            if (!item || typeof item.item_id === 'undefined') {
+                return;
+            }
+
+            const numericItemId = Number(item.item_id);
+
+            if (Number.isNaN(numericItemId)) {
+                return;
+            }
+
+            const normalizedItem = {
+                ...item,
+                item_id: numericItemId
+            };
+            const currentIndex = window.iTheme.ecommerceItems.findIndex(function (storedItem) {
+                return Number(storedItem.item_id) === numericItemId;
+            });
+
+            if (currentIndex >= 0) {
+                window.iTheme.ecommerceItems[currentIndex] = normalizedItem;
+            } else {
+                window.iTheme.ecommerceItems.push(normalizedItem);
+            }
+        });
+
+        window.dataLayerItems = window.iTheme.ecommerceItems;
+    }
+
+    function findEcommerceItem(productId) {
+        const numericProductId = Number(productId);
+
+        if (Number.isNaN(numericProductId)) {
+            return null;
+        }
+
+        const items = window.iTheme.ecommerceItems.concat(getLegacyEcommerceItems());
+
+        return items.find(function (item) {
+            return Number(item.item_id) === numericProductId;
+        }) || null;
+    }
+
+    function trackViewItemList(payload) {
+        payload = payload || {};
+        const items = Array.isArray(payload.items) ? payload.items : [];
+
+        registerEcommerceItems(items);
+
+        if (items.length === 0 || typeof gtag !== 'function') {
+            return;
+        }
+
+        gtag('event', 'view_item_list', {
+            currency: payload.currency || 'BYN',
+            item_list_id: payload.item_list_id || '',
+            item_list_name: payload.item_list_name || '',
+            items: items
+        });
+    }
+
+    function setEcommerce(action, productId, quantity) {
         const numericProductId = Number(productId);
 
         if (Number.isNaN(numericProductId)) {
@@ -24,9 +98,7 @@
             return;
         }
 
-        const product = dataLayerItems.find(function (item) {
-            return item.item_id === numericProductId;
-        });
+        const product = findEcommerceItem(numericProductId);
 
         if (!product) {
             console.error('Товар не найден в dataLayerItems:', productId);
@@ -102,6 +174,11 @@
 
     window.iTheme.setEcommerce = setEcommerce;
     window.iTheme.setGoal = setGoal;
+    window.iTheme.registerEcommerceItems = registerEcommerceItems;
+    window.iTheme.trackViewItemList = trackViewItemList;
+
+    registerEcommerceItems(window.iThemePendingEcommerceItems || []);
+    registerEcommerceItems(getLegacyEcommerceItems());
 
     prepareElements("a[href^='tel']", 'PHONE', 'PHONE_CLICK');
     prepareElements("a[href^='mailto']", 'EMAIL', 'EMAIL_CLICK');
