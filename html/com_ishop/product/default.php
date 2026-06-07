@@ -14,9 +14,19 @@ use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
 
 $wa = Factory::getApplication()->getDocument()->getWebAssetManager();
-$wa ->useScript('tpl.addtocart')
-    ->useScript('tpl.addtocompare')
-    ->useScript('tpl.addtowishlist');
+$wa->getRegistry()->addExtensionRegistryFile('com_ishop');
+
+if ($this->params->get('use_js', true) && $this->params->get('use_cart', false)) {
+    $wa->useScript('com_ishop.addtocart');
+}
+
+if ($this->params->get('use_js', true) && $this->params->get('use_compare', false)) {
+    $wa->useScript('com_ishop.addtocompare');
+}
+
+if ($this->params->get('use_js', true) && $this->params->get('use_wishlist', false)) {
+    $wa->useScript('com_ishop.addtowishlist');
+}
 
 // Сделаем ссылку на товар
 $product = $this->item;
@@ -82,4 +92,3 @@ $wa->addInlineScript($dataLayer);
         <p><?php echo Text::_('COM_ISHOP_INFO_WARNING_02'); ?></p>
     </div>
 </div>
-

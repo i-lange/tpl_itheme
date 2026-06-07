@@ -27,9 +27,19 @@ if (empty($params)) {
 }
 
 $wa = Factory::getApplication()->getDocument()->getWebAssetManager();
-$wa ->useScript('tpl.addtocart')
-    ->useScript('tpl.addtocompare')
-    ->useScript('tpl.addtowishlist');
+$wa->getRegistry()->addExtensionRegistryFile('com_ishop');
+
+if ($params->get('use_js', true) && $params->get('use_cart', false)) {
+    $wa->useScript('com_ishop.addtocart');
+}
+
+if ($params->get('use_js', true) && $params->get('use_compare', false)) {
+    $wa->useScript('com_ishop.addtocompare');
+}
+
+if ($params->get('use_js', true) && $params->get('use_wishlist', false)) {
+    $wa->useScript('com_ishop.addtowishlist');
+}
 
 $currency = strtoupper($params->get('defaultCurrency', 'BYN'));
 $round = (int) $params->get('roundPrice', 0);

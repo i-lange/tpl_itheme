@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
   "name": "itheme",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "This file contains details of the assets used by Cassiopeia, the default Joomla site template.",
   "license": "GPL-2.0-or-later",
   "assets": [
@@ -55,45 +55,6 @@
       "attributes" : {
         "async": true
       }
-    },
-    {
-      "name": "tpl.addtocart",
-      "description": "Добавление/удаление товаров в корзину",
-      "type": "script",
-      "uri": "addtocart.js",
-      "attributes" : {
-        "defer": true
-      },
-      "dependencies": [
-        "core",
-        "tpl.analytics"
-      ]
-    },
-    {
-      "name": "tpl.addtocompare",
-      "description": "Добавление/удаление товаров в сравнение",
-      "type": "script",
-      "uri": "addtocompare.js",
-      "attributes" : {
-        "defer": true
-      },
-      "dependencies": [
-        "core",
-        "tpl.analytics"
-      ]
-    },
-    {
-      "name": "tpl.addtowishlist",
-      "description": "Добавление/удаление товаров в избранное",
-      "type": "script",
-      "uri": "addtowishlist.js",
-      "attributes" : {
-        "defer": true
-      },
-      "dependencies": [
-        "core",
-        "tpl.analytics"
-      ]
     },
     {
       "name": "tpl.itheme",
