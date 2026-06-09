@@ -112,6 +112,7 @@
       "type": "script",
       "uri": "checkout.js",
       "dependencies": [
+        "core",
         "tpl.form-validate"
       ]
     },

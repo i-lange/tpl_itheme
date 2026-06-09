@@ -9,6 +9,8 @@
         thankYou: '.checkout_thank_you'
     };
 
+    var CART_CLEAR_URL = '/index.php?option=com_ishop&task=cart.remove&format=json';
+
     function onReady(callback) {
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', callback, { once: true });
@@ -45,19 +47,141 @@
         check();
     }
 
-    function clearCart() {
-        var url = '/index.php?option=com_ishop&controller=cart&task=remove';
-        var request = new XMLHttpRequest();
+    function getJoomlaCsrfToken(fallbackToken) {
+        if (!window.Joomla || typeof window.Joomla.getOptions !== 'function') {
+            return fallbackToken || '';
+        }
 
-        request.open('POST', url, true);
-        request.send();
+        return window.Joomla.getOptions('csrf.token', '') || fallbackToken || '';
+    }
+
+    function buildCartClearData(fallbackToken) {
+        var formData = new FormData();
+        var csrfToken = getJoomlaCsrfToken(fallbackToken);
+
+        if (csrfToken) {
+            formData.append(csrfToken, '1');
+        }
+
+        return formData;
+    }
+
+    function parseCartResponse(responseText) {
+        var response = JSON.parse(responseText || '{}');
+
+        if (!response || response.success !== true) {
+            throw new Error(response && response.message ? response.message : 'Cart clear request failed');
+        }
+
+        return response;
+    }
+
+    function updateCartModules(count) {
+        var normalizedCount = Math.max(0, parseInt(count, 10) || 0);
 
         document.querySelectorAll(SELECTORS.cart).forEach(function (cart) {
-            var small = cart.querySelector('small');
-            if (small) {
-                small.textContent = '0';
+            var counter = cart.querySelector('[data-ishop-cart-count], small');
+            var countText = cart.querySelector('[data-ishop-cart-count-text]');
+
+            if (counter) {
+                counter.textContent = String(normalizedCount);
             }
+
+            if (countText) {
+                countText.textContent = normalizedCount === 0
+                    ? cart.dataset.ishopCartEmptyText || ''
+                    : String(normalizedCount);
+            }
+
+            if (cart.hasAttribute('aria-label')) {
+                var label = cart.getAttribute('aria-label') || '';
+                var prefix = label.indexOf(':') !== -1 ? label.split(':')[0] : label;
+
+                cart.setAttribute('aria-label', prefix ? prefix + ': ' + normalizedCount : String(normalizedCount));
+            }
+
+            cart.dataset.ishopCartEmpty = normalizedCount === 0 ? '1' : '0';
         });
+    }
+
+    function dispatchCartUpdated(data) {
+        document.dispatchEvent(new CustomEvent('com_ishop:cart-updated', {
+            bubbles: true,
+            detail: {
+                data: data || { count: 0 },
+                source: 'tpl.checkout'
+            }
+        }));
+    }
+
+    function handleCartClearSuccess(response) {
+        var data = response && response.data ? response.data : {};
+        var count = data.count !== undefined && data.count !== null ? data.count : 0;
+
+        updateCartModules(count);
+        dispatchCartUpdated(data);
+    }
+
+    function clearCartWithJoomlaRequest(tokenName) {
+        return new Promise(function (resolve, reject) {
+            window.Joomla.request({
+                url: CART_CLEAR_URL,
+                method: 'POST',
+                data: buildCartClearData(tokenName),
+                headers: {
+                    'Cache-Control': 'no-cache'
+                },
+                onSuccess: function (responseText) {
+                    try {
+                        resolve(parseCartResponse(responseText));
+                    } catch (e) {
+                        reject(e);
+                    }
+                },
+                onError: function (xhr) {
+                    reject(new Error('Cart clear request failed with status: ' + (xhr.status || 0)));
+                }
+            });
+        });
+    }
+
+    function clearCartWithXhr(tokenName) {
+        return new Promise(function (resolve, reject) {
+            var request = new XMLHttpRequest();
+
+            request.open('POST', CART_CLEAR_URL, true);
+            request.setRequestHeader('Cache-Control', 'no-cache');
+            request.onreadystatechange = function () {
+                if (request.readyState !== XMLHttpRequest.DONE) {
+                    return;
+                }
+
+                if (request.status !== 200) {
+                    reject(new Error('Cart clear request failed with status: ' + request.status));
+                    return;
+                }
+
+                try {
+                    resolve(parseCartResponse(request.responseText));
+                } catch (e) {
+                    reject(e);
+                }
+            };
+
+            request.send(buildCartClearData(tokenName));
+        });
+    }
+
+    function clearCart(tokenName) {
+        var request = window.Joomla && typeof window.Joomla.request === 'function'
+            ? clearCartWithJoomlaRequest(tokenName)
+            : clearCartWithXhr(tokenName);
+
+        request
+            .then(handleCartClearSuccess)
+            .catch(function (error) {
+                console.error('Cart clear error:', error);
+            });
     }
 
     function updateShippingState(activeRadio) {
@@ -264,7 +388,7 @@
 
             form.reset();
             form.classList.add('d-none');
-            clearCart();
+            clearCart(tokenName);
 
             var thankYou = document.querySelector(SELECTORS.thankYou);
             if (thankYou) {
