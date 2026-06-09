@@ -38,11 +38,12 @@ if ($params->get('use_css')) {
 <a href="<?php echo Route::_(RouteHelper::getCartRoute()); ?>"
    class="header__button"
    aria-label="<?php echo Text::_('MOD_ISHOP_CART_COUNT'), ': ', $count; ?>"
-   data-ishop-cart>
+   data-ishop-cart
+   data-ishop-cart-empty-text="<?php echo htmlspecialchars(Text::_('MOD_ISHOP_CART_EMPTY'), ENT_QUOTES, 'UTF-8'); ?>">
     <span class="header__button-icon-wrap" aria-hidden="true">
         <?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-cart']); ?>
         <?php if ($params->get('show_count', 0)) : ?>
-            <small class="header__button-badge"><?php echo $count; ?></small>
+            <small class="header__button-badge" data-ishop-cart-count><?php echo $count; ?></small>
         <?php endif; ?>
     </span>
     <?php if ($params->get('show_text', 0)) : ?>

@@ -13,12 +13,13 @@ use Ilange\Component\Ishop\Site\Helper\ImageHelper;
 use Ilange\Component\Ishop\Site\Helper\PriceHelper;
 use Ilange\Component\Ishop\Site\Helper\RouteHelper;
 use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Router\Route;
 
 $wa = Factory::getApplication()->getDocument()->getWebAssetManager();
-$wa->useScript('tpl.shopping-cart');
+$wa->useScript('com_ishop.cart');
 $currency = strtoupper($this->params->get('defaultCurrency', 'BYN'));
 
 if ($this->cart->total > 0) {
@@ -55,7 +56,8 @@ if ($this->cart->total > 0) {
           id="cart-submit"
           action="<?php echo Route::_(RouteHelper::getCheckoutRoute()); ?>"
           method="post"
-          name="cart-submit">
+          name="cart-submit"
+          data-cart-empty-text="<?php echo $this->escape(Text::_('COM_ISHOP_CART_NULL')); ?>">
         <div>
             <?php foreach ($this->cart->products as $key_id => $product) : ?>
                 <div class="module-cart-item<?php echo ($product->available) ? '' : ' not_available'; ?>" data-product-incart-id="<?php echo $product->id; ?>">
@@ -161,6 +163,7 @@ if ($this->cart->total > 0) {
                 <?php endif; ?>
             </div>
         </div>
+        <?php echo HTMLHelper::_('form.token'); ?>
     </form>
     <?php else : ?>
         <div class="module-cart-empty">

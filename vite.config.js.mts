@@ -14,7 +14,6 @@ const JS_ENTRY_FILES = [
   'offcanvas-slider.js',
   'phone_masker.js',
   'buy1click.js',
-  'shopping-cart.js',
   'form-validate.js',
   'checkout.js',
   'form-submit.js',
