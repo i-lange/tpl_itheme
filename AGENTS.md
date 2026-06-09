@@ -1,112 +1,76 @@
 # AGENTS.md
 
-## Назначение проекта
+## Контекст
 
-`tpl_itheme` - устанавливаемое site-template расширение для CMS Joomla 6. Шаблон ориентирован на e-commerce: поддерживает штатный контент Joomla, компонент `com_ishop`, модули и плагины магазина iShop.
+`tpl_itheme` - устанавливаемый site-template для Joomla 6 (`client="site"`, `method="upgrade"`), основной frontend-шаблон магазина `magazin-gefest-new.local`. Шаблон обслуживает стандартный контент Joomla и e-commerce на базе `com_ishop` с модулями/плагинами iShop.
 
-Главные точки проекта:
+Локальный сайт:
+- frontend: `https://magazin-gefest-new.local`
+- admin: `https://magazin-gefest-new.local/administrator/`
+- Windows root сайта: `C:\OSPanel\home\magazin-gefest-new.local\`
 
-- `templateDetails.xml` - манифест Joomla-шаблона: метаданные, файлы установки, media-папка, позиции модулей, языки и параметры шаблона.
-- `index.php`, `component.php`, `error.php`, `offline.php` - основные entrypoint-файлы шаблона.
-- `head.php`, `header.php`, `footer.php`, `analytics.php` - разнесенные части разметки и подключения assets.
-- `joomla.asset.json` - декларация Joomla Web Asset Manager для CSS/JS шаблона.
-- `html/` - template overrides компонентов, модулей, layout-файлов и module chrome.
-- `media/scss/` - исходники стилей, включая импорт Bootstrap 5.3.
-- `media/js/` - исходники JS и собранные `.min.js`/`.gz`.
-- `media/css/` - собранные CSS, `.min.css` и `.gz`.
-- `language/en-GB`, `language/ru-RU` - языковые строки шаблона.
-- `build.mjs`, `pack.mjs`, `vite.config.*.mts` - сборка CSS/JS и упаковка установочного zip.
+Связанные расширения в `C:\OSPanel\home\`: `com_ishop`, `com_ishopintegro`, `mod_ishop_cart`, `mod_ishop_compare`, `mod_ishop_filter`, `mod_ishop_zone`, `plg_ishopfinder`, `plg_ishopintegrocron`, `plg_ithemecsscompiler`, `tpl_itheme`. При изменениях учитывайте их зависимости и Web Asset Manager assets.
 
-## Связанные проекты и расширения
-Данный шаблон разрабатывается для интернет-магазина на Joomla.
-Собранный production-ready проект это magazin-gefest-new.local, он доступен:
-- в окружении Windows путь к директории проекта: "c:\OSPanel\home\magazin-gefest-new.local\"
-- в окружении WSL путь к директории проекта: "mnt/c/OSPanel/home/magazin-gefest-new.local"
-- на локальном сервере (сервер всегда запущен по-умолчанию) панель администратора доступна по адресу: https://magazin-gefest-new.local/administrator/
-- на локальном сервере (сервер всегда запущен по-умолчанию) фронтенд сайта доступен по адресу: https://magazin-gefest-new.local
+## Документация
 
-Расширения, которые работают вместе в рамках magazin-gefest-new.local:
-- com_ishop (в окружении Windows путь "c:\OSPanel\home\com_ishop\") это компонент Joomla непосредственно интернет-магазина.
-- com_ishopintegro (в окружении Windows путь "c:\OSPanel\home\com_ishopintegro\") это компонент Joomla для интернет-магазина com_ishop со сторонними сервисами, для обмена данными.
-- mod_ishop_cart (в окружении Windows путь "c:\OSPanel\home\mod_ishop_cart\") это модуль Joomla для реализации функций корзины пользователя.
-- mod_ishop_compare (в окружении Windows путь "c:\OSPanel\home\mod_ishop_compare\") это модуль Joomla для реализации функций сравнения товаров.
-- mod_ishop_filter (в окружении Windows путь "c:\OSPanel\home\mod_ishop_filter\") это модуль Joomla для реализации фильтрации товаров в категории по параметрам.
-- mod_ishop_zone (в окружении Windows путь "c:\OSPanel\home\mod_ishop_zone\") это модуль Joomla для реализации выбора подходящей зоны доставки (местоположения) пользователем.
-- plg_ishopfinder (в окружении Windows путь "c:\OSPanel\home\plg_ishopfinder\") это плагин Joomla для индексации товаров в штатном поиск CMS Joomla.
-- plg_ishopintegrocron (в окружении Windows путь "c:\OSPanel\home\plg_ishopintegrocron\") это плагин Joomla для запуска некоторых методов com_ishopintegro из планировщика задач CMS Joomla.
-- tpl_itheme (в окружении Windows путь "c:\OSPanel\home\tpl_itheme\") это шаблон Joomla который используется на всей клиентской части сайта
-- plg_ithemecsscompiler (в окружении Windows путь "c:\OSPanel\home\plg_ithemecsscompiler\") это плагин Joomla который добавляет в шаблон tpl_itheme возможность компилировать стили прямо из административной панели Joomla
+Если задача касается API/CLI/настроек библиотек, фреймворков, SDK, Joomla или Bootstrap, используйте Context7: сначала `resolve-library-id`, затем `query-docs`. Для Joomla 6 особенно важны Templates, Template Details File и Web Asset Manager из официальной документации.
 
-При внесении изменений в проект нужно держать во внимании данный контекст. Все эти расширения дополняют друг друга и имеют некоторые зависимости одно от другого!
+## Ключевые файлы
 
-## Официальный контекст Joomla 6
+- `templateDetails.xml` - источник правды для установки: файлы, media, позиции, языки, параметры, update server.
+- `index.php`, `component.php`, `error.php`, `offline.php` - entrypoints шаблона.
+- `head.php`, `header.php`, `footer.php`, `analytics.php` - общая разметка, meta, assets, аналитика.
+- `joomla.asset.json` - assets шаблона для Joomla Web Asset Manager.
+- `html/` - overrides `com_content`, `com_finder`, `com_ishop`, `com_users`, модулей и layouts.
+- `media/scss/` - SCSS исходники; `itheme.scss` импортирует Bootstrap и блоки шаблона.
+- `media/js/` - JS исходники и сгенерированные `.min.js/.gz`.
+- `media/css/` - сгенерированные CSS, `.min.css/.gz`; руками не править.
+- `language/en-GB`, `language/ru-RU` - языковые строки.
+- `build.mjs`, `pack.mjs`, `vite.config.*.mts` - сборка и упаковка zip.
 
-При изменениях сверяйтесь с официальной документацией Joomla, особенно:
+## Стек
 
-- Getting Started: https://manual.joomla.org/docs/get-started/
-- Technical Requirements: https://manual.joomla.org/docs/get-started/technical-requirements/
-- Templates: https://manual.joomla.org/docs/building-extensions/templates/
-- Template Details File: https://manual.joomla.org/docs/building-extensions/templates/template-details-file/
-- Web Asset Manager: https://manual.joomla.org/docs/general-concepts/web-asset-manager/
-
-Практические правила для Joomla 6 template development:
-
-- `templateDetails.xml` является источником правды для установки. Новые корневые PHP/XML/JSON файлы должны быть добавлены в манифест и в `pack.mjs`; новые подпапки внутри `html`, `language`, `media` уже попадают в пакет через существующие директории.
-- Позиции модулей добавляйте в `<positions>` перед использованием через `<jdoc:include type="modules" name="..." />`.
-- Параметры шаблона добавляйте в `<config><fields name="params">` с явными `type`, `filter`, `validate`, `default`, `showon` и языковыми ключами.
-- Подключение CSS/JS делайте через Web Asset Manager: `joomla.asset.json` + `$wa->useStyle()`, `$wa->useScript()`, `$wa->usePreset()` и зависимости assets. Не добавляйте прямые `<script>`/`<link>` без причины.
-- Для Bootstrap JS используйте Joomla asset names вроде `bootstrap.offcanvas`, `bootstrap.dropdown`, `bootstrap.carousel`; не дублируйте Bootstrap JS вручную.
-- Overrides держите в `html/com_*`, `html/mod_*`; переиспользуемую разметку держите в `html/layouts/*` и вызывайте через `LayoutHelper::render()`.
-- Все пользовательские строки должны идти через `Text::_()` и языковые `.ini`; frontend строки - в `tpl_itheme.ini`.
-
-## Стек и окружение
-
-- Joomla CMS 6.x, template extension `client="site"`, `method="upgrade"`.
-- PHP 8.3+; для Joomla 6.x ориентируйтесь на актуальные требования официальной документации.
-- Bootstrap 5.3: импортируется из `vendor/bootstrap/scss` в `media/scss/itheme.scss`; JS-компоненты подключаются через Joomla Web Asset Manager.
-- Frontend JS: vanilla JavaScript, глобальный объект `Joomla`, события `DOMContentLoaded` и `joomla:updated`.
-- Сборка: Node.js `>=24`, pnpm `>=10.3.0` (`packageManager`: `pnpm@10.33.0`), Vite, Sass, Lightning CSS, vite-plugin-compression.
-- PHP-зависимостей через Composer в проекте нет.
+- Joomla CMS 6.x, PHP 8.3+.
+- Bootstrap 5.3 SCSS лежит в `media/scss/vendor/bootstrap`; JS Bootstrap подключайте только Joomla asset names (`bootstrap.dropdown`, `bootstrap.modal`, `bootstrap.carousel`, `bootstrap.offcanvas` и т.п.).
+- Frontend JS: vanilla JavaScript, `Joomla`, `DOMContentLoaded`, `joomla:updated`.
+- Node.js `>=24`, npm `>=11.8`, pnpm `>=10.3`; Vite 8, Sass, Lightning CSS, vite-plugin-compression.
+- Composer-зависимостей в шаблоне нет.
 
 ## Команды
 
-- `pnpm install` - установить JS-зависимости по `pnpm-lock.yaml`.
-- `pnpm build` - полная сборка CSS и JS через `build.mjs`.
-- `pnpm build:css` - собрать `media/css/*.css`, `*.min.css`, `*.min.css.gz`.
-- `pnpm build:js` - собрать `media/js/*.min.js`, `*.min.js.gz`.
-- `pnpm watch:js` - наблюдать `media/js/*.min.js`, `*.min.js.gz`.
-- `pnpm watch:css` - наблюдать `media/js/*.min.js`, `*.min.js.gz`.
-- `pnpm test` - сейчас заглушка `No automated tests yet`.
-- `pnpm zip` - `pnpm build` и создание установочного архива `tpl_itheme-{version}.zip`.
+- `pnpm install` - установить JS-зависимости.
+- `pnpm build` - собрать CSS и JS.
+- `pnpm build:css` - собрать `media/css/itheme.css`, `.min.css`, `.gz`.
+- `pnpm build:js` - собрать перечисленные JS entrypoints в `.min.js/.gz`.
+- `pnpm watch:css`, `pnpm watch:js` - watch-сборка.
+- `pnpm test` - заглушка `No automated tests yet`.
+- `pnpm zip` - `pnpm build` + `tpl_itheme-{version}.zip`.
 
-## Правила внесения изменений
+## Правила изменений
 
-- Сначала меняйте исходники: SCSS в `media/scss`, обычные JS entrypoints в `media/js`, PHP overrides в `html` или корневых template-файлах. Не правьте вручную `.min.css`, `.min.js`, `.gz`, если изменение должно генерироваться сборкой.
-- После изменения SCSS/JS запускайте соответствующую сборку и включайте сгенерированные assets, если проект ожидает готовый installable template.
-- `vite.config.css.mts` использует `emptyOutDir: true` для `media/css`; не держите там ручные файлы, которые не должны удаляться сборкой.
-- В PHP-файлах сохраняйте `defined('_JEXEC') or die;`, namespaced Joomla API (`Factory`, `HTMLHelper`, `Text`, `LayoutHelper`, `Route`) и существующий стиль шаблона.
-- Экранируйте вывод: `$this->escape()`, `htmlspecialchars()`, `HTMLHelper::cleanImageURL()`, `Text::_()` и явные приведения типов там, где данные приходят из params/input/model.
-- Формы должны содержать Joomla CSRF token через `HTMLHelper::_('form.token')`; новые POST/AJAX сценарии должны учитывать Joomla token и права доступа.
-- Новые assets регистрируйте в `joomla.asset.json` с понятными именами, `type`, `uri`, `attributes` и `dependencies`.
-- Если добавляете новый JS entrypoint, обновите `JS_ENTRY_FILES` в `vite.config.js.mts` и asset declaration в `joomla.asset.json`.
-- Если добавляете новый SCSS entrypoint, обновите `SCSS_ENTRIES` в `vite.config.css.mts` и asset declaration в `joomla.asset.json`.
-- Для Bootstrap-разметки используйте классы и data-атрибуты Bootstrap 5.3 (`data-bs-*`), а не устаревшие Bootstrap 4 подходы.
-- Поддерживайте accessibility: `aria-label`, `visually-hidden`, корректные `button`/`a`, возврат фокуса в offcanvas/modal и видимые состояния focus.
-- При добавлении языковых ключей обновляйте обе локали `en-GB` и `ru-RU`.
-- Не редактируйте `node_modules`. `vendor/bootstrap` считается vendored Bootstrap 5.3 и меняется только осознанным апгрейдом с проверкой SCSS/JS совместимости.
+- Меняйте исходники, не сборочные артефакты: SCSS в `media/scss`, JS entrypoints в `media/js`, PHP в корне или `html/`.
+- После правок SCSS/JS запускайте нужную сборку; для installable результата включайте сгенерированные файлы.
+- `vite.config.css.mts` очищает `media/css` (`emptyOutDir: true`), поэтому не храните там ручные файлы.
+- Новые корневые PHP/XML/JSON файлы добавляйте и в `templateDetails.xml`, и в `pack.mjs`; подпапки `html`, `language`, `media` пакуются целиком.
+- Новые позиции модулей сначала добавляйте в `<positions>`, затем используйте в `<jdoc:include>`.
+- Новые параметры шаблона добавляйте в `<config><fields name="params">` с `type`, `filter`/`validate`, `default`, `showon` при необходимости и языковыми ключами.
+- CSS/JS подключайте через `joomla.asset.json` и `$wa->useStyle()`, `$wa->useScript()`, `$wa->usePreset()`; прямые `<script>/<link>` допускаются только с явной причиной.
+- При новом JS entrypoint обновите `JS_ENTRY_FILES` в `vite.config.js.mts` и `joomla.asset.json`; при новом SCSS entrypoint - `SCSS_ENTRIES` в `vite.config.css.mts` и assets.
+- Сверяйте `joomla.asset.json`, реальные файлы `media/js|css` и Vite entrypoints: декларация asset не должна ссылаться на отсутствующий файл.
+- Overrides держите в `html/com_*`, `html/mod_*`; переиспользуемую разметку - в `html/layouts/*` через `LayoutHelper::render()`.
+- В PHP сохраняйте `defined('_JEXEC') or die;`, namespaced Joomla API (`Factory`, `HTMLHelper`, `Text`, `LayoutHelper`, `Route`) и текущий стиль проекта.
+- Экранируйте вывод (`$this->escape()`, `htmlspecialchars()`, `HTMLHelper::cleanImageURL()`, приведения типов). POST/AJAX/forms должны учитывать Joomla CSRF token и права доступа.
+- Пользовательские строки - только через `Text::_()` и `.ini`; frontend строки кладите в `tpl_itheme.ini` обеих локалей.
+- Bootstrap-разметка должна быть Bootstrap 5.3 (`data-bs-*`), без Bootstrap 4 атрибутов.
+- Поддерживайте accessibility: корректные `button/a`, `aria-label`, `visually-hidden`, focus states, возврат фокуса в modal/offcanvas.
+- Не редактируйте `node_modules`; vendored Bootstrap меняйте только как осознанный апгрейд.
 
-## Проверка перед сдачей
+## Проверка
 
-Минимальный набор:
+Минимум перед сдачей: `pnpm build`, `pnpm test`, `pnpm zip`. Если Node.js/pnpm недоступны, явно укажите, что проверки не запускались.
 
-- `pnpm build`
-- `pnpm test`
-- `pnpm zip`
+Функциональная проверка после установки zip через Joomla installer: главная, категория, карточка товара, корзина, checkout, поиск, логин, 403/404, offline page.
 
-Если Node.js недоступен, явно сообщите, что команды не запускались из-за окружения. 
-Для функциональной проверки установите zip в Joomla 6 по адресу https://magazin-gefest-new.local/administrator/index.php?option=com_installer&view=install и проверьте как минимум главную, категорию, карточку товара, корзину, checkout, поиск, логин, 403/404 и offline page.
+## Ограничения
 
-## Ограничения и известные состояния
-
-- Это не полный сайт Joomla, а только шаблон для сайта, устанавливаемый как расширение. Корневые PHP-файлы нельзя полноценно запускать вне Joomla application context.
-- Автоматических тестов пока нет; `pnpm test` является заглушкой.
+Это шаблон Joomla, а не полный сайт: корневые PHP-файлы не запускаются полноценно вне Joomla application context. Автотестов пока нет, `pnpm test` - заглушка.
