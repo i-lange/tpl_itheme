@@ -199,7 +199,7 @@ const iShoppingCart = {
 
 	request(task, params) {
 		return new Promise((resolve, reject) => {
-			const url = '/index.php?option=com_ishop&controller=cart&task=' + task;
+			const url = '/index.php?option=com_ishop&task=cart.' + task + '&format=json';
 			const request = new XMLHttpRequest();
 
 			request.open('POST', url, true);
