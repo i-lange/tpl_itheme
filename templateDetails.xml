@@ -7,7 +7,7 @@
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>pavel@ilange.ru</authorEmail>
     <authorUrl>https://ilange.ru/en/contact</authorUrl>
-    <version>1.0.14</version>
+    <version>1.0.15</version>
     <description>TPL_ITHEME_XML_DESCRIPTION</description>
     <inheritable>1</inheritable>
     <files>
@@ -394,6 +394,81 @@
                 </field>
             </fieldset>
             <fieldset name="colors" label="TPL_ITHEME_COLORS_FIELDSET_LABEL">
+                <field name="noteScssPaletteColors"
+                       type="note"
+                       label="TPL_ITHEME_SCSS_PALETTE_COLORS_LABEL"
+                       description="TPL_ITHEME_SCSS_VALUES_NOTE"
+                       class="alert alert-info"/>
+                <field name="blue"
+                       type="color"
+                       parentclass="span-3-inline stack"
+                       default="#0d6efd"
+                       format="hex"
+                       filter="string"
+                       label="$blue"/>
+                <field name="indigo"
+                       type="color"
+                       parentclass="span-3-inline stack"
+                       default="#6610f2"
+                       format="hex"
+                       filter="string"
+                       label="$indigo"/>
+                <field name="purple"
+                       type="color"
+                       parentclass="span-3-inline stack"
+                       default="#6f42c1"
+                       format="hex"
+                       filter="string"
+                       label="$purple"/>
+                <field name="pink"
+                       type="color"
+                       parentclass="span-3-inline stack"
+                       default="#d63384"
+                       format="hex"
+                       filter="string"
+                       label="$pink"/>
+                <field name="red"
+                       type="color"
+                       parentclass="span-3-inline stack"
+                       default="#dc3545"
+                       format="hex"
+                       filter="string"
+                       label="$red"/>
+                <field name="orange"
+                       type="color"
+                       parentclass="span-3-inline stack"
+                       default="#fd7e14"
+                       format="hex"
+                       filter="string"
+                       label="$orange"/>
+                <field name="yellow"
+                       type="color"
+                       parentclass="span-3-inline stack"
+                       default="#ffc107"
+                       format="hex"
+                       filter="string"
+                       label="$yellow"/>
+                <field name="green"
+                       type="color"
+                       parentclass="span-3-inline stack"
+                       default="#198754"
+                       format="hex"
+                       filter="string"
+                       label="$green"/>
+                <field name="teal"
+                       type="color"
+                       parentclass="span-3-inline stack"
+                       default="#20c997"
+                       format="hex"
+                       filter="string"
+                       label="$teal"/>
+                <field name="cyan"
+                       type="color"
+                       parentclass="span-3-inline stack"
+                       default="#0dcaf0"
+                       format="hex"
+                       filter="string"
+                       label="$cyan"/>
                 <field name="noteScssColors"
                        type="note"
                        label="TPL_ITHEME_SCSS_THEME_COLORS_LABEL"
@@ -524,21 +599,24 @@
                        filter="string"
                        label="$link-hover-color"/>
                 <field name="border-color-translucent"
-                       type="text"
+                       type="color"
                        parentclass="span-3-inline stack"
-                       default="rgba(#000, .175)"
+                       default=""
+                       format="hex"
                        filter="string"
                        label="$border-color-translucent"/>
                 <field name="focus-ring-color"
-                       type="text"
+                       type="color"
                        parentclass="span-3-inline stack"
-                       default="rgba(#c40e38, .25)"
+                       default=""
+                       format="hex"
                        filter="string"
                        label="$focus-ring-color"/>
                 <field name="headings-color"
-                       type="text"
+                       type="color"
                        parentclass="span-3-inline stack"
-                       default="inherit"
+                       default=""
+                       format="hex"
                        filter="string"
                        label="$headings-color"/>
                 <field name="noteScssContentColors"
