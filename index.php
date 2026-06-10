@@ -30,7 +30,7 @@ require JPATH_THEMES . '/itheme/head.php';
 	<jdoc:include type="scripts" />
 </head>
 <body class="<?php echo $page_class; ?>">
-<header id="header">
+<header id="header" class="is-fixed">
     <?php require JPATH_THEMES . '/itheme/header.php'; ?>
 </header>
 <main id="main">
