@@ -11968,8 +11968,7 @@ body {
 }
 
 .header__top {
-  background-color: var(--gray-100);
-  border-bottom: var(--border-width) var(--border-style) var(--border-color);
+  background-color: var(--pink);
 }
 
 .header__top-inner {

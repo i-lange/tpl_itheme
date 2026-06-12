@@ -46,7 +46,8 @@
     "watch:css": "vite build --watch --config vite.config.css.mts",
     "watch:js": "vite build --watch --config vite.config.js.mts",
     "test": "echo \"No automated tests yet\" && exit 0",
-    "zip": "pnpm build && node pack.mjs"
+    "zip": "pnpm build && node pack.mjs",
+    "zip:update": "pnpm build && node pack.mjs --mode=update"
   },
   "engines": {
     "node": ">=24.0.0",
