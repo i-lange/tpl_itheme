@@ -2,7 +2,12 @@
   position: relative;
 
   .awesomplete {
-    width: 100% ;
+    width: 100%;
+  }
+
+  .form-control {
+    border-color: var(--gray-300);
+    background-color: var(--gray-300);
   }
 
   button {
@@ -11,8 +16,8 @@
     right: 0;
 
     &.btn-close {
-      right: 3em;
-      top: .5em;
+      right: 3rem;
+      top: $input-btn-padding-y;
     }
   }
 }

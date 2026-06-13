@@ -2,45 +2,38 @@
 // Header Top panel
 // -----------------------------------------------------------------------------
 .header__top {
-  background-color: var(--pink);
+  background-color: var(--gray-300);
 }
 
 .header__top-inner {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 1em;
+  gap: 1rem;
   flex-wrap: wrap;
 
   > .nav {
-    --nav-link-color: var(--black);
-    --nav-link-font-size: 1em;
-    flex: 1;
-    border-left: var(--border-width) var(--border-style) var(--border-color);
-  }
-
-  @include media-breakpoint-down(lg) {
-    justify-content: space-between;
+    --nav-link-color: var(--body-color);
   }
 }
 
 .header__location {
-  font-weight: 600;
-  color: color-mix(in srgb, #000 50%, var(--blue) 100%);
-  text-decoration: none;
   display: inline-flex;
   align-items: center;
   gap: 0.25em;
+  font-weight: 500;
+  text-decoration: none;
   white-space: nowrap;
+  --btn-font-size: 1rem;
 
   &:hover {
-    color: var(--primary);
     text-decoration: none;
   }
 }
 
 .header__phone {
   color: var(--black);
-  font-size: 1.25em;
+  font-size: 1.25rem;
   font-weight: 600;
   text-decoration: none;
   white-space: nowrap;
