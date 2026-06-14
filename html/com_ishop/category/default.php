@@ -32,8 +32,18 @@ $fullOrdering = $ordering . ' ' . $direction;
 $text = ltrim($ordering, 'a.') . '_' . $direction;
 $sort = ($direction === 'DESC') ? 'down' : 'up';
 $orderingList = $this->params->get('category_ordering', []);
-$filterModules = ModuleHelper::getModules('filter');
-$showFilter = (!empty($filterModules)) && !empty($this->filter_object) && !$this->filter_object->empty;
+$hasSidebarFilter = static function (string $position): bool {
+    foreach (ModuleHelper::getModules($position) as $module) {
+        if (($module->module ?? '') === 'mod_ishop_filter') {
+            return true;
+        }
+    }
+
+    return false;
+};
+$showFilter = !empty($this->filter_object)
+    && !$this->filter_object->empty
+    && ($hasSidebarFilter('sidebar-left') || $hasSidebarFilter('sidebar-right'));
 $categoryTitle = !empty($this->filter_seo_page->heading) ? $this->filter_seo_page->heading : $this->category->title;
 $limit = max(1, (int) $this->state->get('list.limit', $app->get('list_limit', 20)));
 $limitstart = (int) $this->state->get('list.start', 0);
@@ -127,29 +137,18 @@ if ($this->state->get('filter.warehouse_id', false) !== false) {
             </button>
         <?php endif; ?>
     </div>
-    <div class="category-layout<?php echo $showFilter ? ' category-layout--with-filter' : ''; ?>">
-        <?php if ($showFilter) : ?>
-            <aside class="category-layout__filter" aria-label="<?php echo Text::_('TPL_ITHEME_FILTER_ANCHOR'); ?>">
-                <?php foreach ($filterModules as $filterModule) : ?>
-                    <?php echo ModuleHelper::renderModule($filterModule, ['style' => 'offcanvas']); ?>
-                <?php endforeach; ?>
-            </aside>
-        <?php endif; ?>
-        <div class="category-layout__products">
-            <div class="products__grid"
-                 data-ishop-products
-                 data-ishop-context="category"
-                 data-ishop-endpoint="<?php echo Route::_('index.php?option=com_ishop&task=products.load&format=json', false); ?>"
-                 data-ishop-state="<?php echo $loaderStateId; ?>"
-                 data-ishop-token="<?php echo Session::getFormToken(); ?>"
-                 data-ishop-limit="<?php echo $limit; ?>"
-                 data-ishop-total="<?php echo $total; ?>"
-                 data-ishop-next-limitstart="<?php echo $nextLimitstart; ?>"
-                 data-ishop-has-more="<?php echo $hasMore ? '1' : '0'; ?>"
-                 data-ishop-currency="<?php echo strtoupper($this->params->get('defaultCurrency', 'BYN')); ?>">
-            <?php echo $this->loadTemplate('items'); ?>
-            </div>
-        </div>
+    <div class="products__grid"
+         data-ishop-products
+         data-ishop-context="category"
+         data-ishop-endpoint="<?php echo Route::_('index.php?option=com_ishop&task=products.load&format=json', false); ?>"
+         data-ishop-state="<?php echo $loaderStateId; ?>"
+         data-ishop-token="<?php echo Session::getFormToken(); ?>"
+         data-ishop-limit="<?php echo $limit; ?>"
+         data-ishop-total="<?php echo $total; ?>"
+         data-ishop-next-limitstart="<?php echo $nextLimitstart; ?>"
+         data-ishop-has-more="<?php echo $hasMore ? '1' : '0'; ?>"
+         data-ishop-currency="<?php echo strtoupper($this->params->get('defaultCurrency', 'BYN')); ?>">
+    <?php echo $this->loadTemplate('items'); ?>
     </div>
     <script type="application/json" id="<?php echo $loaderStateId; ?>"><?php echo json_encode($loaderState, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE); ?></script>
 </div>

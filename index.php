@@ -9,6 +9,9 @@
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Helper\ModuleHelper;
+use Joomla\CMS\Language\Text;
+
 /** @var Joomla\CMS\Document\HtmlDocument $this */
 /** @var string $page_class */
 /** @var string $stickyHeader */
@@ -16,6 +19,28 @@ defined('_JEXEC') or die;
 /** @var bool $needContainer */
 
 require JPATH_THEMES . '/itheme/head.php';
+
+$renderSidebarPosition = static function (string $position): string {
+    $modules = ModuleHelper::getModules($position);
+
+    if (empty($modules)) {
+        return '';
+    }
+
+    $html = '';
+
+    foreach ($modules as $module) {
+        $html .= ModuleHelper::renderModule($module, ['style' => 'offcanvas']);
+    }
+
+    return trim($html);
+};
+
+$sidebarLeft = $renderSidebarPosition('sidebar-left');
+$sidebarRight = $renderSidebarPosition('sidebar-right');
+$hasSidebarLeft = $sidebarLeft !== '';
+$hasSidebarRight = $sidebarRight !== '';
+$hasSidebar = $hasSidebarLeft || $hasSidebarRight;
 ?>
 <!DOCTYPE html>
 <html lang="<?php echo $this->language; ?>" dir="<?php echo $this->direction; ?>">
@@ -49,9 +74,23 @@ require JPATH_THEMES . '/itheme/head.php';
             <jdoc:include type="modules" name="top-b" style="none" />
         </section>
     <?php endif; ?>
-    <div class="<?php echo ($needContainer) ? 'container ' : ''; ?>section-main">
+    <div class="<?php echo ($needContainer || $hasSidebar) ? 'container ' : ''; ?>section-main">
         <jdoc:include type="message" />
-        <jdoc:include type="component" />
+        <div class="template-layout<?php echo $hasSidebarLeft ? ' template-layout--has-left' : ''; ?><?php echo $hasSidebarRight ? ' template-layout--has-right' : ''; ?>">
+            <?php if ($hasSidebarLeft) : ?>
+                <aside class="template-sidebar template-sidebar--left" aria-label="<?php echo htmlspecialchars(Text::_('TPL_ITHEME_SIDEBAR_LEFT'), ENT_COMPAT, 'UTF-8'); ?>">
+                    <?php echo $sidebarLeft; ?>
+                </aside>
+            <?php endif; ?>
+            <div class="template-main">
+                <jdoc:include type="component" />
+            </div>
+            <?php if ($hasSidebarRight) : ?>
+                <aside class="template-sidebar template-sidebar--right" aria-label="<?php echo htmlspecialchars(Text::_('TPL_ITHEME_SIDEBAR_RIGHT'), ENT_COMPAT, 'UTF-8'); ?>">
+                    <?php echo $sidebarRight; ?>
+                </aside>
+            <?php endif; ?>
+        </div>
     </div>
     <?php if ($this->countModules('bottom-a', true)) : ?>
         <section class="section-bottom-a">

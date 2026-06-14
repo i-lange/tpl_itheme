@@ -38,26 +38,41 @@
 .products__grid + .pagination__wrapper {
   margin-top: 2em;
 }
+
 // =============================================================================
-// Сетка категории с левым фильтром
+// Основная сетка шаблона с sidebar-позициями
 // =============================================================================
-.category-layout {
+.template-layout,
+.template-main,
+.template-sidebar {
   min-width: 0;
 }
 
-.category-layout__products {
-  min-width: 0;
+.template-layout--has-left,
+.template-layout--has-right {
+  > .template-main > .container {
+    max-width: none;
+    padding-right: 0;
+    padding-left: 0;
+  }
 }
 
 @include media-breakpoint-up(lg) {
-  .category-layout--with-filter {
+  .template-layout {
     display: grid;
-    grid-template-columns: minmax(17rem, 20rem) minmax(0, 1fr);
     gap: 1.5rem;
     align-items: start;
   }
 
-  .category-layout__filter {
-    min-width: 0;
+  .template-layout--has-left {
+    grid-template-columns: minmax(17rem, 20rem) minmax(0, 1fr);
+  }
+
+  .template-layout--has-right {
+    grid-template-columns: minmax(0, 1fr) minmax(17rem, 20rem);
+  }
+
+  .template-layout--has-left.template-layout--has-right {
+    grid-template-columns: minmax(17rem, 20rem) minmax(0, 1fr) minmax(17rem, 20rem);
   }
 }
