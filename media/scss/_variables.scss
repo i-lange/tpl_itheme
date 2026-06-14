@@ -1,8 +1,11 @@
-// Remove prefix added in BS5
+// Обнуляем префикс
 $prefix: "";
 
-// Disable dark mode
+// отключаем темную тему
 $enable-dark-mode: false;
+
+// цвет текста в кнопках
+$btn-color: var(--#{$prefix}body-bg) !default;
 
 // Ширина контейнеров
 $container-max-widths: (

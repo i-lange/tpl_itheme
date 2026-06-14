@@ -43,7 +43,7 @@ if ($params->get('use_css')) {
     <span class="header__button-icon-wrap" aria-hidden="true">
         <?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-cart']); ?>
         <?php if ($params->get('show_count', 0)) : ?>
-            <small class="header__button-badge" data-ishop-cart-count><?php echo $count; ?></small>
+            <small class="badge rounded-pill header__button-badge" data-ishop-cart-count><?php echo $count; ?></small>
         <?php endif; ?>
     </span>
     <?php if ($params->get('show_text', 0)) : ?>
