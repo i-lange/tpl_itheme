@@ -7,6 +7,15 @@ $enable-dark-mode: false;
 // цвет текста в кнопках
 $btn-color: var(--#{$prefix}body-bg) !default;
 
+// Точки адаптивной сетки
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 960px,
+  xl: 1200px,
+  xxl: 1400px
+) !default;
 // Ширина контейнеров
 $container-max-widths: (
   xl: 78rem,

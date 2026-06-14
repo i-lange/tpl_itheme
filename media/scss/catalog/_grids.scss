@@ -38,3 +38,26 @@
 .products__grid + .pagination__wrapper {
   margin-top: 2em;
 }
+// =============================================================================
+// Сетка категории с левым фильтром
+// =============================================================================
+.category-layout {
+  min-width: 0;
+}
+
+.category-layout__products {
+  min-width: 0;
+}
+
+@include media-breakpoint-up(lg) {
+  .category-layout--with-filter {
+    display: grid;
+    grid-template-columns: minmax(17rem, 20rem) minmax(0, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .category-layout__filter {
+    min-width: 0;
+  }
+}

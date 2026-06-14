@@ -168,13 +168,26 @@
                 this.setPanel(panelId);
             }
 
+            if (this.isStaticMode()) {
+                return;
+            }
+
             const instance = bootstrap.Offcanvas.getOrCreateInstance(this.offcanvasEl);
             instance.show();
         }
 
         hide() {
+            if (this.isStaticMode()) {
+                this.reset();
+                return;
+            }
+
             const instance = bootstrap.Offcanvas.getOrCreateInstance(this.offcanvasEl);
             instance.hide();
+        }
+
+        isStaticMode() {
+            return window.getComputedStyle(this.offcanvasEl).position !== 'fixed';
         }
 
         handleViewportClick(event) {

@@ -193,9 +193,6 @@ defined('_JEXEC') or die;
     </div>
 </div>
 <?php endif; ?>
-<?php if ($this->countModules('filter', true)) : ?>
-    <jdoc:include type="modules" name="filter" style="offcanvas" />
-<?php endif; ?>
 <?php if ($this->countModules('modals', true)) : ?>
     <jdoc:include type="modules" name="modals" style="none" />
 <?php endif; ?>

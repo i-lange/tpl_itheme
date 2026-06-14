@@ -32,7 +32,8 @@ $fullOrdering = $ordering . ' ' . $direction;
 $text = ltrim($ordering, 'a.') . '_' . $direction;
 $sort = ($direction === 'DESC') ? 'down' : 'up';
 $orderingList = $this->params->get('category_ordering', []);
-$showFilter = (!empty(ModuleHelper::getModules('filter'))) && !empty($this->filter_object) && !$this->filter_object->empty;
+$filterModules = ModuleHelper::getModules('filter');
+$showFilter = (!empty($filterModules)) && !empty($this->filter_object) && !$this->filter_object->empty;
 $categoryTitle = !empty($this->filter_seo_page->heading) ? $this->filter_seo_page->heading : $this->category->title;
 $limit = max(1, (int) $this->state->get('list.limit', $app->get('list_limit', 20)));
 $limitstart = (int) $this->state->get('list.start', 0);
@@ -111,7 +112,7 @@ if ($this->state->get('filter.warehouse_id', false) !== false) {
             <input type="hidden" name="filter_order_Dir" id="filter_direction" value="<?php echo $direction; ?>">
         </form>
         <?php if ($showFilter) : ?>
-            <button class="btn btn-light btn-sm border"
+            <button class="btn btn-light btn-sm border d-lg-none"
                     type="button"
                     data-bs-toggle="offcanvas"
                     data-bs-target="#moduleFilter"
@@ -121,23 +122,34 @@ if ($this->state->get('filter.warehouse_id', false) !== false) {
                 <?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-funnel']); ?>
                 <span><?php echo Text::_('TPL_ITHEME_FILTER_ANCHOR'); ?></span>
                 <?php if ($this->filter_object->active_count > 0) : ?>
-                <small><?php echo $this->filter_object->active_count; ?></small>
+                <small class="badge rounded-pill"><?php echo $this->filter_object->active_count; ?></small>
                 <?php endif; ?>
             </button>
         <?php endif; ?>
     </div>
-    <div class="products__grid"
-         data-ishop-products
-         data-ishop-context="category"
-         data-ishop-endpoint="<?php echo Route::_('index.php?option=com_ishop&task=products.load&format=json', false); ?>"
-         data-ishop-state="<?php echo $loaderStateId; ?>"
-         data-ishop-token="<?php echo Session::getFormToken(); ?>"
-         data-ishop-limit="<?php echo $limit; ?>"
-         data-ishop-total="<?php echo $total; ?>"
-         data-ishop-next-limitstart="<?php echo $nextLimitstart; ?>"
-         data-ishop-has-more="<?php echo $hasMore ? '1' : '0'; ?>"
-         data-ishop-currency="<?php echo strtoupper($this->params->get('defaultCurrency', 'BYN')); ?>">
-    <?php echo $this->loadTemplate('items'); ?>
+    <div class="category-layout<?php echo $showFilter ? ' category-layout--with-filter' : ''; ?>">
+        <?php if ($showFilter) : ?>
+            <aside class="category-layout__filter" aria-label="<?php echo Text::_('TPL_ITHEME_FILTER_ANCHOR'); ?>">
+                <?php foreach ($filterModules as $filterModule) : ?>
+                    <?php echo ModuleHelper::renderModule($filterModule, ['style' => 'offcanvas']); ?>
+                <?php endforeach; ?>
+            </aside>
+        <?php endif; ?>
+        <div class="category-layout__products">
+            <div class="products__grid"
+                 data-ishop-products
+                 data-ishop-context="category"
+                 data-ishop-endpoint="<?php echo Route::_('index.php?option=com_ishop&task=products.load&format=json', false); ?>"
+                 data-ishop-state="<?php echo $loaderStateId; ?>"
+                 data-ishop-token="<?php echo Session::getFormToken(); ?>"
+                 data-ishop-limit="<?php echo $limit; ?>"
+                 data-ishop-total="<?php echo $total; ?>"
+                 data-ishop-next-limitstart="<?php echo $nextLimitstart; ?>"
+                 data-ishop-has-more="<?php echo $hasMore ? '1' : '0'; ?>"
+                 data-ishop-currency="<?php echo strtoupper($this->params->get('defaultCurrency', 'BYN')); ?>">
+            <?php echo $this->loadTemplate('items'); ?>
+            </div>
+        </div>
     </div>
     <script type="application/json" id="<?php echo $loaderStateId; ?>"><?php echo json_encode($loaderState, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE); ?></script>
 </div>
