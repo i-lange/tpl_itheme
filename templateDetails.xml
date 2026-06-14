@@ -7,7 +7,7 @@
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>pavel@ilange.ru</authorEmail>
     <authorUrl>https://ilange.ru/en/contact</authorUrl>
-    <version>1.0.16</version>
+    <version>1.0.17</version>
     <description>TPL_ITHEME_XML_DESCRIPTION</description>
     <inheritable>1</inheritable>
     <files>
@@ -42,6 +42,8 @@
         <position>top-b</position>
         <position>bottom-a</position>
         <position>bottom-b</position>
+        <position>sidebar-left</position>
+        <position>sidebar-right</position>
         <position>footer-a</position>
         <position>footer-b</position>
         <position>footer-c</position>
