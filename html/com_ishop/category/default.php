@@ -132,7 +132,7 @@ if ($this->state->get('filter.warehouse_id', false) !== false) {
                 <?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-funnel']); ?>
                 <span><?php echo Text::_('TPL_ITHEME_FILTER_ANCHOR'); ?></span>
                 <?php if ($this->filter_object->active_count > 0) : ?>
-                <small class="badge rounded-pill"><?php echo $this->filter_object->active_count; ?></small>
+                <small class="badge text-bg-primary rounded-pill"><?php echo $this->filter_object->active_count; ?></small>
                 <?php endif; ?>
             </button>
         <?php endif; ?>

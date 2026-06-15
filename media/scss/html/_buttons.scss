@@ -2,6 +2,10 @@
   vertical-align: -.125em;
 }
 
+.btn-success {
+  --btn-color: var(--body-bg);
+}
+
 .btn-telegram {
   --btn-color: #fff;
   --btn-bg: #3390ec;
