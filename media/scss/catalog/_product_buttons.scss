@@ -18,13 +18,18 @@
     opacity: .5;
     z-index: 2;
 
+    svg {
+      fill: var(--body-color);
+    }
+
     &:hover,
-    &.active {
+    &.active,
+    &:focus {
       background-color: var(--white);
       opacity: 1;
 
       svg {
-        fill: var(--primary)
+        fill: var(--primary);
       }
     }
   }
