@@ -83,6 +83,7 @@ $hasSidebar = $hasSidebarLeft || $hasSidebarRight;
                 </aside>
             <?php endif; ?>
             <div class="template-main">
+                <jdoc:include type="modules" name="breadcrumbs" style="none" />
                 <jdoc:include type="component" />
             </div>
             <?php if ($hasSidebarRight) : ?>

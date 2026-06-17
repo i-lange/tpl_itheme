@@ -9,6 +9,7 @@
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
 
@@ -17,21 +18,36 @@ extract($displayData);
 /** @var object $item Объект товара */
 /** @var string $class Дополнительный класс */
 
-$class = !empty($class) ? ' ' . $class : '';
+$params       = ComponentHelper::getParams('com_ishop');
+$isSimple     = (bool) $params->get('cart_button_simple', true);
+$isInCart     = !empty($item->incart);
+$class        = htmlspecialchars('btn btn-light' . (!empty($class) ? ' ' . $class : '') . ($isInCart ? ' active' : ''), ENT_QUOTES, 'UTF-8');
+$productId    = (int) ($item->id ?? 0);
+$quantity     = max(1, (int) ($item->incart_count ?? 1));
+$title        = htmlspecialchars(Text::_('TPL_ITHEME_BTN_BUY'), ENT_QUOTES, 'UTF-8');
+$delivery     = htmlspecialchars((string) ($item->delivery ?? $title), ENT_QUOTES, 'UTF-8');
+$buttonSimple = $isSimple ? 'true' : 'false';
 ?>
 <?php if ($item->available) : ?>
-    <?php if ($item->incart) : ?>
-        <button class="btn btn-primary<?php echo $class; ?> active"
-                title="<?php echo Text::_('COM_ISHOP_ADD_TO_CART'); ?>"
-                data-tocart="<?php echo $item->id; ?>"
-                data-original-html="<?php echo $this->escape(LayoutHelper::render('itheme.icon', ['icon' => 'i-cart'])); ?><span><?php echo $item->delivery; ?></span>">
+    <?php $innerHtml = LayoutHelper::render('itheme.icon', ['icon' => 'i-cart']) . '<span>' . (($isSimple) ? '' : $delivery) . '</span>'; ?>
+
+    <?php if ($isSimple || !$isInCart) : ?>
+        <button
+                class="<?php echo $class; ?>"
+                title="<?php echo $title; ?>"
+                data-tocart="<?php echo $productId; ?>"
+                data-tocart-simple="<?php echo $buttonSimple; ?>"><?php echo $innerHtml; ?></button>
+    <?php else : ?>
+        <?php $class = trim($class . ' btn-control active'); ?>
+        <button
+                class="<?php echo $class; ?>"
+                title="<?php echo $title; ?>"
+                data-tocart="<?php echo $productId; ?>"
+                data-tocart-simple="false"
+                data-original-html="<?php echo htmlspecialchars($innerHtml, ENT_QUOTES, 'UTF-8'); ?>">
             <span class="btn_decrease">-</span>
-            <span class="btn_quantity"><?php echo $item->incart_count; ?></span>
+            <span class="btn_quantity"><?php echo $quantity; ?></span>
             <span class="btn_increase">+</span>
         </button>
-    <?php else : ?>
-        <button class="btn btn-primary<?php echo $class; ?>"
-                title="<?php echo Text::_('COM_ISHOP_ADD_TO_CART'); ?>"
-                data-tocart="<?php echo $item->id; ?>"><?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-cart']); ?><span><?php echo $item->delivery; ?></span></button>
     <?php endif; ?>
 <?php endif; ?>

@@ -1,52 +1,62 @@
-.btn svg {
-  vertical-align: -.125em;
+.btn {
+  svg {
+    vertical-align: -.125em;
+  }
 }
 
 .btn-success {
-  --btn-color: var(--body-bg);
+  --btn-color: var(--white);
+}
+
+.btn-light {
+  --btn-hover-color: var(--danger);
+  --btn-hover-bg: var(--light);
+  --btn-hover-border-color: var(--light);
+  --btn-active-color: var(--primary);
+  --btn-active-bg: var(--pink);
+  --btn-active-border-color: var(--pink);
+  --btn-disabled-color: var(--white);
+  --btn-disabled-bg: var(--gray-600);
+  --btn-disabled-border-color: var(--gray-600);
+}
+
+.btn-tools {
+  --btn-color: var(--black);
+  --btn-padding-x: 0;
+  text-decoration: none;
+
+  &:after {
+    display: none;
+  }
 }
 
 .btn-telegram {
-  --btn-color: #fff;
+  --btn-color: var(--white);
   --btn-bg: #3390ec;
   --btn-border-color: #3390ec;
-  --btn-hover-color: #fff;
+  --btn-hover-color: var(--white);
   --btn-hover-bg: color-mix(in srgb, #000 15%, #3390ec 100%);
   --btn-hover-border-color: color-mix(in srgb, #000 20%, #3390ec 100%);
-  --btn-active-color: #fff;
+  --btn-active-color: var(--white);
   --btn-active-bg: color-mix(in srgb, #000 20%, #3390ec 100%);
   --btn-active-border-color: color-mix(in srgb, #000 25%, #3390ec 100%);
-  --btn-disabled-color: #fff;
-  --btn-disabled-bg: #3390ec;
-  --btn-disabled-border-color: #3390ec;
 }
 
 .btn-viber {
-  --btn-color: #fff;
+  --btn-color: var(--white);
   --btn-bg: #7360f2;
   --btn-border-color: #7360f2;
-  --btn-hover-color: #fff;
+  --btn-hover-color: var(--white);
   --btn-hover-bg: color-mix(in srgb, #000 15%, #7360f2 100%);
   --btn-hover-border-color: color-mix(in srgb, #000 20%, #7360f2 100%);
-  --btn-active-color: #fff;
+  --btn-active-color: var(--white);
   --btn-active-bg: color-mix(in srgb, #000 20%, #7360f2 100%);
   --btn-active-border-color: color-mix(in srgb, #000 25%, #7360f2 100%);
-  --btn-disabled-color: #fff;
-  --btn-disabled-bg: #7360f2;
-  --btn-disabled-border-color: #7360f2;
 }
 
-.btn[data-tocart] {
-  &.active {
+.btn[data-original-html].active {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
     align-items: center;
     overflow: hidden;
-  }
-}
-
-.btn-light[data-bs-toggle] {
-  svg {
-    fill: var(--primary);
-  }
 }

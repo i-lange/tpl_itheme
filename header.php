@@ -53,11 +53,4 @@ use Joomla\CMS\Layout\LayoutHelper;
         <jdoc:include type="modules" name="navbar" style="none" />
     </div>
 </nav>
-<?php endif; ?>
-<?php if ($this->countModules('breadcrumbs', true)) : ?>
-<div class="header__breadcrumbs">
-    <div class="container">
-        <jdoc:include type="modules" name="breadcrumbs" style="none" />
-    </div>
-</div>
 <?php endif;

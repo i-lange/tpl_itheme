@@ -4,8 +4,38 @@ $prefix: "";
 // отключаем темную тему
 $enable-dark-mode: false;
 
-// цвет текста в кнопках
-$btn-color: var(--body-bg) !default;
+// Размер шрифта
+$h1-font-size: 2rem !default;
+$h2-font-size: 1.75rem !default;
+$h3-font-size: 1.5rem !default;
+$h4-font-size: 1.325rem !default;
+$h5-font-size: 1.25rem !default;
+$h6-font-size: 1rem !default;
+
+// цвета
+$body-bg: #fefefe !default;
+$body-color: #171717 !default;
+
+$blue: #02448d !default;
+$pink: #ffdbdb !default;
+$red: #c40e38 !default;
+$yellow: #ffc16b !default;
+$teal: #37b77b !default;
+$cyan: #6396e0 !default;
+$primary: $red !default;
+
+$gray-100: $body-bg !default;
+$gray-200: #f5f5f5 !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #efecec !default;
+$gray-500: #cfcfcf !default;
+$gray-600: #bebebe !default;
+$gray-700: #989292 !default;
+$gray-800: #595757 !default;
+$gray-900: $body-color !default;
+
+$white: $body-bg !default;
+$black: $body-color !default;
 
 // Ширина контейнеров
 $container-max-widths: (

@@ -93,7 +93,7 @@ if ($this->state->get('filter.warehouse_id', false) !== false) {
     <?php endif; ?>
     <div class="mb-3 d-flex justify-content-between">
         <div class="dropdown">
-            <button class="btn btn-light btn-sm border dropdown-toggle"
+            <button class="btn btn-link btn-tools dropdown-toggle"
                     type="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false">
@@ -122,7 +122,7 @@ if ($this->state->get('filter.warehouse_id', false) !== false) {
             <input type="hidden" name="filter_order_Dir" id="filter_direction" value="<?php echo $direction; ?>">
         </form>
         <?php if ($showFilter) : ?>
-            <button class="btn btn-light btn-sm border d-lg-none"
+            <button class="btn btn-link btn-tools d-lg-none"
                     type="button"
                     data-bs-toggle="offcanvas"
                     data-bs-target="#moduleFilter"
