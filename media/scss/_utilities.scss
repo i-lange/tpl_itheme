@@ -1,0 +1,20 @@
+$utilities: (
+  "viewport-height": (
+    property: height,
+    class: vh,
+    values: (
+      25: 25vh,
+      50: 50vh,
+      100: 100vh,
+    )
+  ),
+  "min-viewport-height": (
+    property: min-height,
+    class: min-vh,
+    values: (
+      25: 25vh,
+      50: 50vh,
+      100: 100vh,
+    )
+  )
+) !default;

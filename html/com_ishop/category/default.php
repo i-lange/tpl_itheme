@@ -81,16 +81,21 @@ if ($this->state->get('filter.warehouse_id', false) !== false) {
     $loaderState['warehouse_id'] = (int) $this->state->get('filter.warehouse_id', 0);
 }
 ?>
-<div class="container">
-    <?php if ($this->params->get('show_page_heading')) : ?>
-        <h1><?php echo $this->escape($this->params->get('page_heading')); ?></h1>
-    <?php endif; ?>
-    <?php if ($this->params->get('show_category_title')) : ?>
-        <h2><?php echo $categoryTitle; ?> <span class="category-products-count">(<?php echo $this->pagination->total; ?>)</span></h2>
-    <?php endif; ?>
-    <?php if ($this->maxLevel != 0 && $this->get('children')) : ?>
-        <?php echo $this->loadTemplate('children'); ?>
-    <?php endif; ?>
+<?php if ($this->params->get('show_page_heading')) : ?>
+    <h1><?php echo $this->escape($this->params->get('page_heading')); ?></h1>
+<?php endif; ?>
+<?php if ($this->params->get('show_category_title')) : ?>
+    <h2><?php echo $categoryTitle; ?> <span class="category-products-count"><?php echo $total; ?>&nbsp;<?php echo Text::_('COM_ISHOP_PSC'); ?></span></h2>
+<?php endif; ?>
+<?php if ($this->maxLevel != 0 && $this->get('children')) : ?>
+    <?php echo $this->loadTemplate('children'); ?>
+<?php endif; ?>
+<?php if ($total === 0 ) : ?>
+<div class="min-vh-50 text-center">
+    <h3 class="h1"><?php echo Text::_('COM_ISHOP_CATEGORY_NO_ITEMS'); ?></h3>
+    <p class=""><?php echo Text::_('COM_ISHOP_CATEGORY_FILTER_RESET'); ?></p>
+</div>
+<?php else: ?>
     <div class="mb-3 d-flex justify-content-between">
         <div class="dropdown">
             <button class="btn btn-link btn-tools dropdown-toggle"
@@ -102,12 +107,12 @@ if ($this->state->get('filter.warehouse_id', false) !== false) {
             <ul class="dropdown-menu">
                 <?php foreach ($orderingList as $item) : ?>
                     <?php
-                        $full = $item->field . ' ' . $item->dir;
-                        $attribs = ($full == $fullOrdering)
-                                ? ' class="dropdown-item active"'
-                                : ' class="dropdown-item" onclick="document.getElementById(\'filter_ordering\').value=\'' . $item->field .
-                                '\';document.getElementById(\'filter_direction\').value=\'' . $item->dir .
-                                '\';document.getElementById(\'category-ordering\').submit();"';
+                    $full = $item->field . ' ' . $item->dir;
+                    $attribs = ($full == $fullOrdering)
+                            ? ' class="dropdown-item active"'
+                            : ' class="dropdown-item" onclick="document.getElementById(\'filter_ordering\').value=\'' . $item->field .
+                            '\';document.getElementById(\'filter_direction\').value=\'' . $item->dir .
+                            '\';document.getElementById(\'category-ordering\').submit();"';
                     ?>
                     <li><a <?php echo $attribs; ?> href="#"><?php echo Text::_('COM_ISHOP_ORDER_' . ltrim($item->field, 'a.')  . '_' . $item->dir); ?></a></li>
                 <?php endforeach; ?>
@@ -132,7 +137,7 @@ if ($this->state->get('filter.warehouse_id', false) !== false) {
                 <?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-funnel']); ?>
                 <span><?php echo Text::_('TPL_ITHEME_FILTER_ANCHOR'); ?></span>
                 <?php if ($this->filter_object->active_count > 0) : ?>
-                <small class="badge text-bg-primary rounded-pill"><?php echo $this->filter_object->active_count; ?></small>
+                    <small class="badge text-bg-primary rounded-pill"><?php echo $this->filter_object->active_count; ?></small>
                 <?php endif; ?>
             </button>
         <?php endif; ?>
@@ -148,19 +153,17 @@ if ($this->state->get('filter.warehouse_id', false) !== false) {
          data-ishop-next-limitstart="<?php echo $nextLimitstart; ?>"
          data-ishop-has-more="<?php echo $hasMore ? '1' : '0'; ?>"
          data-ishop-currency="<?php echo strtoupper($this->params->get('defaultCurrency', 'BYN')); ?>">
-    <?php echo $this->loadTemplate('items'); ?>
+        <?php echo $this->loadTemplate('items'); ?>
     </div>
     <script type="application/json" id="<?php echo $loaderStateId; ?>"><?php echo json_encode($loaderState, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE); ?></script>
-</div>
-<?php
-$filterSeoDescription = !empty($this->filter_seo_page->description) ? $this->filter_seo_page->description : '';
-$categoryDescription = $filterSeoDescription ?: $this->category->description;
-$showCategoryDescription = $filterSeoDescription || $this->params->get('show_description', 1);
-?>
-<?php if ($showCategoryDescription && $categoryDescription) : ?>
-<div class="bg-light py-5">
-    <div class="container">
-        <?php echo HTMLHelper::_('content.prepare', $categoryDescription, '', 'com_ishop.category'); ?>
-    </div>
-</div>
-<?php endif; ?>
+    <?php
+    $filterSeoDescription = !empty($this->filter_seo_page->description) ? $this->filter_seo_page->description : '';
+    $categoryDescription = $filterSeoDescription ?: $this->category->description;
+    $showCategoryDescription = $filterSeoDescription || $this->params->get('show_description', 1);
+    ?>
+    <?php if ($showCategoryDescription && $categoryDescription) : ?>
+        <div class="py-5">
+            <?php echo HTMLHelper::_('content.prepare', $categoryDescription, '', 'com_ishop.category'); ?>
+        </div>
+    <?php endif; ?>
+<?php endif;
