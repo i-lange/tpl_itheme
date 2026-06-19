@@ -50,7 +50,7 @@ $finderHelper = $app->bootModule('mod_finder', 'site')->getHelper('FinderHelper'
                class="js-finder-search-query form-control"
                value="<?php echo htmlspecialchars($app->getInput()->get('q', '', 'string'), ENT_COMPAT, 'UTF-8'); ?>"
                placeholder="<?php echo Text::_('MOD_FINDER_SEARCH_VALUE'); ?>">
-        <button type="button" class="btn-close" aria-label="Close"></button>
+        <button type="button" class="btn-close d-none" aria-label="Close" hidden></button>
         <button class="btn btn-primary" type="submit">
             <?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-search']); ?>
             <span class="visually-hidden"><?php echo Text::_('JSEARCH_FILTER_SUBMIT'); ?></span>

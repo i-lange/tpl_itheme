@@ -126,20 +126,36 @@ Joomla = window.Joomla || {};
         });
     });
 
-    document.addEventListener('DOMContentLoaded', function () {
-        const form = document.querySelector('.js-finder-searchform');
-        if (!form) return;
+    function initFinderClearButton() {
+        document.querySelectorAll('.js-finder-searchform').forEach((form) => {
+            const input = form.querySelector('.js-finder-search-query');
+            const clearBtn = form.querySelector('.btn-close');
 
-        const input = form.querySelector('.js-finder-search-query');
-        const clearBtn = form.querySelector('.btn-close');
+            if (!clearBtn || !input) {
+                return;
+            }
 
-        if (clearBtn && input) {
+            const toggleClearButton = () => {
+                const hasValue = input.value.trim().length > 0;
+
+                clearBtn.hidden = !hasValue;
+                clearBtn.classList.toggle('d-none', !hasValue);
+            };
+
             clearBtn.addEventListener('click', function () {
                 input.value = '';
                 input.focus();
                 input.dispatchEvent(new Event('input', { bubbles: true }));
             });
-        }
+
+            input.addEventListener('input', toggleClearButton);
+            input.addEventListener('change', toggleClearButton);
+            toggleClearButton();
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        initFinderClearButton();
     });
 
     // Инициализируется при обновлении части страницы
