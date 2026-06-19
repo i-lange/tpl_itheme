@@ -1,43 +1,47 @@
 // =============================================================================
 // Цена товара
 // =============================================================================
-.product-small__prices {
+.product-price-box {
   display: flex;
   align-items: center;
-}
+  font-size: 1rem;
 
-.product-small__price {
-  font-size: 1.25em;
-  font-weight: 700;
+  .price {
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+    font-weight: 500;
+
+    &.sale {
+      color: var(--primary);
+    }
+
+    @include media-breakpoint-up(md) {
+      font-size: 1.5em;
+    }
+  }
+
+  .old-price {
+    display: flex;
+    align-items: center;
+    font-size: .875em;
+    color: var(--gray-600);
+    margin-left: .375em;
+
+    @include media-breakpoint-up(md) {
+      font-size: 1em;
+    }
+  }
 
   .currency {
-    font-size: .5em;
-    margin-left: .25em;
+    font-size: .875em;
+    margin-left: .125em;
     text-transform: uppercase;
   }
 
-  svg {
-    width: 0.75em;
-    height: 0.75em;
-    margin-top: -.125em;
-    fill: var(--primary);
-  }
-
-  &.sale {
-    color: var(--primary);
-  }
-
-  @include media-breakpoint-up(sm) {
-    font-size: 1.5em;
-  }
-}
-
-.product-small__old-price {
-  color: var(--gray-500);
-  margin-left: 1em;
-
-  .currency {
-    font-size: .75em;
+  .badge {
+    font-weight: 400;
+    margin-left: .375em;
   }
 }
 

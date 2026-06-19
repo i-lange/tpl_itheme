@@ -20,6 +20,7 @@ $blue: #02448d !default;
 $pink: #ffdbdb !default;
 $red: #c40e38 !default;
 $yellow: #ffc16b !default;
+$green: #0b7a4a !default;
 $teal: #37b77b !default;
 $cyan: #6396e0 !default;
 $primary: $red !default;
@@ -42,3 +43,20 @@ $container-max-widths: (
   xl: 78rem,
   xxl: 80rem
 ) !default;
+
+// Блоки с пропорциями ratio
+$aspect-ratios: (
+  "1x1": 100%,
+  "3x4": calc(4 / 3 * 100%),
+  "4x3": calc(3 / 4 * 100%),
+  "16x9": calc(9 / 16 * 100%),
+  "21x9": calc(9 / 21 * 100%)
+) !default;
+
+// Элементы check, radio, switch
+$form-check-input-width:          1.5em !default;
+$form-switch-color:               $gray-600 !default;
+$form-switch-width:               2.75em !default;
+$form-switch-padding-start:       $form-switch-width + .5em !default;
+$form-switch-bg-image:            url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='3' fill='#{$form-switch-color}'/></svg>") !default;
+$form-switch-border-radius:       $form-switch-width !default;

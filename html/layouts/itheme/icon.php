@@ -16,6 +16,7 @@ extract($displayData);
 
 // Имя файла с иконками из настроек шаблона
 $file = HTMLHelper::cleanImageURL(Factory::getApplication()->getTemplate(true)->params->get('iconsFile'))->url;
+$file = '/' . ltrim($file, '/');
 $attributes = [
     'aria-hidden' => 'true',
 ];

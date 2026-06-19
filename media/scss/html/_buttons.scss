@@ -4,10 +4,6 @@
   }
 }
 
-.btn-success {
-  --btn-color: var(--white);
-}
-
 .btn-light {
   --btn-hover-color: var(--danger);
   --btn-hover-bg: var(--light);
@@ -15,7 +11,7 @@
   --btn-active-color: var(--primary);
   --btn-active-bg: var(--pink);
   --btn-active-border-color: var(--pink);
-  --btn-disabled-color: var(--white);
+  --btn-disabled-color: var(--black);
   --btn-disabled-bg: var(--gray-600);
   --btn-disabled-border-color: var(--gray-600);
 }
@@ -52,11 +48,4 @@
   --btn-active-color: var(--white);
   --btn-active-bg: color-mix(in srgb, #000 20%, #7360f2 100%);
   --btn-active-border-color: color-mix(in srgb, #000 25%, #7360f2 100%);
-}
-
-.btn[data-original-html].active {
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    align-items: center;
-    overflow: hidden;
 }

@@ -23,7 +23,7 @@ if (empty($src)) {
 $layoutAttr = [
     'src' => $src,
     'alt' => (!empty($displayData->images->image_small_alt)) ?: $displayData->fullname,
-    'class' => 'image',
+    'class' => 'object-fit-contain',
     'sizes' => '(max-width: 439px) 100vw, 50vw',
 ];
 
