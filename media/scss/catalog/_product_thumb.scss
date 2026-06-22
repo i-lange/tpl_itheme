@@ -1,0 +1,29 @@
+// =============================================================================
+// Маленькая карточка товара для списков
+// =============================================================================
+.product-thumb {
+  position: relative;
+}
+
+.product-thumb__image {
+  overflow: hidden;
+  border-radius: .75rem;
+  border: 1px solid var(--gray-400);
+}
+
+.product-thumb__title {
+  margin-top: 0.125rem;
+  font-size: .625rem;
+  color: var(--gray-800);
+  text-align: center;
+}
+
+.product-thumb:hover,
+.product-thumb.active {
+  .product-thumb__image {
+    border-color: var(--primary);
+  }
+  .product-thumb__title {
+    color: var(--primary);
+  }
+}

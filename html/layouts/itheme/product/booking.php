@@ -37,8 +37,8 @@ $json = json_encode([
 ?>
 <?php if ($item->available) : ?>
     <button class="btn <?php echo $class; ?>"
-            title="Заказать в 1 клик"
+            title="Забронировать"
             data-bs-toggle="modal"
             data-bs-target="#buy1clickModal"
-            data-1click='<?php echo $json; ?>'>Купить</button>
+            data-1click='<?php echo $json; ?>'>Забронировать</button>
 <?php endif; ?>

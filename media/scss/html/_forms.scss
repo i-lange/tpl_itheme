@@ -1,7 +1,7 @@
 .form-control {
   &:focus {
     border-color: color-mix(in srgb, #fff 50%, var(--primary) 100%);
-    box-shadow: 0 0 0 .25em rgba(var(--primary-rgb), .25);
+    box-shadow: 0 0 0 .25rem rgba(var(--primary-rgb), .25);
   }
 }
 

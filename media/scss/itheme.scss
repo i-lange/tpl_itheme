@@ -3,11 +3,13 @@
 
 // Общие стили
 @import "html/global";
+@import "html/breadcrumbs";
 @import "html/card";
 @import "html/buttons";
 @import "html/forms";
 @import "html/image";
 @import "html/svg";
+@import "html/lists";
 
 // Стили Header
 @import "header/header";
@@ -37,6 +39,7 @@
 @import "catalog/product_buttons";
 @import "catalog/product_field";
 @import "catalog/product_parts";
+@import "catalog/product_thumb";
 
 // iShop pages
 @import "ishop/cart";
@@ -44,7 +47,6 @@
 @import "ishop/compare";
 
 // Модули
-@import "modules/consultation";
 @import "modules/offcanvas-slider";
 @import "modules/search-form";
 @import "modules/scroll-items-list";

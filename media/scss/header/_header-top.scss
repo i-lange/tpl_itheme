@@ -24,16 +24,20 @@
   font-weight: 500;
   text-decoration: none;
   white-space: nowrap;
-  --btn-font-size: 1rem;
+  --btn-font-size: .865rem;
 
   &:hover {
     text-decoration: none;
+  }
+
+  @include media-breakpoint-up(sm) {
+    --btn-font-size: 1rem;
   }
 }
 
 .header__phone {
   color: var(--black);
-  font-size: 1.25rem;
+  font-size: .865rem;
   font-weight: 600;
   text-decoration: none;
   white-space: nowrap;
@@ -43,7 +47,15 @@
     text-decoration: none;
   }
 
-  @include media-breakpoint-down(sm) {
+  @include media-breakpoint-up(sm) {
+    font-size: 1rem;
+  }
+
+  @include media-breakpoint-up(md) {
+    font-size: 1.25rem;
+  }
+
+  @media (max-width: 339px) {
     display: none;
   }
 }

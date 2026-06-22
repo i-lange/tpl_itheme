@@ -20,6 +20,10 @@
     z-index: 2;
 
     &:first-child {
+      padding-top: .75em;
+    }
+
+    &:has(+ .btn) {
       border-bottom-left-radius: 0;
     }
 

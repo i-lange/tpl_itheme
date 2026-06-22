@@ -3,9 +3,9 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 3.25em;
+  height: 3.25rem;
   color: var(--gray-600);
-  padding: .5em;
+  padding: .5rem;
   background-color: var(--white);
   z-index: $zindex-sticky;
 
@@ -16,7 +16,7 @@
 
 .navigator-container {
   display: grid;
-  gap: .5em;
+  gap: .5rem;
   grid-template-columns: repeat(5, 1fr);
 
   @include media-breakpoint-down(sm) {
@@ -29,8 +29,8 @@
   text-align: center;
 
   svg {
-    width: 1.75em !important;
-    height: 1.75em !important;
+    width: 1.75rem !important;
+    height: 1.75rem !important;
     fill: var(--gray-600);
   }
 }

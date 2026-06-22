@@ -1,18 +1,27 @@
 // SVG иконки
 svg {
+  &.small  {
+    width: 1.25em;
+    height: 1.25em;
+    vertical-align: -.25em;
+  }
+
   &.medium  {
     width: 2em;
     height: 2em;
+    vertical-align: -.365em;
   }
 
   &.large  {
     width: 3em;
     height: 3em;
+    vertical-align: -.5em;
   }
 
   &.mega  {
     width: 4em;
     height: 4em;
+    vertical-align: -.625em;
   }
 
   &.primary {

@@ -56,9 +56,8 @@ $formId = 'i-form-' . $module->id;
                 </button>
             </div>
             <?php echo HTMLHelper::_('form.token'); ?>
-            <input type="hidden" name="title" value="DOMIS.BY - Заказ звонка">
+            <input type="hidden" name="title" value="Бесплатная консультация">
             <input type="hidden" name="module_id" value="<?php echo $module->id; ?>">
-            <input type="hidden" name="goal" value="FEEDBACK">
             <input type="hidden" name="metrika_client_id" value="">
             <input type="hidden" name="google_client_id" value="">
         </fieldset>

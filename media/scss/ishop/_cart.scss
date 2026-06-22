@@ -3,23 +3,23 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2em 0;
+  padding: 2rem 0;
   min-height: 50vh;
 }
 
 .module-cart-grid {
   display: grid;
-  grid-gap: 2em;
+  grid-gap: 2rem;
 
   @include media-breakpoint-up(lg) {
-    grid-gap: 4em;
+    grid-gap: 4rem;
     grid-template-columns: 5fr 3fr;
   }
 }
 
 .module-cart-checkout {
   position: sticky;
-  top: 12em;
+  top: 12rem;
 
   .btn {
     width: 100%;
@@ -27,15 +27,15 @@
 }
 
 .module-cart-info {
-  font-size: 1.25em;
-  padding: 1.5em;
-  border-radius: 1.5em;
+  font-size: 1.25rem;
+  padding: 1.5rem;
+  border-radius: 1.5rem;
   border: 1px solid var(--gray-400);
-  box-shadow: 0 0 1em var(--white), 0 0 .25em var(--black);
+  box-shadow: 0 0 1rem var(--white), 0 0 .25rem var(--black);
 
   & + div {
-    margin-top: 2em;
-    padding: 0 1.5em;
+    margin-top: 2rem;
+    padding: 0 1.5rem;
   }
 
   hr {
@@ -45,13 +45,13 @@
   .cart-price {
     .currency {
       text-transform: uppercase;
-      margin-left: .25em;
+      margin-left: .25rem;
     }
   }
 }
 
 .module-cart-item {
-  padding: 1em 0;
+  padding: 1rem 0;
   border-bottom: 1px solid var(--gray-400);
 
   &.not_available {
@@ -75,11 +75,11 @@
   justify-content: center;
   overflow-wrap: anywhere;
   margin-right: .75em;
-  width: 6em;
-  padding: 1em;
-  border-radius: 1em;
+  width: 6rem;
+  padding: 1rem;
+  border-radius: 1rem;
   border: 1px solid var(--primary);
-  box-shadow: 0 0 1em 0 rgba(var(--primary-rgb), 0.2) inset;
+  box-shadow: 0 0 1rem 0 rgba(var(--primary-rgb), 0.2) inset;
 
   &:after {
     display: block;
@@ -89,20 +89,20 @@
 
   img {
     width: auto;
-    max-height: 5em;
-    height: 5em;
+    max-height: 5rem;
+    height: 5rem;
   }
 
   .form-check-input {
     position: absolute;
-    top: .5em;
-    left: .5em;
-    width: 2em;
-    height: 2em;
+    top: .5rem;
+    left: .5rem;
+    width: 2rem;
+    height: 2rem;
   }
 
   @include media-breakpoint-up(lg) {
-    margin-right: 2em;
+    margin-right: 2rem;
   }
 }
 
@@ -122,16 +122,16 @@
   }
 
   > h3 {
-    font-size: 1em;
+    font-size: 1rem;
     margin: 0;
 
     @include media-breakpoint-up(lg) {
-      font-size: 1.25em;
+      font-size: 1.25rem;
     }
   }
 
   > span {
-    font-size: .75em;
+    font-size: .75rem;
     text-transform: lowercase;
     color: var(--gray-600);
   }
@@ -148,7 +148,7 @@
   }
 
   @include media-breakpoint-up(lg) {
-    padding-left: 8em;
+    padding-left: 8rem;
   }
 }
 
@@ -158,7 +158,7 @@
   justify-content: space-between;
 
   @include media-breakpoint-down(lg) {
-    margin-top: .5em;
+    margin-top: .5rem;
   }
 
   input,
@@ -169,7 +169,7 @@
   }
 
   button {
-    min-width: 2.25em;
+    min-width: 2.25rem;
 
     .svg {
       fill: var(--primary);
@@ -185,8 +185,8 @@
 }
 
 .quantity_input {
-  margin-left: .5em;
-  max-width: 3em;
+  margin-left: .5rem;
+  max-width: 3rem;
   border: none;
 }
 
@@ -208,17 +208,17 @@
 
 .prices-container {
   @include media-breakpoint-up(lg) {
-    margin-left: 2em;
+    margin-left: 2rem;
   }
 }
 
 .cart-item_price {
-  font-size: 2em;
+  font-size: 2rem;
   font-weight: $font-weight-bold;
 
   .currency {
-    font-size: .75em;
-    margin-left: .25em;
+    font-size: .75rem;
+    margin-left: .25rem;
     text-transform: uppercase;
   }
 
@@ -226,9 +226,9 @@
     color: var(--primary);
 
     .svg {
-      width: 0.75em;
-      height: 0.75em;
-      margin-top: -.125em;
+      width: 0.75rem;
+      height: 0.75rem;
+      margin-top: -.125rem;
       fill: var(--primary);
     }
   }
@@ -237,7 +237,7 @@
 .cart-item_price_old_price {
   display: none;
   color: var(--gray-500);
-  font-size: 1.25em;
+  font-size: 1.25rem;
 
   @include media-breakpoint-up(md) {
     display: inline-block;

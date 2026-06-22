@@ -2,24 +2,24 @@
 // Footer Main section (columns)
 // -----------------------------------------------------------------------------
 .footer__main {
-  padding: 1em 0;
+  padding: 1rem 0;
   border-bottom: var(--border-width) var(--border-style) var(--gray-700);
 
   @include media-breakpoint-up(sm) {
-    padding: 3em 0 2em;
+    padding: 3rem 0 2rem;
   }
 
   h3 {
     font-weight: 700;
     color: var(--gray-200);
     text-transform: uppercase;
-    letter-spacing: 0.04em;
-    margin-bottom: 1em;
+    letter-spacing: 0.04rem;
+    margin-bottom: 1rem;
   }
 
   .nav-link {
     --nav-link-padding-x: 0;
-    --nav-link-padding-y: .25em;
+    --nav-link-padding-y: .25rem;
     --nav-link-color: var(--gray-400);
 
     &:hover {
@@ -29,15 +29,15 @@
 }
 
 .footer__logo {
-  margin-bottom: 0.5em;
+  margin-bottom: 0.5rem;
 
   img {
     filter: brightness(0) invert(1);
-    max-height: 3em;
+    max-height: 3rem;
     width: auto;
 
     @include media-breakpoint-down(sm) {
-      height: 1.25em;
+      height: 1.25rem;
     }
   }
 }
@@ -45,16 +45,16 @@
 .footer__sitename {
   color: var(--gray-500);
   @include media-breakpoint-up(sm) {
-    font-size: 1em;
+    font-size: 1rem;
   }
 }
 
 .footer__socials {
   display: flex;
   align-items: center;
-  gap: 0.35em;
+  gap: 0.35rem;
   flex-wrap: wrap;
-  margin-top: 2em;
+  margin-top: 2rem;
   justify-content: center;
 
   @include media-breakpoint-up(sm) {
@@ -66,8 +66,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 3.5em;
-  height: 3.5em;
+  width: 3.5rem;
+  height: 3.5rem;
   border-radius: 50%;
   background-color: var(--gray-800);
   color: var(--gray-200);
@@ -79,8 +79,8 @@
   svg {
     fill: currentColor;
     display: block;
-    width: 1.5em;
-    height: 1.5em;
+    width: 1.5rem;
+    height: 1.5rem;
   }
 
   &:hover {
@@ -93,7 +93,7 @@
 .footer__contact {
   display: flex;
   align-items: flex-start;
-  margin-top: 1em;
+  margin-top: 1rem;
   line-height: 1.4;
   color: var(--gray-400);
 
@@ -109,7 +109,7 @@
   svg {
     fill: var(--primary);
     flex-shrink: 0;
-    margin-top: 0.125em;
-    margin-right: 0.25em;
+    margin-top: 0.25em;
+    margin-right: 0.25rem;
   }
 }

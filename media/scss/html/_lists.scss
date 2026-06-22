@@ -1,0 +1,10 @@
+// Списки
+ol,
+ul {
+  padding-left: 1.5rem;
+}
+
+ul li::marker {
+  color: var(--primary);
+  font-size: 1.25rem;
+}

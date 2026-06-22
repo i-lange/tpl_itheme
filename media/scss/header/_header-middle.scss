@@ -5,18 +5,35 @@
   search {
     flex: 1;
     min-width: 0;
+
+    @include media-breakpoint-down(sm) {
+      display: none;
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+    border: 1px solid var(--gray-400);
   }
 }
 
 .header__middle-inner {
   display: flex;
   align-items: center;
-  gap: 2rem;
-  padding: 0.75rem 0 0.25rem;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.75rem 0 0.5rem;
 
-  @include media-breakpoint-down(sm) {
-    gap: 0.5rem;
-    padding: 0.5rem 0;
+  @include media-breakpoint-up(md) {
+    gap: 1.25rem;
+  }
+
+  @include media-breakpoint-up(lg) {
+    gap: 1.5rem;
+    padding: 0.75rem 0 0.25rem;
+  }
+
+  @include media-breakpoint-up(xl) {
+    gap: 2rem;
   }
 }
 
@@ -30,10 +47,6 @@
     margin-top: -.75rem;
     height: 2.5rem;
     width: auto;
-  }
-
-  @include media-breakpoint-down(md) {
-    display: none;
   }
 }
 

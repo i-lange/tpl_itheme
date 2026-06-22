@@ -1,14 +1,13 @@
 .j-main-container {
   .alert {
-    margin: .75em;
+    margin: .75rem;
   }
-
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(-1em);
+    transform: translateY(-1rem);
   }
 
   to {
@@ -19,7 +18,7 @@
 
 /* Only apply margin when #system-message-container contains a visible joomla-alert */
 #system-message-container:has(joomla-alert) {
-  margin-top: 1em;
+  margin-top: 1rem;
 }
 
 /* Remove margin when no <joomla-alert> exists */

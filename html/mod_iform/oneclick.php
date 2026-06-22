@@ -42,8 +42,10 @@ $formId = 'i-form-' . $module->id;
             </div>
             <div class="modal-body">
                 <div class="d-flex align-items-center mb-2">
-                    <div class="border rounded me-2">
-                        <img class="rounded" id="trg-1click-img" width="40" src="/media/templates/site/itheme/images/phd.svg" alt="">
+                    <div class="product-thumb me-2" style="min-width:3rem">
+                        <div class="product-thumb__image ratio ratio-3x4">
+                            <img class="object-fit-contain" id="trg-1click-img" width="40" src="/media/templates/site/itheme/images/phd.svg" alt="">
+                        </div>
                     </div>
                     <div>
                         <div class="fw-bold" id="trg-1click-title"></div>

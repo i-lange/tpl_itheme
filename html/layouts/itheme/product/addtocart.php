@@ -17,19 +17,22 @@ extract($displayData);
 
 /** @var object $item Объект товара */
 /** @var string $class Дополнительный класс */
+/** @var bool $anchor Нужен ли текст на кнопке */
 
 $params       = ComponentHelper::getParams('com_ishop');
 $isSimple     = (bool) $params->get('cart_button_simple', true);
 $isInCart     = !empty($item->incart);
-$class        = htmlspecialchars('btn btn-light' . (!empty($class) ? ' ' . $class : '') . ($isInCart ? ' active' : ''), ENT_QUOTES, 'UTF-8');
+$class        = htmlspecialchars('btn' . (!empty($class) ? ' ' . $class : '') . ($isInCart ? ' active' : ''), ENT_QUOTES, 'UTF-8');
 $productId    = (int) ($item->id ?? 0);
 $quantity     = max(1, (int) ($item->incart_count ?? 1));
-$title        = htmlspecialchars(Text::_('TPL_ITHEME_BTN_BUY'), ENT_QUOTES, 'UTF-8');
+$title        = htmlspecialchars(Text::_('COM_ISHOP_ADD_TO_CART'), ENT_QUOTES, 'UTF-8');
 $delivery     = htmlspecialchars((string) ($item->delivery ?? $title), ENT_QUOTES, 'UTF-8');
 $buttonSimple = $isSimple ? 'true' : 'false';
+$anchor_class = ($anchor ?? false) ? ' class="ms-1"' : ' class="visually-hidden"';
 ?>
 <?php if ($item->available) : ?>
-    <?php $innerHtml = LayoutHelper::render('itheme.icon', ['icon' => 'i-cart']) . '<span>' . (($isSimple) ? '' : $delivery) . '</span>'; ?>
+    <?php $innerHtml = LayoutHelper::render('itheme.icon', ['icon' => 'i-cart']) .
+            '<span' . $anchor_class . '>' . (($isSimple) ? $title : $delivery) . '</span>'; ?>
 
     <?php if ($isSimple || !$isInCart) : ?>
         <button

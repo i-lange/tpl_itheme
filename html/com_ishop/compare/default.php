@@ -45,7 +45,7 @@ $catId = $this->category_id;
                         aria-expanded="false"
                         title="<?php echo Text::_('COM_ISHOP_MSG_SELECT_CATEGORY'); ?>">
                     <span class="dropdown-text"><?php echo $this->compare[$catId]->title; ?></span>
-                    <small class="ms-1"><?php echo $this->compare[$catId]->count; ?></small></button>
+                    <small class="badge rounded-pill text-bg-primary ms-1"><?php echo $this->compare[$catId]->count; ?></small></button>
                 <ul class="dropdown-menu">
                     <?php foreach ($this->compare as $category) : ?>
                         <?php
@@ -56,7 +56,7 @@ $catId = $this->category_id;
                         ?>
                         <li>
                             <a <?php echo $attribs; ?> href="#">
-                                <span><?php echo $category->title; ?></span> <small class="ms-1">(<?php echo $category->count; ?>)</small>
+                                <span><?php echo $category->title; ?></span> <small class="badge rounded-pill <?php echo($catId === $category->id) ? 'text-bg-light' : 'text-bg-primary'; ?> ms-1"><?php echo $category->count; ?></small>
                             </a>
                         </li>
                     <?php endforeach; ?>

@@ -4,28 +4,49 @@
 }
 
 .card-rounded {
-  --card-border-radius: 1.5em;
+  --card-border-radius: 1.5rem;
+}
+
+.card-geo {
+  --card-border-width: 0;
+  background-color: var(--gray-200);
+
+  img {
+    border-radius: .75rem;
+  }
+  .card-title {
+    display: flex;
+    color: var(--link-color);
+    font-size: 1rem;
+    margin: 1rem 0;
+
+    svg {
+      min-width: 1.25em;
+      width: 1.25em;
+      height: 1.25em;
+    }
+  }
 }
 
 .card-hover {
-  --card-spacer-y: 1em;
-  --card-spacer-x: 1em;
-  --card-title-spacer-y: 0.5em;
+  --card-spacer-y: 1rem;
+  --card-spacer-x: 1rem;
+  --card-title-spacer-y: 0.5rem;
   --card-title-color: ;
   --card-subtitle-color: ;
   --card-border-width: var(--border-width);
   --card-border-radius: var(--border-radius);
   --card-box-shadow: ;
   --card-inner-border-radius: calc(var(--border-radius) - (var(--border-width)));
-  --card-cap-padding-y: 0.5em;
-  --card-cap-padding-x: 1em;
+  --card-cap-padding-y: 0.5rem;
+  --card-cap-padding-x: 1rem;
   --card-cap-bg: rgba(var(--body-color-rgb), 0.03);
   --card-cap-color: ;
   --card-height: ;
   --card-color: ;
   --card-bg: var(--body-bg);
-  --card-img-overlay-padding: 1em;
-  --card-group-margin: 0.75em;
+  --card-img-overlay-padding: 1rem;
+  --card-group-margin: 0.75rem;
 
   :hover {
     --card-border-color: var(--primary);

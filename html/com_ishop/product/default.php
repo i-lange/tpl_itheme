@@ -54,41 +54,55 @@ $wa->addInlineScript($dataLayer);
 ?>
 <div class="product-full container">
     <div class="row gy-2">
-        <div class="col-md-5 col-lg-6 col-xl-7">
+        <div class="col-12 col-md-7 col-lg-5 col-xl-6">
             <?php echo $this->loadTemplate('images'); ?>
         </div>
-        <div class="col-md-7 col-lg-6 col-xl-5">
+        <div class="col-12 col-md-5 col-lg-7 col-xl-6">
             <?php echo $this->loadTemplate('title'); ?>
-            <?php echo $this->loadTemplate('buttons'); ?>
+            <div class="row gy-2">
+                <div class="col-12 col-lg-5 col-xl-6"><?php echo $this->loadTemplate('offers'); ?></div>
+                <div class="col-12 col-lg-7 col-xl-6"><?php echo $this->loadTemplate('buttons'); ?></div>
+            </div>
         </div>
     </div>
+    <?php echo $this->loadTemplate('description'); ?>
+    <?php echo $this->loadTemplate('fields'); ?>
     <?php if (!empty($product->warehouses)) : ?>
-    <h3 class="mt-3">Товар доступен в ПВЗ</h3>
+    <h3 class="mt-4">Наличие в магазинах и ПВЗ</h3>
     <div class="scroll-items-list list-20">
         <?php foreach ($product->warehouses as $warehouse) : ?>
-            <?php echo LayoutHelper::render('itheme.warehouse', ['item' => $warehouse]) ?>
+            <?php echo LayoutHelper::render('itheme.product.warehouse', ['item' => $warehouse, 'product' => $product]); ?>
         <?php endforeach; ?>
     </div>
     <?php endif; ?>
-    <?php if (!empty($this->item->fields) || !empty($this->item->fulltext)) : ?>
-        <div class="offcanvas offcanvas-bottom" tabindex="-1" id="productDescription" aria-labelledby="productDescriptionLabel">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="productDescriptionLabel">Характеристики и описание</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body small">
-                <div class="container container-sm">
-                    <?php echo $this->loadTemplate('fields'); ?>
-                    <?php echo $this->loadTemplate('description'); ?>
-                </div>
-            </div>
-        </div>
-    <?php endif; ?>
     <?php echo $this->loadTemplate('parts'); ?>
 </div>
-<div class="bg-light py-5">
+<?php if (!empty($product->related)) : ?>
+<div class="container mt-5">
+    <h2>С этим товаром покупают</h2>
+    <div class="products__grid">
+        <?php foreach ($product->related as $item) : ?>
+            <?php echo LayoutHelper::render('itheme.product.small', ['item' => $item, 'params' => $this->params]) ?>
+        <?php endforeach; ?>
+    </div>
+</div>
+<?php endif; ?>
+<?php if (!empty($product->similar)) : ?>
+<div class="container mt-5">
+    <h2>Похожие товары</h2>
+    <div class="products__grid">
+        <?php foreach ($product->similar as $item) : ?>
+            <?php echo LayoutHelper::render('itheme.product.small', ['item' => $item, 'params' => $this->params]) ?>
+        <?php endforeach; ?>
+    </div>
+</div>
+<?php endif; ?>
+<div class="product-full__warning mt-5">
     <div class="container">
-        <p><?php echo Text::_('COM_ISHOP_INFO_WARNING_01'); ?></p>
-        <p><?php echo Text::_('COM_ISHOP_INFO_WARNING_02'); ?></p>
+        <?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-message', 'class' => 'd-none d-md-inline-block']); ?>
+        <div>
+            <p><?php echo Text::_('COM_ISHOP_INFO_WARNING_01'); ?></p>
+            <p><?php echo Text::_('COM_ISHOP_INFO_WARNING_02'); ?></p>
+        </div>
     </div>
 </div>

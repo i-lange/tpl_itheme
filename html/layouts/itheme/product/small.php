@@ -58,7 +58,7 @@ if ($params->get('use_js', true) && $params->get('use_wishlist', false)) {
     <div class="btn btn-secondary disabled w-100"><?php echo Text::_('COM_ISHOP_PRODUCT_NOT_AVAILABLE'); ?></div>
 <?php endif; ?>
     <div class="product-small__footer">
-        <?php echo LayoutHelper::render('itheme.product.buy1click', ['item' => $item, 'class' => 'mr-1']); ?>
-        <?php echo LayoutHelper::render('itheme.product.addtocart', ['item' => $item]); ?>
+        <?php echo LayoutHelper::render('itheme.product.buy1click', ['item' => $item, 'class' => 'btn-primary mr-1']); ?>
+        <?php echo LayoutHelper::render('itheme.product.addtocart', ['item' => $item, 'class' => 'btn-light']); ?>
     </div>
 </article>
