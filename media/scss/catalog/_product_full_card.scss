@@ -95,17 +95,6 @@
   }
 }
 
-.product-full__carousel,
-.product-full__image {
-  overflow: hidden;
-  border: 1px solid var(--gray-400);
-  border-radius: .75rem;
-
-  @include media-breakpoint-up(md) {
-    border-radius: 1.5rem;
-  }
-}
-
 .product-full__sales {
   color: var(--white);
   text-align: center;

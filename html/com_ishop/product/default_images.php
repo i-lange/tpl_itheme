@@ -9,7 +9,6 @@
 
 defined('_JEXEC') or die;
 
-use Ilange\Component\Ishop\Site\Helper\ImageHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
 
@@ -17,8 +16,7 @@ use Joomla\CMS\Layout\LayoutHelper;
 /** @var Joomla\CMS\WebAsset\WebAssetManager $wa */
 $wa = $this->getDocument()->getWebAssetManager();
 $wa->useScript('bootstrap.carousel');
-
-$i = 0;
+$wa->useScript('tpl.gallery');
 
 // Сделаем ссылку на изображения товара
 $images = $this->item->images;
@@ -26,78 +24,79 @@ $images = $this->item->images;
 $more = isset($images->image_more) ? (array) $images->image_more : [];
 // Прикрепленные видео ролики
 $videos = isset($this->item->videos) ? (array) $this->item->videos : [];
-?>
-<?php if ((!empty($more) && count($more)) || (!empty($videos) && count($videos))) : ?>
-    <div id="productFullSlider" class="carousel slide product-full__carousel">
-        <div class="carousel-inner">
-            <?php if (!empty($images->image_main)) : ?>
-                <?php $i++; ?>
-                <div class="carousel-item active">
-                    <?php $alt = $images->image_main_alt ?: $this->item->fullname; ?>
-                    <div class="ratio ratio-3x4">
-                        <?php echo LayoutHelper::render('itheme.image', [
-                                'src' => $images->image_main,
-                                'alt' => $alt,
-                                'class' => 'object-fit-contain',
-                                'sizes' => '(max-width: 439px) 100vw, 50vw',
-                        ]); ?>
-                    </div>
-                </div>
-            <?php endif; ?>
-            <?php foreach ($more as $image) : ?>
-                <?php if (!empty($image->image_item)) : ?>
-                    <?php $alt = $image->image_item_alt ?: $this->item->fullname; ?>
-                    <div class="carousel-item<?php echo ($i === 0) ? ' active' : ''; ?>">
-                        <?php $i++; ?>
-                        <div class="ratio ratio-3x4">
-                            <?php echo LayoutHelper::render('itheme.image', [
-                                    'src' => $image->image_item,
-                                    'alt' => $alt,
-                                    'class' => 'object-fit-contain',
-                                    'sizes' => '(max-width: 439px) 100vw, 50vw',
-                            ]); ?>
-                        </div>
-                    </div>
-                <?php endif; ?>
-            <?php endforeach; ?>
-            <?php foreach ($videos as $video) : ?>
-                <div class="carousel-item<?php echo ($i === 0) ? ' active' : ''; ?>">
-                    <?php $i++; ?>
-                    <div class="ratio ratio-3x4">
-                        <?php echo LayoutHelper::render('itheme.video', ['video' => $video]); ?>
-                    </div>
-                </div>
-            <?php endforeach; ?>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#productFullSlider" data-bs-slide="prev" aria-label="<?php echo Text::_('TPL_ITHEME_PREV'); ?>">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden"><?php echo Text::_('TPL_ITHEME_PREV'); ?></span>
+
+$slides = [];
+$videoThumb = '';
+
+if (!empty($images->image_main)) {
+    $alt = $images->image_main_alt ?: $this->item->fullname;
+    $slides[] = [
+        'type'     => 'image',
+        'src'      => $images->image_main,
+        'thumbSrc' => $images->image_main,
+        'alt'      => $alt,
+    ];
+    $videoThumb = $images->image_main;
+}
+
+foreach ($more as $image) {
+    if (empty($image->image_item)) {
+        continue;
+    }
+
+    $alt = $image->image_item_alt ?: $this->item->fullname;
+    $slides[] = [
+        'type'     => 'image',
+        'src'      => $image->image_item,
+        'thumbSrc' => $image->image_item,
+        'alt'      => $alt,
+    ];
+
+    if (empty($videoThumb)) {
+        $videoThumb = $image->image_item;
+    }
+}
+
+foreach ($videos as $video) {
+    if (empty($video->video_id) || empty($video->video_source)) {
+        continue;
+    }
+
+    $slides[] = [
+        'type'     => 'video',
+        'video'    => $video,
+        'thumbSrc' => $videoThumb,
+        'alt'      => $this->item->fullname,
+    ];
+}
+
+if (empty($slides)) {
+    return;
+}
+
+$toolsHtml = '';
+
+if ($this->params->get('use_wishlist', false)) {
+    ob_start();
+    ?>
+    <div class="product_tools">
+        <button class="btn btn-lg<?php echo ($this->item->inwishlist) ? ' active' : ''; ?>"
+                title="<?php echo Text::_('TPL_ITHEME_BTN_WISHLIST'); ?>"
+                data-towishlist="<?php echo (int) $this->item->id; ?>">
+            <?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-like']); ?>
+            <span class="visually-hidden"><?php echo Text::_('TPL_ITHEME_BTN_WISHLIST'); ?></span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#productFullSlider" data-bs-slide="next" aria-label="<?php echo Text::_('TPL_ITHEME_NEXT'); ?>">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden"><?php echo Text::_('TPL_ITHEME_NEXT'); ?></span>
-        </button>
-        <?php if ($this->params->get('use_wishlist', false)) : ?>
-        <div class="product_tools">
-            <button class="btn btn-lg<?php echo ($this->item->inwishlist) ? ' active' : ''; ?>"
-                    title="<?php echo Text::_('TPL_ITHEME_BTN_WISHLIST'); ?>"
-                    data-towishlist="<?php echo $this->item->id; ?>">
-                <?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-like']); ?>
-                <span class="visually-hidden"><?php echo Text::_('TPL_ITHEME_BTN_WISHLIST'); ?></span>
-            </button>
-        </div>
-        <?php endif; ?>
     </div>
-<?php elseif (!empty($images->image_main)) : ?>
-    <div class="product-full__image">
-        <?php $alt = $images->image_main_alt ?: $this->item->fullname; ?>
-        <div class="ratio ratio-3x4">
-            <?php echo LayoutHelper::render('itheme.image', [
-                    'src' => $images->image_main,
-                    'alt' => $alt,
-                    'class' => 'object-fit-contain',
-                    'sizes' => '(max-width: 439px) 100vw, 50vw',
-            ]); ?>
-        </div>
-    </div>
-<?php endif; ?>
+    <?php
+    $toolsHtml = ob_get_clean();
+}
+
+echo LayoutHelper::render('itheme.gallery', [
+    'id'         => 'productFullSlider',
+    'slides'     => $slides,
+    'class'      => 'product-full__gallery',
+    'ratioClass' => 'ratio ratio-3x4',
+    'imageSizes' => '(max-width: 439px) 100vw, 50vw',
+    'thumbSizes' => '(max-width: 767px) 4.5rem, 5rem',
+    'toolsHtml'  => $toolsHtml,
+]);

@@ -18,6 +18,7 @@ const JS_ENTRY_FILES = [
   'checkout.js',
   'form-submit.js',
   'drag-scroller.js',
+  'gallery.js',
 ]
 
 function getJsEntries(): Record<string, string> {
