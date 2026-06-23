@@ -69,6 +69,122 @@ Joomla = window.Joomla || {};
         }).observe();
     }
 
+    const expandableMedia = window.matchMedia('(min-width: 768px)');
+    let expandableResizeTimer = null;
+
+    function getCssLengthInPixels(value, context = document.documentElement) {
+        const length = String(value || '').trim();
+        const size = Number.parseFloat(length);
+
+        if (!Number.isFinite(size) || size <= 0) {
+            return null;
+        }
+
+        if (length.endsWith('px') || !/[a-z%]+$/i.test(length)) {
+            return size;
+        }
+
+        if (length.endsWith('rem')) {
+            const rootFontSize = parseFloat(window.getComputedStyle(document.documentElement).fontSize);
+
+            return size * (Number.isFinite(rootFontSize) ? rootFontSize : 16);
+        }
+
+        if (length.endsWith('em')) {
+            const contextFontSize = parseFloat(window.getComputedStyle(context).fontSize);
+
+            return size * (Number.isFinite(contextFontSize) ? contextFontSize : 16);
+        }
+
+        return null;
+    }
+
+    function getExpandableLimit(expandable) {
+        const customLimit = getCssLengthInPixels(expandable.dataset.expandableMaxHeight, expandable);
+
+        if (customLimit) {
+            return customLimit;
+        }
+
+        const cssLimit = getCssLengthInPixels(
+            window.getComputedStyle(expandable).getPropertyValue('--expandable-max-height'),
+            expandable
+        );
+
+        return cssLimit || 256;
+    }
+
+    function getExpandableItems(root = document) {
+        const items = [];
+
+        if (root instanceof Element && root.matches('[data-expandable]')) {
+            items.push(root);
+        }
+
+        if (root.querySelectorAll) {
+            items.push(...root.querySelectorAll('[data-expandable]'));
+        }
+
+        return items;
+    }
+
+    function getExpandablePart(expandable, selector) {
+        return expandable.querySelector(`:scope > ${selector}`);
+    }
+
+    function syncExpandable(expandable) {
+        const content = getExpandablePart(expandable, '[data-expandable-content]');
+        const toggle = getExpandablePart(expandable, '[data-expandable-toggle]');
+
+        if (!content || !toggle) {
+            return;
+        }
+
+        if (expandable.dataset.expandableMaxHeight) {
+            expandable.style.setProperty('--expandable-max-height', expandable.dataset.expandableMaxHeight);
+        }
+
+        const isExpanded = expandable.dataset.expandableExpanded === 'true';
+
+        expandable.classList.remove('is-collapsible', 'is-collapsed', 'is-expanded');
+        toggle.hidden = true;
+        toggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+
+        if (!expandableMedia.matches) {
+            return;
+        }
+
+        if (content.scrollHeight <= getExpandableLimit(expandable) + 1) {
+            return;
+        }
+
+        expandable.classList.add('is-collapsible');
+
+        if (isExpanded) {
+            expandable.classList.add('is-expanded');
+            return;
+        }
+
+        expandable.classList.add('is-collapsed');
+        toggle.hidden = false;
+    }
+
+    function initExpandable(root = document) {
+        getExpandableItems(root).forEach((expandable) => {
+            const toggle = getExpandablePart(expandable, '[data-expandable-toggle]');
+
+            if (toggle && toggle.dataset.expandableBound !== '1') {
+                toggle.dataset.expandableBound = '1';
+                toggle.addEventListener('click', () => {
+                    expandable.dataset.expandableExpanded = 'true';
+                    syncExpandable(expandable);
+                });
+            }
+
+            syncExpandable(expandable);
+        });
+    }
+
     window.iTheme = window.iTheme || {};
     window.iTheme.refreshLazyload = refreshLazyload;
 
@@ -88,6 +204,8 @@ Joomla = window.Joomla || {};
 
         // Ленивая загрузка изображений и фреймов
         refreshLazyload(document);
+
+        initExpandable(document);
 
         // блоки с прокруткой
         document.querySelectorAll('.scroll-items-list').forEach((list) => {
@@ -159,9 +277,27 @@ Joomla = window.Joomla || {};
     });
 
     // Инициализируется при обновлении части страницы
-    document.addEventListener('joomla:updated', initTemplate);
+    document.addEventListener('joomla:updated', event => {
+        initTemplate(event);
+        initExpandable(event.target instanceof Element ? event.target : document);
+    });
     document.addEventListener('com_ishop:products-loaded', event => {
         refreshLazyload(event.detail && event.detail.container ? event.detail.container : document);
+    });
+
+    expandableMedia.addEventListener('change', () => {
+        initExpandable(document);
+    });
+
+    window.addEventListener('load', () => {
+        initExpandable(document);
+    });
+
+    window.addEventListener('resize', () => {
+        window.clearTimeout(expandableResizeTimer);
+        expandableResizeTimer = window.setTimeout(() => {
+            initExpandable(document);
+        }, 120);
     });
 
 })(Joomla, document);
