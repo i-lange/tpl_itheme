@@ -9,11 +9,9 @@
 
 defined('_JEXEC') or die;
 
-use Ilange\Component\Ishop\Site\Helper\RouteHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
-use Joomla\CMS\Router\Route;
 
 $app = Factory::getApplication();
 $tpl = $app->getTemplate(true);
@@ -31,7 +29,7 @@ $user = Factory::getApplication()->getIdentity();
 <div class="product-full__sales mb-2">До конца акции: 22 ч. 35 мин.</div>
 <?php endif; ?>
 <div class="product-full__buttons">
-    <li class="product-full__buttons-inner">
+    <div class="product-full__buttons-inner">
     <?php echo LayoutHelper::render('itheme.product.prices', ['item' => $this->item, 'class' => 'mb-3']); ?>
     <?php if (!$user->guest) : ?>
         <div class="mb-2 fw-bold" style="color:var(--green)">Пользователь: <?php echo $user->name; ?></div>
