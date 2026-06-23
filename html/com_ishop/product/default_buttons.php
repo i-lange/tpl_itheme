@@ -31,7 +31,7 @@ $user = Factory::getApplication()->getIdentity();
 <div class="product-full__sales mb-2">До конца акции: 22 ч. 35 мин.</div>
 <?php endif; ?>
 <div class="product-full__buttons">
-    <div class="product-full__buttons-inner">
+    <li class="product-full__buttons-inner">
     <?php echo LayoutHelper::render('itheme.product.prices', ['item' => $this->item, 'class' => 'mb-3']); ?>
     <?php if (!$user->guest) : ?>
         <div class="mb-2 fw-bold" style="color:var(--green)">Пользователь: <?php echo $user->name; ?></div>
@@ -54,8 +54,16 @@ $user = Factory::getApplication()->getIdentity();
             </div>
             <?php endif; ?>
         </div>
-        <?php if (!empty($this->item->parts)) : ?>
+
+        <?php if (!empty($this->item->parts) || (!empty($this->item->delivery_date) && !empty($this->item->delivery))) : ?>
             <ul class="list-group mt-3">
+                <?php if (!empty($this->item->delivery_date) && !empty($this->item->delivery)) : ?>
+                    <?php $today = new DateTime(); ?>
+                    <?php $date = new DateTime($this->item->delivery_date); ?>
+                    <?php if ($date >= $today) : ?>
+                    <li class="list-group-item small"><span class="text-body-emphasis">Доставим</span> <?php echo $this->item->delivery; ?></li>
+                    <?php endif; ?>
+                <?php endif; ?>
                 <?php foreach ($this->item->parts as $part) : ?>
                     <li class="list-group-item small">
                         <a class="text-body-emphasis text-decoration-none"
