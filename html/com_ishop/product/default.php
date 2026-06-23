@@ -68,7 +68,7 @@ $wa->addInlineScript($dataLayer);
     <?php echo $this->loadTemplate('description'); ?>
     <?php echo $this->loadTemplate('fields'); ?>
     <?php if (!empty($product->warehouses)) : ?>
-    <h3 class="mt-4">Наличие в магазинах и ПВЗ</h3>
+    <h3 class="mt-5">Наличие в магазинах и ПВЗ</h3>
     <div class="scroll-items-list list-20">
         <?php foreach ($product->warehouses as $warehouse) : ?>
             <?php echo LayoutHelper::render('itheme.product.warehouse', ['item' => $warehouse, 'product' => $product]); ?>

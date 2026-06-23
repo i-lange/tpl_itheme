@@ -12991,6 +12991,12 @@ body {
   padding-top: 1rem;
 }
 
+@media (max-width: 575.98px) {
+  .vw_product .mod-breadcrumbs__wrapper {
+    display: none;
+  }
+}
+
 .product-small {
   position: relative;
 }
@@ -13076,6 +13082,17 @@ body {
   position: relative;
 }
 
+@media (max-width: 575.98px) {
+  .product-full__gallery {
+    margin-left: -0.75rem;
+    margin-right: -0.75rem;
+    margin-top: 0 !important;
+    border-top: none !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+  }
+}
+
 .expandable-block__toggle {
   display: none;
 }
@@ -13088,6 +13105,11 @@ body {
 .product-full__title {
   font-size: 1.25rem;
   line-height: 1;
+}
+@media (max-width: 767.98px) {
+  .product-full__title {
+    margin-top: 0.75rem;
+  }
 }
 @media (min-width: 992px) {
   .product-full__title {
@@ -13402,26 +13424,10 @@ body {
 }
 
 .payment-part {
-  padding: 1rem 0.5rem;
-  margin-bottom: 1rem;
-  background: var(--white);
-  border-radius: 1rem;
-  border: 1px solid var(--blue-3);
-  box-shadow: 0 0 1rem 0 rgba(0, 102, 156, 0.2) inset;
+  padding: 1.25rem;
+  background-color: var(--gray-200);
+  border-radius: 1.5rem;
 }
-@media (min-width: 576px) {
-  .payment-part {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-  }
-}
-@media (min-width: 768px) {
-  .payment-part {
-    padding: 1rem;
-  }
-}
-
 .payment-part-title {
   display: flex;
   align-items: center;
@@ -13429,57 +13435,33 @@ body {
   line-height: 1.2;
   margin-bottom: 1rem;
 }
+.payment-part-title img {
+  margin-right: 0.75rem;
+}
 .payment-part-title svg {
   min-width: 2rem;
   width: 2rem;
   height: 2rem;
-  margin-right: 1rem;
+  margin-right: 0.75rem;
 }
 .payment-part-title .payment-part-header {
   font-size: 1.25rem;
   font-weight: 500;
 }
-@media (min-width: 576px) {
-  .payment-part-title {
-    display: block;
-    min-width: 40%;
-    width: 40%;
-  }
-  .payment-part-title .svg {
+.payment-part-title .payment-part-desc {
+  color: var(--gray-800);
+}
+@media (min-width: 992px) {
+  .payment-part-title svg {
     min-width: 3rem;
     width: 3rem;
     height: 3rem;
-    margin-bottom: 0.5rem;
-  }
-  .payment-part-title .payment-part-desc {
-    font-size: 0.75rem;
   }
 }
-@media (min-width: 768px) {
-  .payment-part-title {
-    display: flex;
-    min-width: 50%;
-    width: 50%;
-  }
-  .payment-part-title .svg {
-    min-width: 4rem;
-    width: 4rem;
-    height: 4rem;
-  }
-}
-@media (min-width: 992px) {
-  .payment-part-title {
-    min-width: 35%;
-    width: 35%;
-  }
-  .payment-part-title .payment-part-desc {
-    font-size: 1rem;
-  }
-}
-@media (min-width: 1200px) {
-  .payment-part-title {
-    min-width: 30%;
-    width: 30%;
+@media (max-width: 575.98px) {
+  .payment-part-title img,
+  .payment-part-title svg {
+    display: none;
   }
 }
 

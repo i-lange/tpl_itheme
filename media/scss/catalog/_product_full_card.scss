@@ -5,6 +5,20 @@
   position: relative;
 }
 
+@include media-breakpoint-down(sm) {
+  .product-full__gallery {
+    margin-left: -.75rem;
+    margin-right: -.75rem;
+    margin-top: 0 !important;
+  }
+
+  .itheme-gallery__stage {
+    border-top: none !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+  }
+}
+
 .expandable-block__toggle {
   display: none;
 }
@@ -19,9 +33,14 @@
   font-size: 1.25rem;
   line-height: 1;
 
+  @include media-breakpoint-down(md) {
+    margin-top: .75rem;
+  }
+
   @include media-breakpoint-up(lg) {
     font-size: 1.75rem;
   }
+
 
   .prefix {
     font-size: .75rem;

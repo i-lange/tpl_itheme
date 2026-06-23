@@ -3,3 +3,11 @@
     padding-top: 1rem;
   }
 }
+
+.vw_product {
+  .mod-breadcrumbs__wrapper {
+    @include media-breakpoint-down(sm) {
+      display: none;
+    }
+  }
+}
