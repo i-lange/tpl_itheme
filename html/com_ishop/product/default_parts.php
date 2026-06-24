@@ -9,12 +9,14 @@
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
 
 /** @var Ilange\Component\Ishop\Site\View\Product\HtmlView $this */
 ?>
 <?php if (!empty($this->item->parts)) : ?>
+    <?php Factory::getApplication()->getDocument()->getWebAssetManager()->useScript('bootstrap.collapse'); ?>
     <h2 class="mt-5 mb-4">Оплата частями</h2>
     <div class="row g-4">
     <?php foreach ($this->item->parts as $part) : ?>

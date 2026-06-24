@@ -24,24 +24,39 @@ $image = !empty($item->images->image_small) ? $item->images->image_small : '';
 $alt = !empty($item->images->image_small_alt) ? $item->images->image_small_alt : $item->title;
 $count = count($item->rules);
 $isMulti = $count > 1;
+$collapseId = 'payment-part-content-' . preg_replace('/[^A-Za-z0-9_-]+/', '-', (string) $item->alias);
 ?>
 <div class="col-12 col-md-<?php echo ($isMulti) ? '12' : '6'; ?><?php echo $class; ?>">
     <div class="payment-part<?php echo $class; ?>" id="<?php echo $item->alias; ?>">
-        <div class="payment-part-title">
-            <?php if (!empty($image)) : ?>
-                <?php echo LayoutHelper::render('itheme.image', [
-                        'class' => '',
-                        'src' => $image,
-                        'alt' => $alt,
-                        'sizes' => '(max-width: 439px) 100vw, 50vw',
-                ]); ?>
-            <?php else: ?>
-                <?php echo LayoutHelper::render('itheme.icon', ['icon' => $item->icon]); ?>
-            <?php endif; ?>
-            <div><span class="payment-part-header"><?php echo $item->title; ?></span><br>
-                <span class="payment-part-desc"><?php echo $item->introtext; ?></span></div>
-        </div>
-        <div class="row gy-2 row-cols-1 <?php echo ($isMulti) ? 'row-cols-md-' . $count : ''; ?>">
+        <?php foreach (['button' => 'd-flex d-md-none', 'div' => 'd-none d-md-flex'] as $tag => $displayClass) : ?>
+            <<?php echo $tag; ?> class="payment-part-title <?php echo $displayClass; ?><?php echo ($tag === 'button') ? ' collapsed' : ''; ?>"
+                <?php if ($tag === 'button') : ?>
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#<?php echo $collapseId; ?>"
+                    aria-expanded="false"
+                    aria-controls="<?php echo $collapseId; ?>"
+                <?php endif; ?>>
+                <span class="payment-part-title__body">
+                    <?php if (!empty($image)) : ?>
+                        <?php echo LayoutHelper::render('itheme.image', [
+                                'class' => '',
+                                'src' => $image,
+                                'alt' => $alt,
+                                'sizes' => '(max-width: 439px) 100vw, 50vw',
+                        ]); ?>
+                    <?php else: ?>
+                        <?php echo LayoutHelper::render('itheme.icon', ['icon' => $item->icon]); ?>
+                    <?php endif; ?>
+                    <span><span class="payment-part-header"><?php echo $item->title; ?></span><br>
+                        <span class="payment-part-desc"><?php echo $item->introtext; ?></span></span>
+                </span>
+                <?php if ($tag === 'button') : ?>
+                    <?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-chevron-down', 'class' => 'payment-part-title__toggle']); ?>
+                <?php endif; ?>
+            </<?php echo $tag; ?>>
+        <?php endforeach; ?>
+        <div class="payment-part-content row gy-2 row-cols-1 collapse <?php echo ($isMulti) ? 'row-cols-md-' . $count : ''; ?>" id="<?php echo $collapseId; ?>">
         <?php foreach ($item->rules as $period => $rule) : ?>
             <div class="col">
                 <div class="card">
