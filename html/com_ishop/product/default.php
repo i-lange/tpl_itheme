@@ -60,8 +60,8 @@ $wa->addInlineScript($dataLayer);
         <div class="col-12 col-md-5 col-lg-7 col-xl-6">
             <?php echo $this->loadTemplate('title'); ?>
             <div class="row gy-2">
-                <div class="col-12 col-lg-5 col-xl-6"><?php echo $this->loadTemplate('offers'); ?></div>
-                <div class="col-12 col-lg-7 col-xl-6"><?php echo $this->loadTemplate('buttons'); ?></div>
+                <div class="col-12 col-sm-5 col-md-12 col-lg-5 col-xl-6" id="product-offers"><?php echo $this->loadTemplate('offers'); ?></div>
+                <div class="col-12 col-sm-7 col-md-12 col-lg-7 col-xl-6" id="product-buttons"><?php echo $this->loadTemplate('buttons'); ?></div>
             </div>
         </div>
     </div>

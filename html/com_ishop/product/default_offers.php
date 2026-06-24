@@ -85,4 +85,4 @@ use Joomla\CMS\Layout\LayoutHelper;
             <?php echo LayoutHelper::render('itheme.document', ['item' => $document, 'class' => '']); ?>
         <?php endforeach; ?>
     </div>
-<?php endif;
+<?php endif; ?>

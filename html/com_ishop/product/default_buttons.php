@@ -26,7 +26,7 @@ $product_price = ($product->sale_price > 0) ? $product->sale_price : $product->p
 $user = Factory::getApplication()->getIdentity();
 ?>
 <?php if (!empty($this->item->sale_end)) : ?>
-<div class="product-full__sales mb-2">До конца акции: 22 ч. 35 мин.</div>
+    <div class="product-full__sales mb-2">До конца акции: 22 ч. 35 мин.</div>
 <?php endif; ?>
 <div class="product-full__buttons">
     <div class="product-full__buttons-inner">

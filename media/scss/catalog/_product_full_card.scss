@@ -105,7 +105,7 @@
 
 .product-full__offers {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(3rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(3.75rem, 1fr));
   gap: .25rem;
 
   @include media-breakpoint-up(xl) {

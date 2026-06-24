@@ -13087,12 +13087,13 @@ body {
     margin-left: -0.75rem;
     margin-right: -0.75rem;
     margin-top: 0 !important;
+  }
+  .itheme-gallery__stage {
     border-top: none !important;
     border-top-left-radius: 0 !important;
     border-top-right-radius: 0 !important;
   }
 }
-
 .expandable-block__toggle {
   display: none;
 }
@@ -13169,7 +13170,7 @@ body {
 }
 .product-full__offers {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(3rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(3.75rem, 1fr));
   gap: 0.25rem;
 }
 @media (min-width: 1200px) {
