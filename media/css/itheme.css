@@ -13180,6 +13180,41 @@ body {
   }
 }
 
+.product-full__buttons-sidebar {
+  display: none;
+}
+
+@media (min-width: 992px) {
+  .product-full__summary {
+    display: flex;
+    flex-direction: column;
+  }
+  .product-full__summary-body {
+    flex: 1 1 auto;
+  }
+  .product-full__offers--wide {
+    width: 100%;
+  }
+  #product-buttons {
+    position: sticky;
+    top: calc(var(--header-offset, 0px) + 1rem);
+    align-self: flex-start;
+    z-index: 10;
+  }
+  .product-full__buttons-sidebar:not(:empty) {
+    display: block;
+  }
+  .product-full__buttons-sidebar > #product-buttons {
+    width: 100%;
+    max-width: 100%;
+    padding-right: 0;
+    padding-left: 0;
+  }
+  .product-full__buttons-sidebar .product-full__buttons {
+    max-height: calc(100vh - var(--header-offset, 0px) - 2rem);
+    overflow-y: auto;
+  }
+}
 .product-full__sales {
   color: var(--white);
   text-align: center;

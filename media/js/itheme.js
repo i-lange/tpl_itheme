@@ -70,7 +70,10 @@ Joomla = window.Joomla || {};
     }
 
     const expandableMedia = window.matchMedia('(min-width: 768px)');
+    const productButtonsMedia = window.matchMedia('(min-width: 992px)');
     let expandableResizeTimer = null;
+    let productButtonsPlaceholder = null;
+    let productButtonsScrollTicking = false;
 
     function getCssLengthInPixels(value, context = document.documentElement) {
         const length = String(value || '').trim();
@@ -185,6 +188,91 @@ Joomla = window.Joomla || {};
         });
     }
 
+    function getHeaderOffset() {
+        return getCssLengthInPixels(
+            window.getComputedStyle(document.documentElement).getPropertyValue('--header-offset'),
+            document.documentElement
+        ) || 0;
+    }
+
+    function shouldMoveProductButtons(buttons) {
+        if (!productButtonsPlaceholder || !productButtonsPlaceholder.parentElement) {
+            return false;
+        }
+
+        const sourceColumn = productButtonsPlaceholder.parentElement.closest('.product-full__summary')
+            || productButtonsPlaceholder.parentElement.closest('.col-12');
+
+        if (!sourceColumn) {
+            return false;
+        }
+
+        const stickyTop = getHeaderOffset() + 16;
+        const sourceBottom = sourceColumn.getBoundingClientRect().bottom;
+
+        return window.scrollY > 0 && sourceBottom <= stickyTop;
+    }
+
+    function setProductButtonsSourceMode(buttons, offers) {
+        if (productButtonsPlaceholder?.parentNode && buttons.previousSibling !== productButtonsPlaceholder) {
+            productButtonsPlaceholder.after(buttons);
+        }
+
+        offers?.classList.remove('product-full__offers--wide');
+        document.documentElement.classList.remove('is-product-buttons-sidebar-active');
+    }
+
+    function setProductButtonsSidebarMode(buttons, sidebar, offers) {
+        if (buttons.parentElement !== sidebar) {
+            sidebar.append(buttons);
+        }
+
+        offers?.classList.add('product-full__offers--wide');
+        document.documentElement.classList.add('is-product-buttons-sidebar-active');
+    }
+
+    function syncProductButtonsPlacement(forceSource = false) {
+        const buttons = document.getElementById('product-buttons');
+        const sidebar = document.querySelector('[data-product-buttons-sidebar]');
+
+        if (!buttons || !sidebar) {
+            document.documentElement.classList.remove('is-product-buttons-sidebar-active');
+            return;
+        }
+
+        if (!productButtonsPlaceholder || !productButtonsPlaceholder.isConnected) {
+            productButtonsPlaceholder = document.createComment('product-buttons-placeholder');
+            buttons.before(productButtonsPlaceholder);
+        }
+
+        const offers = document.getElementById('product-offers');
+
+        if (!productButtonsMedia.matches || forceSource) {
+            setProductButtonsSourceMode(buttons, offers);
+            return;
+        }
+
+        if (shouldMoveProductButtons(buttons)) {
+            setProductButtonsSidebarMode(buttons, sidebar, offers);
+            return;
+        }
+
+        setProductButtonsSourceMode(buttons, offers);
+    }
+
+    function requestProductButtonsPlacementSync() {
+        if (productButtonsScrollTicking) {
+            return;
+        }
+
+        productButtonsScrollTicking = true;
+
+        window.requestAnimationFrame(() => {
+            productButtonsScrollTicking = false;
+            syncProductButtonsPlacement();
+        });
+    }
+
     window.iTheme = window.iTheme || {};
     window.iTheme.refreshLazyload = refreshLazyload;
 
@@ -206,6 +294,7 @@ Joomla = window.Joomla || {};
         refreshLazyload(document);
 
         initExpandable(document);
+        syncProductButtonsPlacement();
 
         // блоки с прокруткой
         document.querySelectorAll('.scroll-items-list').forEach((list) => {
@@ -280,6 +369,8 @@ Joomla = window.Joomla || {};
     document.addEventListener('joomla:updated', event => {
         initTemplate(event);
         initExpandable(event.target instanceof Element ? event.target : document);
+        syncProductButtonsPlacement(true);
+        syncProductButtonsPlacement();
     });
     document.addEventListener('com_ishop:products-loaded', event => {
         refreshLazyload(event.detail && event.detail.container ? event.detail.container : document);
@@ -289,14 +380,24 @@ Joomla = window.Joomla || {};
         initExpandable(document);
     });
 
+    productButtonsMedia.addEventListener('change', () => {
+        syncProductButtonsPlacement();
+    });
+
     window.addEventListener('load', () => {
         initExpandable(document);
+        syncProductButtonsPlacement();
     });
+
+    window.addEventListener('scroll', () => {
+        requestProductButtonsPlacementSync();
+    }, { passive: true });
 
     window.addEventListener('resize', () => {
         window.clearTimeout(expandableResizeTimer);
         expandableResizeTimer = window.setTimeout(() => {
             initExpandable(document);
+            syncProductButtonsPlacement();
         }, 120);
     });
 

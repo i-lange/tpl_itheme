@@ -57,25 +57,28 @@ $wa->addInlineScript($dataLayer);
         <div class="col-12 col-md-7 col-lg-5 col-xl-6">
             <?php echo $this->loadTemplate('images'); ?>
         </div>
-        <div class="col-12 col-md-5 col-lg-7 col-xl-6">
+        <div class="product-full__summary col-12 col-md-5 col-lg-7 col-xl-6">
             <?php echo $this->loadTemplate('title'); ?>
-            <div class="row gy-2">
+            <div class="product-full__summary-body row gy-2">
                 <div class="col-12 col-sm-5 col-md-12 col-lg-5 col-xl-6" id="product-offers"><?php echo $this->loadTemplate('offers'); ?></div>
                 <div class="col-12 col-sm-7 col-md-12 col-lg-7 col-xl-6" id="product-buttons"><?php echo $this->loadTemplate('buttons'); ?></div>
             </div>
         </div>
+        <div class="product-full_last col-12 col-lg-8 col-xl-9">
+            <?php echo $this->loadTemplate('description'); ?>
+            <?php echo $this->loadTemplate('fields'); ?>
+            <?php if (!empty($product->warehouses)) : ?>
+                <h3 class="mt-5">Наличие в магазинах и ПВЗ</h3>
+                <div class="scroll-items-list list-20">
+                    <?php foreach ($product->warehouses as $warehouse) : ?>
+                        <?php echo LayoutHelper::render('itheme.product.warehouse', ['item' => $warehouse, 'product' => $product]); ?>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+            <?php echo $this->loadTemplate('parts'); ?>
+        </div>
+        <aside class="product-full__buttons-sidebar col-12 col-lg-4 col-xl-3" data-product-buttons-sidebar></aside>
     </div>
-    <?php echo $this->loadTemplate('description'); ?>
-    <?php echo $this->loadTemplate('fields'); ?>
-    <?php if (!empty($product->warehouses)) : ?>
-    <h3 class="mt-5">Наличие в магазинах и ПВЗ</h3>
-    <div class="scroll-items-list list-20">
-        <?php foreach ($product->warehouses as $warehouse) : ?>
-            <?php echo LayoutHelper::render('itheme.product.warehouse', ['item' => $warehouse, 'product' => $product]); ?>
-        <?php endforeach; ?>
-    </div>
-    <?php endif; ?>
-    <?php echo $this->loadTemplate('parts'); ?>
 </div>
 <?php if (!empty($product->related)) : ?>
 <div class="container mt-5">
