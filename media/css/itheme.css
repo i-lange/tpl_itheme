@@ -11867,12 +11867,13 @@ svg {
 }
 
 .btn svg {
-  vertical-align: -0.25em;
+  vertical-align: -0.125em;
 }
 @media (min-width: 768px) {
   .btn svg {
     width: 1.25em;
     height: 1.25em;
+    vertical-align: -0.25em;
   }
 }
 
@@ -12450,7 +12451,7 @@ body {
   right: 0;
   height: 3.25rem;
   color: var(--gray-600);
-  padding: 0.5rem;
+  border-top: 1px solid var(--gray-400);
   background-color: var(--white);
   z-index: 1020;
 }
@@ -12471,12 +12472,13 @@ body {
 }
 
 .navigator-element {
+  padding: 0.5rem;
   text-align: center;
 }
 .navigator-element svg {
   width: 1.75rem !important;
   height: 1.75rem !important;
-  fill: var(--gray-600);
+  fill: var(--gray-800);
 }
 
 @media (min-width: 768px) {

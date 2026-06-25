@@ -5,7 +5,7 @@
   right: 0;
   height: 3.25rem;
   color: var(--gray-600);
-  padding: .5rem;
+  border-top: 1px solid var(--gray-400);
   background-color: var(--white);
   z-index: $zindex-sticky;
 
@@ -26,12 +26,13 @@
 }
 
 .navigator-element {
+  padding: .5rem;
   text-align: center;
 
   svg {
     width: 1.75rem !important;
     height: 1.75rem !important;
-    fill: var(--gray-600);
+    fill: var(--gray-800);
   }
 }
 
