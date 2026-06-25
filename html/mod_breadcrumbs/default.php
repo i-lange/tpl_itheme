@@ -17,12 +17,12 @@ use Joomla\CMS\Uri\Uri;
 use Joomla\CMS\WebAsset\WebAssetManager;
 ?>
 <nav class="mod-breadcrumbs__wrapper" aria-label="<?php echo htmlspecialchars($module->title, ENT_QUOTES, 'UTF-8'); ?>">
-    <ol class="breadcrumb py-2">
+    <ol class="breadcrumb">
         <?php if ($params->get('showHere', 1)) : ?>
             <li class="float-start">
                 <?php echo Text::_('MOD_BREADCRUMBS_HERE'); ?>&#160;
             </li>
-        <?php else : ?>
+        <?php elseif (0) : ?>
             <li class="breadcrumb-item">
                 <?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-home']); ?>
             </li>

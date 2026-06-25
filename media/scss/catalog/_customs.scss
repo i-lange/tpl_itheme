@@ -1,6 +1,16 @@
+.mod-breadcrumbs__wrapper {
+  margin-bottom: 1.25rem;
+  --breadcrumb-margin-bottom: 0;
+
+  @include media-breakpoint-up(lg) {
+    margin-top: -.25rem;
+    margin-bottom: 2rem;
+  }
+}
+
 .com_ishop.vw_category {
   .mod-breadcrumbs__wrapper {
-    padding-top: 1rem;
+    //padding-top: 1rem;
   }
 }
 

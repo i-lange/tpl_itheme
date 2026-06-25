@@ -51,6 +51,18 @@
 // =============================================================================
 // Основная сетка шаблона с sidebar-позициями
 // =============================================================================
+.template-main {
+  margin-top: .75rem;
+  margin-bottom: 2rem;
+
+  @include media-breakpoint-up(lg) {
+    margin-top: 1rem;
+  }
+
+  @include media-breakpoint-up(lg) {
+    margin-top: 2rem;
+  }
+}
 .template-layout,
 .template-main,
 .template-sidebar {

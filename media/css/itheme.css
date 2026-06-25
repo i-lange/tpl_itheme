@@ -12299,9 +12299,13 @@ body {
 }
 
 #footer {
-  margin-top: 2rem;
   color: var(--gray-400);
   background-color: var(--gray-900);
+}
+@media (max-width: 767.98px) {
+  #footer {
+    padding-bottom: 4rem;
+  }
 }
 
 .footer__main {
@@ -12904,6 +12908,21 @@ body {
   margin-top: 2rem;
 }
 
+.template-main {
+  margin-top: 0.75rem;
+  margin-bottom: 2rem;
+}
+@media (min-width: 992px) {
+  .template-main {
+    margin-top: 1rem;
+  }
+}
+@media (min-width: 992px) {
+  .template-main {
+    margin-top: 2rem;
+  }
+}
+
 .template-layout,
 .template-main,
 .template-sidebar {
@@ -12987,8 +13006,15 @@ body {
   color: var(--gray-600);
 }
 
-.com_ishop.vw_category .mod-breadcrumbs__wrapper {
-  padding-top: 1rem;
+.mod-breadcrumbs__wrapper {
+  margin-bottom: 1.25rem;
+  --breadcrumb-margin-bottom: 0;
+}
+@media (min-width: 992px) {
+  .mod-breadcrumbs__wrapper {
+    margin-top: -0.25rem;
+    margin-bottom: 2rem;
+  }
 }
 
 @media (max-width: 575.98px) {
