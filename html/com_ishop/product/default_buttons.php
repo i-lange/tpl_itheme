@@ -35,7 +35,7 @@ $user = Factory::getApplication()->getIdentity();
         <div class="mb-2 fw-bold" style="color:var(--green)">Пользователь: <?php echo $user->name; ?></div>
     <?php endif; ?>
     <?php if ($this->item->available) : ?>
-        <div class="row g-1">
+        <div class="row g-1 d-none d-md-flex">
             <div class="col-12">
                 <?php echo LayoutHelper::render('itheme.product.buy1click', ['item' => $this->item, 'class' => 'btn-primary w-100']); ?>
             </div>

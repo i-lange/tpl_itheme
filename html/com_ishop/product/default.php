@@ -51,6 +51,8 @@ $dataLayer = 'const dataLayerItems = ' . $jsonLayerItems . ';';
 $wa->addInlineScript($dataLayer);
 $dataLayer = 'gtag("event","view_item",{currency:"' . $currency . '",value:"' . $dataLayerPrice . '",items:dataLayerItems});';
 $wa->addInlineScript($dataLayer);
+
+$showMobileActions = !empty($product->available);
 ?>
 <div class="product-full container">
     <div class="row gy-2">
@@ -80,6 +82,34 @@ $wa->addInlineScript($dataLayer);
         <aside class="product-full__buttons-sidebar col-12 col-lg-4 col-xl-3" data-product-buttons-sidebar></aside>
     </div>
 </div>
+<?php if ($showMobileActions) : ?>
+    <div class="product-full__mobile-actions d-sm-none">
+        <div class="container">
+            <div class="product-full__mobile-actions-inner">
+                <?php echo LayoutHelper::render('itheme.product.buy1click', ['item' => $this->item, 'class' => 'btn-primary']); ?>
+                <?php if ($this->params->get('use_compare', false)) : ?>
+                    <button class="btn btn-light product-full__mobile-icon<?php echo ($this->item->incompare) ? ' active' : ''; ?>"
+                            type="button"
+                            title="<?php echo Text::_('TPL_ITHEME_BTN_COMPARE'); ?>"
+                            aria-label="<?php echo Text::_('TPL_ITHEME_BTN_COMPARE'); ?>"
+                            data-tocompare="<?php echo (int) $this->item->id; ?>">
+                        <?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-compare']); ?>
+                    </button>
+                <?php endif; ?>
+                <?php if ($this->params->get('use_cart', false)) : ?>
+                    <button class="btn btn-light product-full__mobile-icon<?php echo ($this->item->incart) ? ' active' : ''; ?>"
+                            type="button"
+                            title="<?php echo Text::_('COM_ISHOP_ADD_TO_CART'); ?>"
+                            aria-label="<?php echo Text::_('COM_ISHOP_ADD_TO_CART'); ?>"
+                            data-tocart="<?php echo (int) $this->item->id; ?>"
+                            data-tocart-simple="true">
+                        <?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-cart']); ?>
+                    </button>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
 <?php if (!empty($product->related)) : ?>
 <div class="container mt-5">
     <h2>С этим товаром покупают</h2>
