@@ -5,6 +5,14 @@ jdiv[class^=wrap__] {
   }
 }
 
+.vw_product {
+  jdiv[class^=wrap__] {
+    @include media-breakpoint-down(sm) {
+      bottom: 7rem;
+    }
+  }
+}
+
 body[style*="hidden"] {
   jdiv {
     display: none !important;

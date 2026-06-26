@@ -13019,6 +13019,9 @@ body {
   }
 }
 
+.vw_product .mod-breadcrumbs__wrapper {
+  margin-top: -1rem;
+}
 @media (max-width: 575.98px) {
   .vw_product .mod-breadcrumbs__wrapper {
     display: none;
@@ -14176,6 +14179,12 @@ body {
 @media (max-width: 767.98px) {
   jdiv[class^=wrap__] {
     bottom: 3.5rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .vw_product jdiv[class^=wrap__] {
+    bottom: 7rem;
   }
 }
 

@@ -16,6 +16,8 @@
 
 .vw_product {
   .mod-breadcrumbs__wrapper {
+    margin-top: -1rem;
+
     @include media-breakpoint-down(sm) {
       display: none;
     }
