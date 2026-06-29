@@ -12911,17 +12911,26 @@ body {
 }
 
 .template-main {
-  margin-top: 0.75rem;
-  margin-bottom: 2rem;
+  padding-top: 0.75rem;
+  padding-bottom: 2rem;
 }
 @media (min-width: 992px) {
   .template-main {
-    margin-top: 1rem;
+    padding-top: 1rem;
   }
 }
 @media (min-width: 992px) {
   .template-main {
-    margin-top: 2rem;
+    padding-top: 2rem;
+  }
+}
+
+.vw_product .template-main {
+  padding-top: 1.25rem;
+}
+@media (min-width: 992px) {
+  .vw_product .template-main {
+    padding-top: 1.75rem;
   }
 }
 

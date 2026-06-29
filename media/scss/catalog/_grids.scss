@@ -52,17 +52,28 @@
 // Основная сетка шаблона с sidebar-позициями
 // =============================================================================
 .template-main {
-  margin-top: .75rem;
-  margin-bottom: 2rem;
+  padding-top: .75rem;
+  padding-bottom: 2rem;
 
   @include media-breakpoint-up(lg) {
-    margin-top: 1rem;
+    padding-top: 1rem;
   }
 
   @include media-breakpoint-up(lg) {
-    margin-top: 2rem;
+    padding-top: 2rem;
   }
 }
+
+.vw_product {
+  .template-main {
+    padding-top: 1.25rem;
+
+    @include media-breakpoint-up(lg) {
+      padding-top: 1.75rem;
+    }
+  }
+}
+
 .template-layout,
 .template-main,
 .template-sidebar {
