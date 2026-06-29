@@ -39,13 +39,27 @@
         });
     }
 
+    function initCarousel(gallery) {
+        if (!window.bootstrap?.Carousel) {
+            return;
+        }
+
+        window.bootstrap.Carousel.getOrCreateInstance(gallery, {
+            interval: false,
+            ride: false,
+            touch: true,
+        });
+    }
+
     function initGallery(gallery) {
         if (gallery.dataset.ithemeGalleryBound === '1') {
+            initCarousel(gallery);
             scrollActiveThumb(gallery);
             return;
         }
 
         gallery.dataset.ithemeGalleryBound = '1';
+        initCarousel(gallery);
         gallery.addEventListener('slid.bs.carousel', () => scrollActiveThumb(gallery));
         scrollActiveThumb(gallery);
     }
