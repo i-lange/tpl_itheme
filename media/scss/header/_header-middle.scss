@@ -35,6 +35,21 @@
   @include media-breakpoint-up(xl) {
     gap: 2rem;
   }
+
+  @include media-breakpoint-down(sm) {
+    &.is-search-open {
+      .header__logo,
+      .header__actions {
+        display: none;
+      }
+
+      search {
+        display: block;
+        flex: 0 0 100%;
+        width: 100%;
+      }
+    }
+  }
 }
 
 .header__logo {
@@ -60,6 +75,19 @@
     a.header__button {
       display: none;
     }
+  }
+}
+
+.header__button.header__search-toggle {
+  display: none;
+
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  @include media-breakpoint-down(sm) {
+    display: flex;
   }
 }
 

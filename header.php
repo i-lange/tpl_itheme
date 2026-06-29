@@ -9,6 +9,7 @@
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
 
 /** @var string $iconsFile */
@@ -34,6 +35,18 @@ use Joomla\CMS\Layout\LayoutHelper;
                 <jdoc:include type="modules" name="search" style="none" />
             <?php endif; ?>
             <div class="header__actions">
+                <?php if ($this->countModules('search', true)) : ?>
+                    <button class="header__button header__search-toggle"
+                            type="button"
+                            data-header-search-toggle
+                            aria-expanded="false"
+                            aria-label="<?php echo Text::_('TPL_ITHEME_SEARCH_ARIA_LABEL'); ?>">
+                        <span class="header__button-icon-wrap" aria-hidden="true">
+                            <?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-search']); ?>
+                        </span>
+                        <span class="header__button-label"><?php echo Text::_('TPL_ITHEME_SEARCH'); ?></span>
+                    </button>
+                <?php endif; ?>
                 <?php if ($this->countModules('compare', true)) : ?>
                     <jdoc:include type="modules" name="compare" style="none" />
                 <?php endif; ?>

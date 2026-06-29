@@ -70,7 +70,8 @@ Joomla = window.Joomla || {};
     }
 
     const expandableMedia = window.matchMedia('(min-width: 768px)');
-    const productButtonsMedia = window.matchMedia('(min-width: 992px)');
+    const productButtonsMedia = window.matchMedia('(min-width: 960px)');
+    const mobileSearchMedia = window.matchMedia('(max-width: 439.98px)');
     let expandableResizeTimer = null;
     let productButtonsPlaceholder = null;
     let productButtonsScrollTicking = false;
@@ -302,21 +303,39 @@ Joomla = window.Joomla || {};
         document.querySelectorAll('.js-finder-searchform').forEach((form) => {
             const input = form.querySelector('.js-finder-search-query');
             const clearBtn = form.querySelector('.btn-close');
+            const headerInner = form.closest('.header__middle-inner');
 
             if (!clearBtn || !input) {
                 return;
             }
 
+            if (form.dataset.finderClearBound === '1') {
+                return;
+            }
+
+            form.dataset.finderClearBound = '1';
+
             const toggleClearButton = () => {
                 const hasValue = input.value.trim().length > 0;
+                const isMobileHeaderSearchOpen = Boolean(
+                    headerInner
+                    && headerInner.classList.contains('is-search-open')
+                    && mobileSearchMedia.matches
+                );
 
-                clearBtn.hidden = !hasValue;
-                clearBtn.classList.toggle('d-none', !hasValue);
+                clearBtn.hidden = !(hasValue || isMobileHeaderSearchOpen);
+                clearBtn.classList.toggle('d-none', !(hasValue || isMobileHeaderSearchOpen));
             };
 
             clearBtn.addEventListener('click', function () {
                 input.value = '';
-                input.focus();
+
+                if (headerInner && mobileSearchMedia.matches) {
+                    closeHeaderSearch(headerInner, true);
+                } else {
+                    input.focus();
+                }
+
                 input.dispatchEvent(new Event('input', { bubbles: true }));
             });
 
@@ -326,7 +345,88 @@ Joomla = window.Joomla || {};
         });
     }
 
+    function closeHeaderSearch(headerInner, returnFocus = false) {
+        if (!headerInner) {
+            return;
+        }
+
+        headerInner.classList.remove('is-search-open');
+        const toggle = headerInner.querySelector('[data-header-search-toggle]');
+
+        toggle?.setAttribute('aria-expanded', 'false');
+        headerInner.querySelector('.js-finder-searchform .btn-close')?.classList.add('d-none');
+        const clearBtn = headerInner.querySelector('.js-finder-searchform .btn-close');
+
+        if (clearBtn) {
+            clearBtn.hidden = true;
+        }
+
+        if (returnFocus) {
+            toggle?.focus();
+        }
+    }
+
+    function openHeaderSearch(headerInner) {
+        if (!headerInner) {
+            return;
+        }
+
+        headerInner.classList.add('is-search-open');
+        headerInner.querySelector('[data-header-search-toggle]')?.setAttribute('aria-expanded', 'true');
+
+        const input = headerInner.querySelector('.js-finder-search-query');
+        const clearBtn = headerInner.querySelector('.js-finder-searchform .btn-close');
+
+        if (clearBtn) {
+            clearBtn.hidden = false;
+            clearBtn.classList.remove('d-none');
+        }
+
+        input?.focus();
+    }
+
+    function initHeaderSearch(root = document) {
+        const toggles = [];
+
+        if (root instanceof Element && root.matches('[data-header-search-toggle]')) {
+            toggles.push(root);
+        }
+
+        if (root.querySelectorAll) {
+            toggles.push(...root.querySelectorAll('[data-header-search-toggle]'));
+        }
+
+        toggles.forEach((toggle) => {
+            if (toggle.dataset.headerSearchBound === '1') {
+                return;
+            }
+
+            toggle.dataset.headerSearchBound = '1';
+            toggle.addEventListener('click', () => {
+                const headerInner = toggle.closest('.header__middle-inner');
+
+                if (!headerInner || !mobileSearchMedia.matches) {
+                    return;
+                }
+
+                openHeaderSearch(headerInner);
+            });
+        });
+    }
+
+    function resetHeaderSearchOnDesktop() {
+        if (mobileSearchMedia.matches) {
+            return;
+        }
+
+        document.querySelectorAll('.header__middle-inner.is-search-open').forEach((headerInner) => {
+            closeHeaderSearch(headerInner);
+            headerInner.querySelector('.js-finder-search-query')?.dispatchEvent(new Event('input', { bubbles: true }));
+        });
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
+        initHeaderSearch(document);
         initFinderClearButton();
     });
 
@@ -334,6 +434,8 @@ Joomla = window.Joomla || {};
     document.addEventListener('joomla:updated', event => {
         initTemplate(event);
         initExpandable(event.target instanceof Element ? event.target : document);
+        initHeaderSearch(event.target instanceof Element ? event.target : document);
+        initFinderClearButton();
         syncProductButtonsPlacement(true);
         syncProductButtonsPlacement();
     });
@@ -349,9 +451,12 @@ Joomla = window.Joomla || {};
         syncProductButtonsPlacement();
     });
 
+    mobileSearchMedia.addEventListener('change', resetHeaderSearchOnDesktop);
+
     window.addEventListener('load', () => {
         initExpandable(document);
         syncProductButtonsPlacement();
+        resetHeaderSearchOnDesktop();
     });
 
     window.addEventListener('scroll', () => {

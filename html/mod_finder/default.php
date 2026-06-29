@@ -41,7 +41,7 @@ $wa->useScript('com_finder.finder');
 $finderHelper = $app->bootModule('mod_finder', 'site')->getHelper('FinderHelper');
 ?>
 <search>
-    <form class="mod-finder js-finder-searchform form-search" action="<?php echo Route::_($route); ?>" method="get" aria-label="search">
+    <form class="mod-finder js-finder-searchform form-search" action="<?php echo Route::_($route); ?>" method="get" aria-label="<?php echo Text::_('TPL_ITHEME_SEARCH'); ?>">
         <label for="mod-finder-searchword<?php echo $module->id; ?>"
                class="visually-hidden finder"><?php echo $params->get('alt_label', Text::_('JSEARCH_FILTER_SUBMIT')); ?></label>
         <input type="text"
@@ -50,7 +50,7 @@ $finderHelper = $app->bootModule('mod_finder', 'site')->getHelper('FinderHelper'
                class="js-finder-search-query form-control"
                value="<?php echo htmlspecialchars($app->getInput()->get('q', '', 'string'), ENT_COMPAT, 'UTF-8'); ?>"
                placeholder="<?php echo Text::_('MOD_FINDER_SEARCH_VALUE'); ?>">
-        <button type="button" class="btn-close d-none" aria-label="Close" hidden></button>
+        <button type="button" class="btn-close d-none" aria-label="<?php echo Text::_('TPL_ITHEME_CLOSE'); ?>" hidden></button>
         <button class="btn btn-primary" type="submit">
             <?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-search']); ?>
             <span class="visually-hidden"><?php echo Text::_('JSEARCH_FILTER_SUBMIT'); ?></span>

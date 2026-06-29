@@ -23,7 +23,7 @@ $more = isset($images->image_more) ? (array) $images->image_more : [];
 $i = 0;
 ?>
 <?php if (!empty($more) && count($more) > 1) : ?>
-    <div id="warehouseSlider" class="carousel slide warhouse-full__slider">
+    <div id="warehouseSlider" class="carousel slide warhouse-full__slider" data-bs-ride="carousel" data-bs-interval="5500">
         <div class="carousel-inner">
             <?php foreach ($more as $image) : ?>
                 <?php if (!empty($image->image_item)) : ?>
