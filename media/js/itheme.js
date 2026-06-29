@@ -296,41 +296,6 @@ Joomla = window.Joomla || {};
         initExpandable(document);
         syncProductButtonsPlacement();
 
-        // блоки с прокруткой
-        document.querySelectorAll('.scroll-items-list').forEach((list) => {
-            let isDown = false;
-            let startX = 0;
-            let scrollLeft = 0;
-
-            list.addEventListener('mousedown', (e) => {
-                isDown = true;
-                list.classList.add('is-dragging');
-                startX = e.pageX - list.offsetLeft;
-                scrollLeft = list.scrollLeft;
-            });
-
-            list.addEventListener('mouseleave', () => {
-                isDown = false;
-                list.classList.remove('is-dragging');
-            });
-
-            list.addEventListener('mouseup', () => {
-                isDown = false;
-                list.classList.remove('is-dragging');
-            });
-
-            list.addEventListener('mousemove', (e) => {
-                if (!isDown) return;
-                e.preventDefault();
-                const x = e.pageX - list.offsetLeft;
-                const walk = x - startX;
-                list.scrollLeft = scrollLeft - walk;
-            });
-
-            list.addEventListener('dragstart', (e) => {
-                e.preventDefault();
-            });
-        });
     });
 
     function initFinderClearButton() {

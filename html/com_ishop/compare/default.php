@@ -22,6 +22,7 @@ use Joomla\CMS\Router\Route;
 $app = Factory::getApplication();
 $wa = $app->getDocument()->getWebAssetManager();
 $wa->useScript('bootstrap.dropdown');
+$wa->useScript('tpl.drag-scroller');
 
 $currency = strtoupper($this->params->get('defaultCurrency', 'BYN'));
 $round = (int) $this->params->get('roundPrice', 0);

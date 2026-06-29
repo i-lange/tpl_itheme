@@ -14135,9 +14135,6 @@ body {
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  cursor: grab;
-  user-select: none;
-  touch-action: pan-x;
 }
 .scroll-items-list.list-5 {
   --column-width: 5rem;
@@ -14153,9 +14150,27 @@ body {
   display: none;
 }
 
-.scroll-items-list.is-dragging {
+[data-drag-scroller] {
+  overflow-x: auto;
+  overflow-y: hidden;
+  cursor: grab;
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+[data-drag-scroller]::-webkit-scrollbar {
+  display: none;
+}
+
+[data-drag-scroller].is-dragging {
   cursor: grabbing;
   scroll-behavior: auto;
+  user-select: none;
+}
+
+[data-drag-scroller].is-dragging * {
+  cursor: grabbing;
 }
 
 .scroll-items-list .card {

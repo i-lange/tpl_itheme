@@ -71,7 +71,7 @@ $showMobileActions = !empty($product->available);
             <?php echo $this->loadTemplate('fields'); ?>
             <?php if (!empty($product->warehouses)) : ?>
                 <h3 class="mt-5">Наличие в магазинах и ПВЗ</h3>
-                <div class="scroll-items-list list-20">
+                <div class="scroll-items-list list-20" data-drag-scroller>
                     <?php foreach ($product->warehouses as $warehouse) : ?>
                         <?php echo LayoutHelper::render('itheme.product.warehouse', ['item' => $warehouse, 'product' => $product]); ?>
                     <?php endforeach; ?>
