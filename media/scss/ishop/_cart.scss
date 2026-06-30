@@ -28,6 +28,14 @@
   }
 }
 
+body.com_ishop.vw_cart {
+  @include media-breakpoint-down(md) {
+    --mobile-action-bar-offset: 3.25rem;
+    --mobile-action-bar-height: 4.125rem;
+    @include mobile-action-bar-page-offset;
+  }
+}
+
 .cart-removed-alert {
   padding: 1rem;
   color: var(--body-color);
@@ -252,5 +260,4 @@
   font-size: 1.125rem;
   font-weight: 700;
 }
-
 

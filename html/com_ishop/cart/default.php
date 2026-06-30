@@ -230,6 +230,25 @@ $count = count($this->cart->products);
                 </aside>
             </div>
         </div>
+        <?php if ($this->cart->total > 0) : ?>
+            <div class="mobile-action-bar cart-mobile-actions d-md-none"
+                 data-cart-mobile-actions>
+                <div class="container">
+                    <div class="mobile-action-bar__inner">
+                        <?php echo LayoutHelper::render('itheme.product.price', [
+                                'price' => $this->cart->summary ?? 0,
+                                'class' => 'mobile-action-bar__total',
+                                'attribs' => 'data-cart-summary']); ?>
+                        <button class="btn btn-primary mobile-action-bar__button cart-mobile-actions__button"
+                                title="<?php echo Text::_('COM_ISHOP_CART_CHECKOUT'); ?>"
+                                type="submit">
+                            <span><?php echo Text::_('TPL_ITHEME_CART_GO_TO_CHECKOUT'); ?></span>
+                            <?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-chevron-right']); ?>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
         <?php echo HTMLHelper::_('form.token'); ?>
     </form>
 <?php else : ?>

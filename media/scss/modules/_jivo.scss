@@ -13,6 +13,14 @@ jdiv[class^=wrap__] {
   }
 }
 
+.vw_cart {
+  jdiv[class^=wrap__] {
+    @include media-breakpoint-down(md) {
+      bottom: 7rem;
+    }
+  }
+}
+
 body[style*="hidden"] {
   jdiv {
     display: none !important;

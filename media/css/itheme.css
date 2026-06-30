@@ -12018,6 +12018,98 @@ ul li::marker {
   font-size: 1.25rem;
 }
 
+.mobile-action-bar,
+.product-full__mobile-actions {
+  display: none;
+}
+
+@media (max-width: 767.98px) {
+  .mobile-action-bar {
+    display: block;
+    position: fixed;
+    right: 0;
+    left: 0;
+    bottom: calc(var(--mobile-action-bar-offset, 3.25rem) + env(safe-area-inset-bottom, 0px));
+    z-index: 1022;
+    padding: 0.5rem 0 0.625rem;
+    background-color: rgba(var(--white-rgb), 0.5);
+    backdrop-filter: blur(0.25rem);
+    -webkit-backdrop-filter: blur(0.25rem);
+  }
+  .mobile-action-bar[hidden] {
+    display: none !important;
+  }
+  .mobile-action-bar__inner {
+    display: grid;
+    grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+    gap: 0.5rem;
+    align-items: center;
+  }
+  .mobile-action-bar__total {
+    min-width: 0;
+    min-height: 3rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    padding: 0.625rem 0.875rem;
+    color: var(--body-color);
+    font-weight: 700;
+    white-space: nowrap;
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow-sm);
+  }
+  .mobile-action-bar__button {
+    min-width: 0;
+    min-height: 3rem;
+    white-space: nowrap;
+  }
+  .mobile-action-bar__icon-button {
+    width: 3rem;
+    height: 3rem;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .mobile-action-bar__icon-button svg {
+    width: 1.375rem;
+    height: 1.375rem;
+  }
+}
+@media (max-width: 439.98px) {
+  .product-full__mobile-actions {
+    display: block;
+    position: fixed;
+    right: 0;
+    left: 0;
+    bottom: calc(var(--mobile-action-bar-offset, 3.25rem) + env(safe-area-inset-bottom, 0px));
+    z-index: 1022;
+    padding: 0.5rem 0 0.625rem;
+    background-color: rgba(var(--white-rgb), 0.5);
+    backdrop-filter: blur(0.25rem);
+    -webkit-backdrop-filter: blur(0.25rem);
+  }
+  .product-full__mobile-actions-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  .product-full__mobile-icon {
+    width: 3rem;
+    height: 3rem;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .product-full__mobile-icon svg {
+    width: 1.375rem;
+    height: 1.375rem;
+  }
+}
 :root {
   --header-offset: 0;
 }
@@ -13159,9 +13251,9 @@ body {
 
 @media (max-width: 439.98px) {
   body.vw_product {
-    --product-mobile-actions-offset: 3.25rem;
-    --product-mobile-actions-height: 4.125rem;
-    padding-bottom: calc(var(--product-mobile-actions-offset) + var(--product-mobile-actions-height) + env(safe-area-inset-bottom, 0px));
+    --mobile-action-bar-offset: 3.25rem;
+    --mobile-action-bar-height: 4.125rem;
+    padding-bottom: calc(var(--mobile-action-bar-offset, 3.25rem) + var(--mobile-action-bar-height, 4.125rem) + env(safe-area-inset-bottom, 0px));
   }
 }
 
@@ -13267,42 +13359,6 @@ body {
   display: none;
 }
 
-.product-full__mobile-actions {
-  display: none;
-}
-
-@media (max-width: 439.98px) {
-  .product-full__mobile-actions {
-    display: block;
-    position: fixed;
-    right: 0;
-    left: 0;
-    bottom: calc(var(--product-mobile-actions-offset, 3.25rem) + env(safe-area-inset-bottom, 0px));
-    z-index: 1022;
-    padding: 0.5rem 0 0.625rem;
-    background-color: rgba(var(--white-rgb), 0.5);
-    backdrop-filter: blur(0.25rem);
-    -webkit-backdrop-filter: blur(0.25rem);
-  }
-  .product-full__mobile-actions-inner {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto auto;
-    gap: 0.5rem;
-    align-items: center;
-  }
-  .product-full__mobile-icon {
-    width: 3rem;
-    height: 3rem;
-    padding: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .product-full__mobile-icon svg {
-    width: 1.375rem;
-    height: 1.375rem;
-  }
-}
 @media (min-width: 960px) {
   .product-full__summary {
     display: flex;
@@ -13712,6 +13768,14 @@ body {
 @media (min-width: 768px) {
   .module-cart .sticky-sm-top {
     top: var(--header-offset);
+  }
+}
+
+@media (max-width: 767.98px) {
+  body.com_ishop.vw_cart {
+    --mobile-action-bar-offset: 3.25rem;
+    --mobile-action-bar-height: 4.125rem;
+    padding-bottom: calc(var(--mobile-action-bar-offset, 3.25rem) + var(--mobile-action-bar-height, 4.125rem) + env(safe-area-inset-bottom, 0px));
   }
 }
 
@@ -14251,6 +14315,12 @@ body {
 
 @media (max-width: 439.98px) {
   .vw_product jdiv[class^=wrap__] {
+    bottom: 7rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .vw_cart jdiv[class^=wrap__] {
     bottom: 7rem;
   }
 }

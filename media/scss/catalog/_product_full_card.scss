@@ -7,9 +7,9 @@
 
 body.vw_product {
   @include media-breakpoint-down(sm) {
-    --product-mobile-actions-offset: 3.25rem;
-    --product-mobile-actions-height: 4.125rem;
-    padding-bottom: calc(var(--product-mobile-actions-offset) + var(--product-mobile-actions-height) + env(safe-area-inset-bottom, 0px));
+    --mobile-action-bar-offset: 3.25rem;
+    --mobile-action-bar-height: 4.125rem;
+    @include mobile-action-bar-page-offset;
   }
 }
 
@@ -124,46 +124,6 @@ body.vw_product {
 
 .product-full__buttons-sidebar {
   display: none;
-}
-
-.product-full__mobile-actions {
-  display: none;
-}
-
-@include media-breakpoint-down(sm) {
-  .product-full__mobile-actions {
-    display: block;
-    position: fixed;
-    right: 0;
-    left: 0;
-    bottom: calc(var(--product-mobile-actions-offset, 3.25rem) + env(safe-area-inset-bottom, 0px));
-    z-index: $zindex-sticky + 2;
-    padding: .5rem 0 .625rem;
-    background-color: rgba(var(--white-rgb), .5);
-    backdrop-filter: blur(.25rem);
-    -webkit-backdrop-filter: blur(.25rem);
-  }
-
-  .product-full__mobile-actions-inner {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto auto;
-    gap: .5rem;
-    align-items: center;
-  }
-
-  .product-full__mobile-icon {
-    width: 3rem;
-    height: 3rem;
-    padding: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    svg {
-      width: 1.375rem;
-      height: 1.375rem;
-    }
-  }
 }
 
 @include media-breakpoint-up(lg) {
