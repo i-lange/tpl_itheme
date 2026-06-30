@@ -61,14 +61,22 @@ $count = count($this->cart->products);
           data-cart-empty-text="<?php echo $this->escape(Text::_('COM_ISHOP_CART_NULL')); ?>">
         <div class="row g-4 align-items-start">
             <div class="col-12 col-md-7 col-lg-8 col-xl-9">
-                <div class="cart-removed-alert alert alert-dismissible fade show d-flex align-items-start justify-content-between gap-3 mb-3" role="alert">
+                <div class="cart-removed-alert alert alert-dismissible d-none align-items-start justify-content-between gap-3 mb-3"
+                     role="alert"
+                     data-cart-removed-alert
+                     data-cart-removed-text="<?php echo $this->escape(Text::_('COM_ISHOP_CART_REMOVED_NOTICE')); ?>">
                     <div>
-                        <div><?php echo Text::sprintf('TPL_ITHEME_CART_REMOVED_NOTICE', 3); ?></div>
-                        <button class="btn btn-link p-0 fw-semibold text-primary text-decoration-none" type="button">
-                            <?php echo Text::_('TPL_ITHEME_CART_UNDO'); ?>
+                        <div data-cart-removed-message></div>
+                        <button class="btn btn-link p-0 fw-semibold text-primary text-decoration-none"
+                                type="button"
+                                data-cart-restore>
+                            <?php echo Text::_('COM_ISHOP_CART_UNDO'); ?>
                         </button>
                     </div>
-                    <button type="button" class="btn-close position-static flex-shrink-0 p-0" data-bs-dismiss="alert" aria-label="<?php echo Text::_('TPL_ITHEME_CLOSE'); ?>"></button>
+                    <button type="button"
+                            class="btn-close position-static flex-shrink-0 p-0"
+                            data-cart-alert-close
+                            aria-label="<?php echo Text::_('TPL_ITHEME_CLOSE'); ?>"></button>
                 </div>
 
                 <div class="cart-toolbar d-flex align-items-center justify-content-between gap-3 py-2 mb-2">
@@ -76,11 +84,14 @@ $count = count($this->cart->products);
                         <input class="form-check-input mt-0"
                                id="cart_select_all"
                                type="checkbox"
+                               data-cart-select-all
                                checked>
-                        <label class="form-check-label" for="cart_select_all"><?php echo Text::_('TPL_ITHEME_CART_SELECT_ALL'); ?></label>
+                        <label class="form-check-label" for="cart_select_all"><?php echo Text::_('COM_ISHOP_CART_SELECT_ALL'); ?></label>
                     </div>
-                    <button class="btn btn-link p-0 text-primary text-decoration-none" type="button">
-                        <?php echo Text::_('TPL_ITHEME_CART_REMOVE_SELECTED'); ?>
+                    <button class="btn btn-link p-0 text-primary text-decoration-none"
+                            type="button"
+                            data-cart-remove-selected>
+                        <?php echo Text::_('COM_ISHOP_CART_REMOVE_SELECTED'); ?>
                     </button>
                 </div>
 
@@ -95,7 +106,7 @@ $count = count($this->cart->products);
                                 <input class="form-check-input"
                                        id="check_input_<?php echo $key_id; ?>"
                                        type="checkbox"
-                                    <?php echo ($product->available) ? 'name="products[]" checked="checked" value="' . $productId . '"' : 'disabled'; ?>>
+                                    <?php echo ($product->available) ? 'name="products[]" checked="checked" value="' . $productId . '" data-cart-item-checkbox' : 'disabled'; ?>>
                                 <label class="visually-hidden" for="check_input_<?php echo $key_id; ?>"><?php echo $this->escape($product->fullname); ?></label>
                             </div>
 
@@ -164,18 +175,25 @@ $count = count($this->cart->products);
             <div class="col-12 col-md-5 col-lg-4 col-xl-3 sticky-sm-top">
                 <aside class="module-cart-checkout">
                     <div class="cart-promocode mb-3">
-                        <label class="visually-hidden" for="cart_promocode"><?php echo Text::_('TPL_ITHEME_CART_PROMOCODE'); ?></label>
+                        <label class="visually-hidden" for="cart_promocode"><?php echo Text::_('COM_ISHOP_CART_PROMOCODE'); ?></label>
                         <input class="form-control"
                                id="cart_promocode"
                                type="text"
                                name="promocode"
-                               placeholder="<?php echo Text::_('TPL_ITHEME_CART_PROMOCODE'); ?>"
-                               autocomplete="off">
+                               value="<?php echo $this->escape($this->cart->promocode ?? ''); ?>"
+                               placeholder="<?php echo Text::_('COM_ISHOP_CART_PROMOCODE'); ?>"
+                               autocomplete="off"
+                               data-cart-promocode>
                         <button class="btn btn-primary"
                                 type="button"
-                                aria-label="<?php echo Text::_('TPL_ITHEME_CART_APPLY_PROMOCODE'); ?>">
+                                aria-label="<?php echo Text::_('COM_ISHOP_CART_APPLY_PROMOCODE'); ?>"
+                                data-cart-apply-promocode>
                             <?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-chevron-right']); ?>
                         </button>
+                        <div class="form-text <?php echo empty($this->cart->promocode_message) ? 'd-none' : (($this->cart->promocode_valid ?? false) ? 'text-success' : 'text-danger'); ?>"
+                             data-cart-promocode-message>
+                            <?php echo $this->escape($this->cart->promocode_message ?? ''); ?>
+                        </div>
                     </div>
 
                     <div class="cart-summary-lines">
@@ -185,14 +203,14 @@ $count = count($this->cart->products);
                                     'price' => $this->cart->total, 'class' => 'cart-price', 'attribs' => 'data-cart-total', 'minus' => true]); ?>
                         </div>
                         <div class="info-line">
-                            <span><?php echo Text::_('TPL_ITHEME_CART_ACTION_DISCOUNT'); ?></span>
+                            <span><?php echo Text::_('COM_ISHOP_CART_ACTION_DISCOUNT'); ?></span>
                             <?php echo LayoutHelper::render('itheme.product.price', [
                                     'price' => $this->cart->total_discount, 'class' => 'cart-price', 'attribs' => 'data-cart-total-discount', 'minus' => true]); ?>
                         </div>
                         <div class="info-line">
-                            <span><?php echo Text::_('TPL_ITHEME_CART_PROMO_DISCOUNT'); ?></span>
+                            <span><?php echo Text::_('COM_ISHOP_CART_PROMO_DISCOUNT'); ?></span>
                             <?php echo LayoutHelper::render('itheme.product.price', [
-                                    'price' => $this->cart->promo_discount ?? 0, 'class' => 'cart-price', 'attribs' => 'data-cart-promo-discount', 'minus' => true]); ?>
+                                    'price' => $this->cart->promo_discount, 'class' => 'cart-price', 'attribs' => 'data-cart-promo-discount', 'minus' => true]); ?>
                         </div>
                         <div class="info-line info-line-total">
                             <span><?php echo Text::_('COM_ISHOP_CART_SUM'); ?></span>

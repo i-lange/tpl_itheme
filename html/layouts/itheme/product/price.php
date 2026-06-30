@@ -23,14 +23,15 @@ extract($displayData);
 if (empty($params)) {
     $params = ComponentHelper::getParams('com_ishop');
 }
+if (empty($price)) {
+    $price = 0;
+}
 $class = htmlspecialchars((!empty($class) ? ' ' . $class : ''), ENT_QUOTES, 'UTF-8');
 $attribs = htmlspecialchars((!empty($attribs) ? ' ' . $attribs : ''), ENT_QUOTES, 'UTF-8');
 $currency = $params->get('defaultCurrency', 'BYN');
 $icon = LayoutHelper::render('itheme.icon', ['icon' => 'i-' . $currency]);
 $round = (int) $params->get('roundPrice', 0);
-
-if ($price) : ?>
+?>
 <div class="<?php echo $class; ?>">
     <?php echo (!empty($minus) && $minus === true) ? '-' : ''; ?><span<?php echo $attribs; ?>><?php echo round($price, $round); ?></span><span class="currency" aria-label="<?php echo $currency; ?>"><?php echo $icon; ?></span>
 </div>
-<?php endif;
