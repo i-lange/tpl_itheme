@@ -9,7 +9,6 @@
 
 defined('_JEXEC') or die;
 
-use Ilange\Component\Ishop\Site\Helper\ImageHelper;
 use Ilange\Component\Ishop\Site\Helper\PriceHelper;
 use Ilange\Component\Ishop\Site\Helper\RouteHelper;
 use Joomla\CMS\Factory;
@@ -20,6 +19,7 @@ use Joomla\CMS\Router\Route;
 
 $wa = Factory::getApplication()->getDocument()->getWebAssetManager();
 $wa->useScript('com_ishop.cart');
+$wa->useScript('bootstrap.alert');
 $currency = strtoupper($this->params->get('defaultCurrency', 'BYN'));
 
 if ($this->cart->total > 0) {
@@ -46,110 +46,170 @@ if ($this->cart->total > 0) {
     $dataLayer = 'gtag("event","view_cart",{currency:"' . $currency . '",value:"' . $this->cart->summary . '",items:dataLayerItems});';
     $wa->addInlineScript($dataLayer);
 }
+
 $count = count($this->cart->products);
 ?>
 <?php if ($this->params->get('show_page_heading')) : ?>
     <h1><?php echo $this->escape($this->params->get('page_heading')); ?> <span class="fw-normal text-body-tertiary"><?php echo $count; ?> шт.</span></h1>
 <?php endif; ?>
 <?php if ($count > 0) : ?>
-    <form class="module-cart-grid"
+    <form class="module-cart"
           id="cart-submit"
           action="<?php echo Route::_(RouteHelper::getCheckoutRoute()); ?>"
           method="post"
           name="cart-submit"
           data-cart-empty-text="<?php echo $this->escape(Text::_('COM_ISHOP_CART_NULL')); ?>">
-        <div>
-            <?php foreach ($this->cart->products as $key_id => $product) : ?>
-                <div class="module-cart-item<?php echo ($product->available) ? '' : ' not_available'; ?>" data-product-incart-id="<?php echo $product->id; ?>">
-                    <?php echo LayoutHelper::render('itheme.product.thumb', ['item' => $product, 'class' => 'cart-item__image']); ?>
-                    <?php if ($product->available) : ?>
-                        <div class="cart-item__checkbox">
-                            <label class="visually-hidden" for="check_input_<?php echo $key_id; ?>"></label>
-                            <input class="form-check-input"
-                                   id="check_input_<?php echo $key_id; ?>"
-                                   type="checkbox"
-                                   name="products[]"
-                                   checked="checked"
-                                   value="<?php echo $product->id; ?>">
-                        </div>
-                    <?php endif; ?>
-                    <div class="cart-item__info">
-                        <div class="position-relative">
-                            <?php if ($product->available) : ?>
-                                <?php echo LayoutHelper::render('itheme.product.prices', ['item' => $product]); ?>
-                                <?php if (!empty($product->delivery)) : ?>
-                                    <div><span class="text-body-emphasis">Доставим</span> <?php echo $product->delivery; ?></div>
-                                <?php endif; ?>
-                            <?php else: ?>
-                                <?php echo Text::_('COM_ISHOP_PRODUCT_NOT_AVAILABLE'); ?>
-                            <?php endif; ?>
-                            <h3><?php echo htmlspecialchars($product->fullname); ?></h3>
-                            <?php if ($product->introtext !== '') : ?>
-                                <p class="mt-2 d-n d-md-block text-body-emphasis"><?php echo $product->introtext; ?></p>
-                            <?php endif; ?>
-                            <a class="stretched-link" href="<?php echo Route::_(RouteHelper::getProductRoute((int)$product->id, (int)$product->catid)); ?>">
-                                <span class="visually-hidden"><?php echo $this->escape($product->fullname); ?></span>
-                            </a>
-                        </div>
-                        <div class="cart-item_controls">
-                            <div class="cart-item_quantity">
-                                <?php if ($product->available) : ?>
-                                    <label class="visually-hidden" for="quantity_input_<?php echo $key_id; ?>"></label>
-                                    <button class="btn btn-primary"
-                                            title="<?php echo Text::_('COM_ISHOP_CART_MINUS'); ?>"
-                                            type="button"
-                                            data-cart-button="minus"><span class="visually-hidden"><?php echo Text::_('COM_ISHOP_CART_MINUS'); ?></span>-</button>
-                                    <input class="quantity_input"
-                                           id="quantity_input_<?php echo $key_id; ?>"
-                                           type="number"
-                                           name="quantity[<?php echo $product->id; ?>]"
-                                           value="<?php echo $product->incart_count; ?>"
-                                           min="0"
-                                           readonly
-                                           data-quantity>
-                                    <button class="btn btn-primary"
-                                            title="<?php echo Text::_('COM_ISHOP_CART_PLUS'); ?>"
-                                            type="button"
-                                            data-cart-button="plus"><span class="visually-hidden"><?php echo Text::_('COM_ISHOP_CART_PLUS'); ?></span>+</button>
-                                <?php endif; ?>
+        <div class="row g-4 align-items-start">
+            <div class="col-12 col-md-7 col-lg-8 col-xl-9">
+                <div class="cart-removed-alert alert alert-dismissible fade show d-flex align-items-start justify-content-between gap-3 mb-3" role="alert">
+                    <div>
+                        <div><?php echo Text::sprintf('TPL_ITHEME_CART_REMOVED_NOTICE', 3); ?></div>
+                        <button class="btn btn-link p-0 fw-semibold text-primary text-decoration-none" type="button">
+                            <?php echo Text::_('TPL_ITHEME_CART_UNDO'); ?>
+                        </button>
+                    </div>
+                    <button type="button" class="btn-close position-static flex-shrink-0 p-0" data-bs-dismiss="alert" aria-label="<?php echo Text::_('TPL_ITHEME_CLOSE'); ?>"></button>
+                </div>
+
+                <div class="cart-toolbar d-flex align-items-center justify-content-between gap-3 py-2 mb-2">
+                    <div class="form-check d-flex align-items-center gap-2 mb-0">
+                        <input class="form-check-input mt-0"
+                               id="cart_select_all"
+                               type="checkbox"
+                               checked>
+                        <label class="form-check-label" for="cart_select_all"><?php echo Text::_('TPL_ITHEME_CART_SELECT_ALL'); ?></label>
+                    </div>
+                    <button class="btn btn-link p-0 text-primary text-decoration-none" type="button">
+                        <?php echo Text::_('TPL_ITHEME_CART_REMOVE_SELECTED'); ?>
+                    </button>
+                </div>
+
+                <div class="cart-items">
+                    <?php foreach ($this->cart->products as $key_id => $product) : ?>
+                        <?php
+                        $productId = (int) $product->id;
+                        $productRoute = Route::_(RouteHelper::getProductRoute($productId, (int) $product->catid));
+                        ?>
+                        <div class="module-cart-item<?php echo ($product->available) ? '' : ' not_available'; ?>" data-product-incart-id="<?php echo $productId; ?>">
+                            <div class="cart-item__checkbox form-check mb-0">
+                                <input class="form-check-input"
+                                       id="check_input_<?php echo $key_id; ?>"
+                                       type="checkbox"
+                                    <?php echo ($product->available) ? 'name="products[]" checked="checked" value="' . $productId . '"' : 'disabled'; ?>>
+                                <label class="visually-hidden" for="check_input_<?php echo $key_id; ?>"><?php echo $this->escape($product->fullname); ?></label>
                             </div>
-                            <button class="btn btn-light"
-                                    title="<?php echo Text::_('COM_ISHOP_CART_REMOVE'); ?>"
-                                    type="button"
-                                    data-cart-button="delete">
-                                <?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-trash']); ?>
-                                <span class="d-none d-lg-inline"><?php echo Text::_('COM_ISHOP_CART_REMOVE'); ?></span>
-                            </button>
+
+                            <div class="cart-item__thumb">
+                                <?php echo LayoutHelper::render('itheme.product.thumb', ['item' => $product, 'class' => 'cart-item__image']); ?>
+                            </div>
+
+                            <div class="cart-item__main">
+                                <div class="cart-item__body">
+                                    <?php if ($product->available) : ?>
+                                        <?php echo LayoutHelper::render('itheme.product.prices', ['item' => $product, 'class' => 'cart-item__prices']); ?>
+                                    <?php else : ?>
+                                        <div class="cart-item__unavailable fw-semibold text-body-secondary"><?php echo Text::_('COM_ISHOP_PRODUCT_NOT_AVAILABLE'); ?></div>
+                                    <?php endif; ?>
+
+                                    <h3 class="cart-item__title mb-0">
+                                        <a class="text-body text-decoration-none" href="<?php echo $productRoute; ?>">
+                                            <?php echo htmlspecialchars($product->fullname, ENT_QUOTES, 'UTF-8'); ?>
+                                        </a>
+                                    </h3>
+
+                                    <?php if ($product->available && !empty($product->delivery)) : ?>
+                                        <div class="mt-1"><span class="text-body-emphasis">Доставим</span> <?php echo $product->delivery; ?></div>
+                                    <?php endif; ?>
+
+                                    <?php if ($product->introtext !== '') : ?>
+                                        <p class="cart-item__intro mb-0 text-body-secondary"><?php echo $product->introtext; ?></p>
+                                    <?php endif; ?>
+                                </div>
+
+                                <div class="cart-item_controls d-flex align-items-center justify-content-between gap-3">
+                                    <div class="cart-item_quantity">
+                                        <?php if ($product->available) : ?>
+                                            <label class="visually-hidden" for="quantity_input_<?php echo $key_id; ?>"><?php echo Text::_('COM_ISHOP_CART_SELECTED_TOTAL'); ?></label>
+                                            <button class="btn"
+                                                    title="<?php echo Text::_('COM_ISHOP_CART_MINUS'); ?>"
+                                                    type="button"
+                                                    data-cart-button="minus"><span class="visually-hidden"><?php echo Text::_('COM_ISHOP_CART_MINUS'); ?></span>-</button>
+                                            <input class="quantity_input"
+                                                   id="quantity_input_<?php echo $key_id; ?>"
+                                                   type="number"
+                                                   name="quantity[<?php echo $productId; ?>]"
+                                                   value="<?php echo (int) $product->incart_count; ?>"
+                                                   min="0"
+                                                   readonly
+                                                   data-quantity>
+                                            <button class="btn cart-item_quantity-plus"
+                                                    title="<?php echo Text::_('COM_ISHOP_CART_PLUS'); ?>"
+                                                    type="button"
+                                                    data-cart-button="plus"><span class="visually-hidden"><?php echo Text::_('COM_ISHOP_CART_PLUS'); ?></span>+</button>
+                                        <?php endif; ?>
+                                    </div>
+                                    <button class="btn btn-light cart-item__remove"
+                                            title="<?php echo Text::_('COM_ISHOP_CART_REMOVE'); ?>"
+                                            type="button"
+                                            data-cart-button="delete">
+                                        <?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-trash']); ?>
+                                        <span class="d-none d-lg-inline"><?php echo Text::_('COM_ISHOP_CART_REMOVE'); ?></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+            <div class="col-12 col-md-5 col-lg-4 col-xl-3 sticky-sm-top">
+                <aside class="module-cart-checkout">
+                    <div class="cart-promocode mb-3">
+                        <label class="visually-hidden" for="cart_promocode"><?php echo Text::_('TPL_ITHEME_CART_PROMOCODE'); ?></label>
+                        <input class="form-control"
+                               id="cart_promocode"
+                               type="text"
+                               name="promocode"
+                               placeholder="<?php echo Text::_('TPL_ITHEME_CART_PROMOCODE'); ?>"
+                               autocomplete="off">
+                        <button class="btn btn-primary"
+                                type="button"
+                                aria-label="<?php echo Text::_('TPL_ITHEME_CART_APPLY_PROMOCODE'); ?>">
+                            <?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-chevron-right']); ?>
+                        </button>
+                    </div>
+
+                    <div class="cart-summary-lines">
+                        <div class="info-line">
+                            <span><?php echo Text::_('COM_ISHOP_CART_SELECTED_TOTAL'); ?>:</span>
+                            <?php echo LayoutHelper::render('itheme.product.price', [
+                                    'price' => $this->cart->total, 'class' => 'cart-price', 'attribs' => 'data-cart-total', 'minus' => true]); ?>
+                        </div>
+                        <div class="info-line">
+                            <span><?php echo Text::_('TPL_ITHEME_CART_ACTION_DISCOUNT'); ?></span>
+                            <?php echo LayoutHelper::render('itheme.product.price', [
+                                    'price' => $this->cart->total_discount, 'class' => 'cart-price', 'attribs' => 'data-cart-total-discount', 'minus' => true]); ?>
+                        </div>
+                        <div class="info-line">
+                            <span><?php echo Text::_('TPL_ITHEME_CART_PROMO_DISCOUNT'); ?></span>
+                            <?php echo LayoutHelper::render('itheme.product.price', [
+                                    'price' => $this->cart->promo_discount ?? 0, 'class' => 'cart-price', 'attribs' => 'data-cart-promo-discount', 'minus' => true]); ?>
+                        </div>
+                        <div class="info-line info-line-total">
+                            <span><?php echo Text::_('COM_ISHOP_CART_SUM'); ?></span>
+                            <?php echo LayoutHelper::render('itheme.product.price', [
+                                    'price' => $this->cart->summary ?? 0, 'class' => 'cart-price', 'attribs' => 'data-cart-summary']); ?>
                         </div>
                     </div>
-                </div>
-            <?php endforeach; ?>
-        </div>
-        <div>
-            <div class="module-cart-checkout">
-                <h3><?php echo Text::_('COM_ISHOP_CART_YOUR_ORDER'); ?></h3>
-                <div class="info-line">
-                    <span><?php echo Text::_('COM_ISHOP_CART_SELECTED_TOTAL'); ?>:</span>
-                    <?php echo LayoutHelper::render('itheme.product.price', [
-                            'price' => $this->cart->total, 'class' => 'cart-price', 'attribs' => 'data-cart-total', 'minus' => true]); ?>
-                </div>
-                <div class="info-line">
-                    <span><?php echo Text::_('COM_ISHOP_CART_SELECTED_SALE'); ?>:</span>
-                    <?php echo LayoutHelper::render('itheme.product.price', [
-                            'price' => $this->cart->total, 'class' => 'cart-price', 'attribs' => 'data-cart-total-discount', 'minus' => true]); ?>
-                </div>
-                <div class="info-line h5">
-                    <span><?php echo Text::_('COM_ISHOP_CART_SUM'); ?>:</span>
-                    <?php echo LayoutHelper::render('itheme.product.price', [
-                            'price' => $this->cart->total, 'class' => 'cart-price', 'attribs' => 'data-cart-summary', 'minus' => true]); ?>
-                </div>
-                <?php if ($this->cart->total > 0) : ?>
-                    <button class="btn btn-primary btn-lg"
-                            title="<?php echo Text::_('COM_ISHOP_CART_CHECKOUT'); ?>"
-                            type="submit">
-                        <span><?php echo Text::_('COM_ISHOP_CART_CHECKOUT'); ?></span><?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-chevron-right']); ?>
-                    </button>
-                <?php endif; ?>
+
+                    <?php if ($this->cart->total > 0) : ?>
+                        <button class="btn btn-primary w-100 cart-checkout-button"
+                                title="<?php echo Text::_('COM_ISHOP_CART_CHECKOUT'); ?>"
+                                type="submit">
+                            <span><?php echo Text::_('TPL_ITHEME_CART_GO_TO_CHECKOUT'); ?></span>
+                            <?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-chevron-right']); ?>
+                        </button>
+                    <?php endif; ?>
+                </aside>
             </div>
         </div>
         <?php echo HTMLHelper::_('form.token'); ?>

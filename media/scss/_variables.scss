@@ -118,6 +118,9 @@ $grid-breakpoints: (
 ) !default;
 
 $container-max-widths: (
+  sm: null,
+  md: null,
+  lg: null,
   xl: 78rem,
   xxl: 80rem
 ) !default;
@@ -152,6 +155,7 @@ $input-padding-x: .75rem !default;
 $input-border-radius: $border-radius !default;
 $input-border-radius-sm: $border-radius-sm !default;
 $input-border-radius-lg: $border-radius-lg !default;
+$input-placeholder-color: $gray-600 !default;
 
 $nav-link-padding-y: .5rem !default;
 $nav-link-padding-x: 1rem !default;

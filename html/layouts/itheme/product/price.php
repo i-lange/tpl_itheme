@@ -24,7 +24,7 @@ if (empty($params)) {
     $params = ComponentHelper::getParams('com_ishop');
 }
 $class = htmlspecialchars((!empty($class) ? ' ' . $class : ''), ENT_QUOTES, 'UTF-8');
-$class = htmlspecialchars((!empty($attribs) ? ' ' . $attribs : ''), ENT_QUOTES, 'UTF-8');
+$attribs = htmlspecialchars((!empty($attribs) ? ' ' . $attribs : ''), ENT_QUOTES, 'UTF-8');
 $currency = $params->get('defaultCurrency', 'BYN');
 $icon = LayoutHelper::render('itheme.icon', ['icon' => 'i-' . $currency]);
 $round = (int) $params->get('roundPrice', 0);
