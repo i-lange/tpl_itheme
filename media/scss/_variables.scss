@@ -1,33 +1,28 @@
 // Обнуляем префикс
 $prefix: "";
 
-// отключаем темную тему
+// Отключаем темную тему
 $enable-dark-mode: false;
 
-// Размер шрифта
-$h1-font-size: 2rem !default;
-$h2-font-size: 1.75rem !default;
-$h3-font-size: 1.5rem !default;
-$h4-font-size: 1.325rem !default;
-$h5-font-size: 1.25rem !default;
-$h6-font-size: 1rem !default;
+// Цвета палитры Bootstrap
+$blue: #02448d !default;
+$indigo: #6610f2 !default;
+$purple: #6f42c1 !default;
+$pink: #ffdbdb !default;
+$red: #c40e38 !default;
+$orange: #fd7e14 !default;
+$yellow: #ffc16b !default;
+$green: #198754 !default;
+$teal: #37b77b !default;
+$cyan: #6396e0 !default;
 
-// цвета
+// Палитра серых оттенков
 $body-bg: #fefefe !default;
 $body-color: #171717 !default;
 
-$blue: #02448d !default;
-$pink: #ffdbdb !default;
-$red: #c40e38 !default;
-$yellow: #ffc16b !default;
-$green: #0b7a4a !default;
-$teal: #37b77b !default;
-$cyan: #6396e0 !default;
-$primary: $red !default;
-
 $gray-100: $body-bg !default;
 $gray-200: #f5f5f5 !default;
-$gray-300: #dee2e6 !default;
+$gray-300: #f9f3f3 !default;
 $gray-400: #efecec !default;
 $gray-500: #cfcfcf !default;
 $gray-600: #bebebe !default;
@@ -35,14 +30,185 @@ $gray-700: #989292 !default;
 $gray-800: #595757 !default;
 $gray-900: $body-color !default;
 
+// Цвета темы
+$primary: $red !default;
+$secondary: #6c757d !default;
+$success: $green !default;
+$info: $blue !default;
+$warning: $yellow !default;
+$danger: #aa0c31 !default;
+$light: $gray-200 !default;
+$dark: $body-color !default;
+
 $white: $body-bg !default;
 $black: $body-color !default;
 
-// Ширина контейнеров
+// Текст, ссылки и границы
+$body-secondary-color: $secondary !default;
+$body-secondary-bg: $gray-200 !default;
+$body-tertiary-color: $gray-600 !default;
+$body-tertiary-bg: #ffffff !default;
+$body-emphasis-color: $gray-800 !default;
+$link-color: #873346 !default;
+$link-hover-color: $red !default;
+$border-color: $gray-400 !default;
+$border-color-translucent: rgba($black, .175) !default;
+$component-active-color: $white !default;
+$component-active-bg: $primary !default;
+$focus-ring-color: rgba($primary, .25) !default;
+$headings-color: null !default;
+
+// Цвета контента
+$mark-color: $body-color !default;
+$mark-bg: #fff3cd !default;
+$code-color: $primary !default;
+
+// Типографика
+$font-family-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+$font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+$font-family-base: var(--font-sans-serif) !default;
+$font-family-code: var(--font-monospace) !default;
+
+$font-size-root: null !default;
+$font-size-base: 1rem !default;
+$font-size-sm: .875rem !default;
+$font-size-lg: 1.25rem !default;
+
+$font-weight-light: 300 !default;
+$font-weight-normal: 400 !default;
+$font-weight-medium: 500 !default;
+$font-weight-semibold: 600 !default;
+$font-weight-bold: 700 !default;
+$font-weight-base: $font-weight-normal !default;
+
+$line-height-base: 1.5 !default;
+$line-height-sm: 1.25 !default;
+$line-height-lg: 2 !default;
+
+$h1-font-size: 2rem !default;
+$h2-font-size: 1.75rem !default;
+$h3-font-size: 1.5rem !default;
+$h4-font-size: 1.325rem !default;
+$h5-font-size: 1.25rem !default;
+$h6-font-size: 1rem !default;
+
+$headings-font-family: null !default;
+$headings-font-weight: 500 !default;
+$headings-line-height: 1.2 !default;
+$headings-margin-bottom: 1.75rem !default;
+
+$display-font-weight: 300 !default;
+$display-line-height: 1.2 !default;
+$lead-font-size: 1.25rem !default;
+$small-font-size: .875em !default;
+$paragraph-margin-bottom: 1rem !default;
+
+// Отступы и макет
+$spacer: 1rem !default;
+$grid-gutter-width: 1.5rem !default;
+$container-padding-x: 1.5rem !default;
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 440px,
+  md: 768px,
+  lg: 960px,
+  xl: 1240px,
+  xxl: 2560px
+) !default;
+
 $container-max-widths: (
   xl: 78rem,
   xxl: 80rem
 ) !default;
+
+// Компоненты Bootstrap
+$border-width: 1px !default;
+$border-radius: .75rem !default;
+$border-radius-sm: .5rem !default;
+$border-radius-lg: 1rem !default;
+$border-radius-xl: 1.5rem !default;
+$border-radius-xxl: 2rem !default;
+$border-radius-pill: 50rem !default;
+
+$input-btn-padding-y: .5rem !default;
+$input-btn-padding-x: .75rem !default;
+$input-btn-padding-y-sm: .25rem !default;
+$input-btn-padding-x-sm: .5rem !default;
+$input-btn-padding-y-lg: .75rem !default;
+$input-btn-padding-x-lg: 1rem !default;
+$input-btn-font-size: $font-size-base !default;
+$input-btn-font-size-sm: $font-size-sm !default;
+$input-btn-font-size-lg: $font-size-lg !default;
+$input-btn-border-width: $border-width !default;
+
+$btn-font-weight: 400 !default;
+$btn-border-radius: $border-radius !default;
+$btn-border-radius-sm: $border-radius-sm !default;
+$btn-border-radius-lg: $border-radius-lg !default;
+
+$input-padding-y: .5rem !default;
+$input-padding-x: .75rem !default;
+$input-border-radius: $border-radius !default;
+$input-border-radius-sm: $border-radius-sm !default;
+$input-border-radius-lg: $border-radius-lg !default;
+
+$nav-link-padding-y: .5rem !default;
+$nav-link-padding-x: 1rem !default;
+$nav-link-font-size: null !default;
+
+$navbar-padding-y: .5rem !default;
+$navbar-brand-font-size: 1.25rem !default;
+$navbar-nav-link-padding-x: .5rem !default;
+
+$dropdown-min-width: 10rem !default;
+$dropdown-padding-y: .5rem !default;
+$dropdown-item-padding-y: .25rem !default;
+$dropdown-item-padding-x: 1rem !default;
+$dropdown-border-radius: .375rem !default;
+
+$card-spacer-y: 1rem !default;
+$card-spacer-x: 1rem !default;
+$card-border-width: $border-width !default;
+$card-border-radius: .375rem !default;
+$card-cap-padding-y: .5rem !default;
+$card-cap-padding-x: 1rem !default;
+
+$modal-inner-padding: 1rem !default;
+$modal-dialog-margin: .5rem !default;
+$modal-sm: 18rem !default;
+$modal-md: 28rem !default;
+$modal-lg: 50rem !default;
+$modal-xl: 70rem !default;
+
+$offcanvas-padding-y: 1rem !default;
+$offcanvas-padding-x: 1rem !default;
+$offcanvas-horizontal-width: 22rem !default;
+$offcanvas-vertical-height: 75vh !default;
+
+$badge-font-size: .75em !default;
+$badge-padding-y: .35em !default;
+$badge-padding-x: .65em !default;
+$badge-border-radius: .375rem !default;
+
+$breadcrumb-margin-bottom: 1rem !default;
+$breadcrumb-item-padding-x: .5rem !default;
+
+$pagination-padding-y: .375rem !default;
+$pagination-padding-x: .75rem !default;
+$pagination-font-size: 1rem !default;
+
+// Параметры Bootstrap
+$enable-rounded: true !default;
+$enable-shadows: false !default;
+$enable-gradients: false !default;
+$enable-transitions: true !default;
+$enable-reduced-motion: true !default;
+$enable-smooth-scroll: true !default;
+$enable-rfs: true !default;
+$enable-validation-icons: true !default;
+$enable-negative-margins: false !default;
+$enable-important-utilities: true !default;
 
 // Блоки с пропорциями ratio
 $aspect-ratios: (
@@ -54,9 +220,9 @@ $aspect-ratios: (
 ) !default;
 
 // Элементы check, radio, switch
-$form-check-input-width:          1.5em !default;
-$form-switch-color:               $gray-600 !default;
-$form-switch-width:               2.75em !default;
-$form-switch-padding-start:       $form-switch-width + .5em !default;
-$form-switch-bg-image:            url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='3' fill='#{$form-switch-color}'/></svg>") !default;
-$form-switch-border-radius:       $form-switch-width !default;
+$form-check-input-width: 1.5em !default;
+$form-switch-color: $gray-600 !default;
+$form-switch-width: 2.75em !default;
+$form-switch-padding-start: $form-switch-width + .5em !default;
+$form-switch-bg-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='3' fill='#{$form-switch-color}'/></svg>") !default;
+$form-switch-border-radius: $form-switch-width !default;
