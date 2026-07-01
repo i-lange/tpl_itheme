@@ -14055,6 +14055,13 @@ body {
   background-color: var(--white);
 }
 
+.compare-product.compare-rating-1 .product-small__image {
+  border-color: rgba(25, 135, 84, 0.25);
+}
+.compare-product.compare-rating-2 .product-small__image {
+  border-color: rgba(255, 193, 107, 0.75);
+}
+
 .compare-group-title {
   position: sticky;
   display: inline-block;
@@ -14083,6 +14090,10 @@ body {
 .compare-value-list > div {
   padding-left: 1rem;
   border-left: 1px dotted var(--gray-200);
+}
+.compare-value-list > div.is-best {
+  color: #198754;
+  font-weight: 600;
 }
 .compare-value-list > div:first-child {
   border-left: none;

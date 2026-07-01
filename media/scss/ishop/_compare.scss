@@ -26,6 +26,16 @@
   background-color: var(--white);
 }
 
+.compare-product {
+  &.compare-rating-1 .product-small__image {
+    border-color: rgba($green, 0.25);
+  }
+
+  &.compare-rating-2 .product-small__image {
+    border-color: rgba($yellow, 0.75);
+  }
+}
+
 .compare-group-title {
   position: sticky;
   display: inline-block;
@@ -55,6 +65,11 @@
   > div {
     padding-left: 1rem;
     border-left: 1px dotted var(--gray-200);
+
+    &.is-best {
+      color: $success;
+      font-weight: 600;
+    }
 
     &:first-child {
       border-left: none;
