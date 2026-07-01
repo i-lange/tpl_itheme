@@ -1,12 +1,3 @@
-.module-cart-empty {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem 0;
-  min-height: 50vh;
-}
-
 .module-cart {
   .form-check-input {
     width: 1.5rem;
@@ -54,6 +45,18 @@ body.com_ishop.vw_cart {
 .cart-toolbar {
   color: var(--body-secondary-color);
   border-bottom: 1px solid var(--border-color);
+
+  @media (width <= 339.98px) {
+    .form-check-label,
+    .btn-link {
+      font-size: .875rem;
+      line-height: 1;
+    }
+
+    .btn-link {
+      text-align: right;
+    }
+  }
 }
 
 .module-cart-checkout {

@@ -28,8 +28,8 @@ $round = (int) $this->params->get('roundPrice', 0);
         <?php endforeach; ?>
     </div>
 <?php else : ?>
-    <div class="module-cart-empty">
-        <?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-eye', 'class' => 'mega primary']); ?>
-        <p><?php echo Text::_('COM_ISHOP_VIEWED_NULL'); ?></p>
+    <div class="d-flex flex-column min-vh-50 align-items-center justify-content-center">
+        <h3 class="h1 text-body-tertiary"><?php echo Text::_('COM_ISHOP_VIEWED_NULL'); ?></h3>
+        <?php echo LayoutHelper::render('itheme.product.tocatalog', ['class' => 'btn-lg btn-primary']); ?>
     </div>
 <?php endif; ?>

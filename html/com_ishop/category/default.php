@@ -91,7 +91,7 @@ if ($this->state->get('filter.warehouse_id', false) !== false) {
     <?php echo $this->loadTemplate('children'); ?>
 <?php endif; ?>
 <?php if ($total === 0 ) : ?>
-<div class="d-lg-flex flex-column min-vh-50 align-items-center justify-content-center">
+<div class="d-flex flex-column min-vh-50 align-items-center justify-content-center">
     <h3 class="h1 text-body-tertiary"><?php echo Text::_('COM_ISHOP_CATEGORY_NO_ITEMS'); ?></h3>
     <p class=""><?php echo Text::_('COM_ISHOP_CATEGORY_FILTER_RESET'); ?></p>
 </div>
