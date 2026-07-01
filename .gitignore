@@ -3,6 +3,8 @@
 /.idea
 /docs
 /node_modules
+/build
+/AGENTS.md
 opencode.json
 pnpm-lock.yaml
 pnpm-workspace.yaml

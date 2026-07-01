@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import path from 'node:path';
 import archiver from 'archiver';
 import pkg from './package.json' with { type: 'json' };
 
@@ -12,7 +13,12 @@ if (!['full', 'update'].includes(mode)) {
 
 const isUpdate = mode === 'update';
 const filename = `tpl_itheme-${pkg.version}${isUpdate ? '-update' : ''}.zip`;
-const output = fs.createWriteStream(filename);
+const buildDir = 'build';
+const outputPath = path.join(buildDir, filename);
+
+fs.mkdirSync(buildDir, { recursive: true });
+
+const output = fs.createWriteStream(outputPath);
 const archive = archiver('zip', { zlib: { level: 9 } });
 
 archive.pipe(output);
@@ -53,4 +59,4 @@ archive.append(manifest, { name: 'templateDetails.xml' });
 
 await archive.finalize();
 
-console.log('\n✅ Создан архив для установки! Файл: ' + filename);
+console.log('\n✅ Создан архив для установки! Файл: ' + outputPath);
