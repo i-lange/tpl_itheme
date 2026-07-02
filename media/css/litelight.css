@@ -1,0 +1,298 @@
+@charset "UTF-8";
+/* Lite Light - Lightweight Lightbox Utility Styles */
+.lite-light {
+  --ll-overlay: rgba(0, 0, 0, 0.75);
+  --ll-duration: 0.15s;
+  --ll-radius: 6px;
+  --ll-image-bg: #fff;
+  --ll-control: #fff;
+  align-items: center;
+  background: var(--ll-overlay);
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  transition: opacity 0.25s ease, visibility 0.25s;
+  visibility: hidden;
+  width: 100%;
+  z-index: 1000;
+}
+.lite-light.lite-light-active {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+.lite-light {
+  /* Loading spinner — shown only while lite-light-loading is set */
+}
+.lite-light::after {
+  border: 3px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  border-top-color: rgba(255, 255, 255, 0.8);
+  content: "";
+  height: 36px;
+  opacity: 0;
+  position: absolute;
+  visibility: hidden;
+  width: 36px;
+}
+.lite-light.lite-light-loading::after {
+  animation: lite-light-spin 0.8s linear infinite;
+  opacity: 1;
+  visibility: visible;
+}
+.lite-light .lite-light-prev {
+  left: 10px;
+  position: absolute;
+}
+.lite-light .lite-light-next {
+  position: absolute;
+  right: 10px;
+}
+.lite-light img {
+  background-color: var(--ll-image-bg);
+  border-radius: var(--ll-radius);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
+  max-height: 90%;
+  max-width: 90%;
+  opacity: 1;
+  padding: 7px;
+  position: relative;
+  transform-origin: center center;
+  transition: opacity var(--ll-duration) ease-in-out, transform var(--ll-duration) ease-in-out;
+  z-index: 1;
+}
+.lite-light img.lite-light-zooming {
+  will-change: transform;
+}
+.lite-light img.lite-light-no-transform-transition {
+  transition: opacity var(--ll-duration) ease-in-out, transform 0s;
+}
+.lite-light img.lite-light-entering {
+  transform: scale(0.98);
+}
+.lite-light img.lite-light-entering.lite-light-entered {
+  transform: scale(1);
+}
+
+@supports (backdrop-filter: blur(2px)) {
+  .lite-light {
+    backdrop-filter: blur(4px);
+  }
+}
+/* Navigation Button Touch Targets */
+.lite-light-button {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  transition: transform 0.2s ease;
+}
+.lite-light-button:focus-visible {
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.15);
+  outline: 2px solid var(--ll-control);
+  outline-offset: 2px;
+}
+
+.lite-light-prev.lite-light-button,
+.lite-light-next.lite-light-button {
+  background: none;
+}
+
+/* Navigation Arrows */
+.lite-light-arrow {
+  border: solid var(--ll-control);
+  border-width: 0 1px 1px 0;
+  display: inline-block;
+  padding: 10px;
+  transform: scale(1);
+  transition: transform 0.3s ease;
+}
+.lite-light-arrow:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+.lite-light-arrow.lite-light-right {
+  margin-right: 10px;
+  transform: scale(1) rotate(-45deg);
+}
+.lite-light-arrow.lite-light-right:hover {
+  transform: scale(1.05) rotate(-45deg);
+}
+.lite-light-arrow.lite-light-left {
+  margin-left: 10px;
+  transform: scale(1) rotate(135deg);
+}
+.lite-light-arrow.lite-light-left:hover {
+  transform: scale(1.05) rotate(135deg);
+}
+
+/* Close Button */
+.lite-light-close.lite-light-button {
+  align-items: center;
+  background: none;
+  border: none;
+  box-sizing: border-box;
+  color: white;
+  cursor: pointer;
+  flex-direction: column;
+  height: 44px;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0;
+  position: absolute;
+  right: max(4px, env(safe-area-inset-right, 0px));
+  top: max(4px, env(safe-area-inset-top, 0px));
+  transform: scale(1);
+  width: 44px;
+}
+.lite-light-close.lite-light-button:hover {
+  transform: scale(1.05);
+}
+.lite-light-close .lite-light-bar {
+  background-color: var(--ll-control);
+  display: block;
+  height: 1px;
+  position: absolute;
+  width: 20px;
+}
+.lite-light-close .lite-light-bar:nth-of-type(1) {
+  transform: rotate(45deg);
+}
+.lite-light-close .lite-light-bar:nth-of-type(2) {
+  transform: rotate(-45deg);
+}
+
+/* Animation keyframes for fading (legacy — integrators may still target these) */
+@keyframes lite-light-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes lite-light-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes lite-light-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* Animation classes */
+.lite-light-fade-in {
+  animation: lite-light-fade-in 0.15s ease-in-out forwards;
+}
+
+.lite-light-fade-out {
+  animation: lite-light-fade-out 0.15s ease-in-out forwards;
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+  .lite-light .lite-light-prev,
+  .lite-light .lite-light-next {
+    display: none;
+  }
+  .lite-light img {
+    max-height: 80vh;
+    max-width: 90%;
+    padding: 5px;
+  }
+  .lite-light .lite-light-close.lite-light-button {
+    right: max(14px, env(safe-area-inset-right, 0px));
+    top: max(14px, env(safe-area-inset-top, 0px));
+  }
+}
+/* Reduced Motion Preference */
+@media (prefers-reduced-motion: reduce) {
+  .lite-light {
+    transition: none;
+  }
+  .lite-light img {
+    transition: none;
+  }
+  .lite-light img.lite-light-entering, .lite-light img.lite-light-entering.lite-light-entered {
+    transform: none;
+  }
+  .lite-light-fade-in,
+  .lite-light-fade-out {
+    animation-duration: 0.01s;
+  }
+  .lite-light.lite-light-loading::after {
+    animation: none;
+  }
+}
+/* Mobile Safari — GPU compositing during active zoom only */
+@supports (-webkit-touch-callout: none) {
+  .lite-light img.lite-light-zooming {
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+}
+.itheme-gallery img[data-itheme-lightbox] {
+  cursor: zoom-in;
+}
+
+.itheme-gallery img[data-itheme-lightbox]:focus-visible {
+  outline: 0.2rem solid rgba(var(--primary-rgb), 0.28);
+  outline-offset: 0.25rem;
+}
+
+.lite-light {
+  --ll-overlay: rgba(var(--black-rgb, 0, 0, 0), .92);
+  --ll-radius: 0;
+  --ll-viewport-gap: 0px;
+  height: 100dvh;
+  z-index: 1085;
+}
+
+@supports not (height: 100dvh) {
+  .lite-light {
+    height: 100vh;
+  }
+}
+.lite-light img {
+  box-sizing: border-box;
+  max-width: calc(100vw - var(--ll-viewport-gap) * 2 - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px));
+  max-height: calc(100dvh - var(--ll-viewport-gap) * 2 - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+  padding: 0;
+  object-fit: contain;
+  box-shadow: none;
+}
+
+@supports not (height: 100dvh) {
+  .lite-light img {
+    max-height: calc(100vh - var(--ll-viewport-gap) * 2 - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+  }
+}
+.lite-light-prev.lite-light-button,
+.lite-light-next.lite-light-button,
+.lite-light-close.lite-light-button {
+  z-index: 2;
+}
+
+@media (max-width: 768px) {
+  .lite-light {
+    --ll-viewport-gap: 0px;
+  }
+  .lite-light img {
+    max-width: calc(100vw - var(--ll-viewport-gap) * 2 - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px));
+    max-height: calc(100dvh - var(--ll-viewport-gap) * 2 - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+    padding: 0;
+  }
+}

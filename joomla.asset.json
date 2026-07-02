@@ -135,6 +135,21 @@
       }
     },
     {
+      "name": "tpl.litelight",
+      "description": "Стили LiteLight для просмотра изображений в полноэкранном режиме",
+      "type": "style",
+      "uri": "litelight.min.css"
+    },
+    {
+      "name": "tpl.litelight",
+      "description": "Библиотека LiteLight для просмотра изображений в полноэкранном режиме",
+      "type": "script",
+      "uri": "vendor/litelight/lite-light.umd.min.js",
+      "attributes" : {
+        "defer": true
+      }
+    },
+    {
       "name": "tpl.gallery",
       "description": "Скрипт синхронизации миниатюр галереи",
       "type": "script",
@@ -145,6 +160,29 @@
       "dependencies": [
         "core",
         "bootstrap.carousel"
+      ]
+    },
+    {
+      "name": "tpl.gallery-lightbox-init",
+      "description": "Инициализация LiteLight для галерей шаблона",
+      "type": "script",
+      "uri": "gallery-lightbox.js",
+      "attributes" : {
+        "defer": true
+      },
+      "dependencies": [
+        "core",
+        "tpl.litelight"
+      ]
+    },
+    {
+      "name": "tpl.gallery-lightbox",
+      "description": "Ассеты LiteLight для галерей шаблона",
+      "type": "preset",
+      "dependencies": [
+        "tpl.litelight#style",
+        "tpl.litelight#script",
+        "tpl.gallery-lightbox-init#script"
       ]
     }
   ]

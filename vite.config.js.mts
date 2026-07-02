@@ -19,6 +19,7 @@ const JS_ENTRY_FILES = [
   'form-submit.js',
   'drag-scroller.js',
   'gallery.js',
+  'gallery-lightbox.js',
 ]
 
 function getJsEntries(): Record<string, string> {

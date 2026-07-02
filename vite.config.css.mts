@@ -9,6 +9,7 @@ const __dirname = path.dirname(__filename)
 
 const SCSS_ENTRIES: string[] = [
   'itheme.scss',
+  'litelight.scss',
 ]
 
 function getScssEntries(): Record<string, string> {

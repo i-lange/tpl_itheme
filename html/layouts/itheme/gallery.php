@@ -11,6 +11,8 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
+use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
 
 $id         = preg_replace('/[^A-Za-z0-9_-]/', '', $displayData['id'] ?? '');
 $slides     = array_values(array_filter((array) ($displayData['slides'] ?? [])));
@@ -19,6 +21,7 @@ $ratioClass = trim($displayData['ratioClass'] ?? 'ratio ratio-3x4');
 $imageSizes = $displayData['imageSizes'] ?? '(max-width: 439px) 100vw, 50vw';
 $thumbSizes = $displayData['thumbSizes'] ?? '5rem';
 $toolsHtml  = $displayData['toolsHtml'] ?? '';
+$lightbox   = (bool) ($displayData['lightbox'] ?? false);
 $hasThumbs  = count($slides) > 1;
 
 if (empty($slides)) {
@@ -31,13 +34,37 @@ if (empty($id)) {
     $id = 'ithemeGallery' . $id;
 }
 
-$renderImage = static function (string $src, string|bool $alt, string $class, string $sizes): string {
+$hasLightboxImages = $lightbox && count(array_filter($slides, static function ($slide): bool {
+    return ($slide['type'] ?? 'image') === 'image' && !empty($slide['src']);
+})) > 0;
+
+if ($hasLightboxImages) {
+    Text::script('TPL_ITHEME_IMAGE_LIGHTBOX');
+    Text::script('TPL_ITHEME_PREV');
+    Text::script('TPL_ITHEME_NEXT');
+    Text::script('TPL_ITHEME_CLOSE');
+
+    Factory::getApplication()->getDocument()->getWebAssetManager()->usePreset('tpl.gallery-lightbox');
+}
+
+$renderImage = static function (string $src, string|bool $alt, string $class, string $sizes, array $attributes = []): string {
     return LayoutHelper::render('itheme.image', [
         'src'   => $src,
         'alt'   => $alt,
         'class' => $class,
         'sizes' => $sizes,
-    ]);
+    ] + $attributes);
+};
+
+$normalizeLightboxUrl = static function (string $src): string {
+    $image = HTMLHelper::cleanImageURL($src);
+    $url   = $image->url;
+
+    if ($url !== '' && $url[0] !== '/' && !preg_match('#^[a-z][a-z0-9+.-]*:#i', $url)) {
+        $url = '/' . $url;
+    }
+
+    return $url;
 };
 ?>
 <div id="<?php echo $this->escape($id); ?>"
@@ -55,7 +82,23 @@ $renderImage = static function (string $src, string|bool $alt, string $class, st
                         <?php if ($type === 'video' && !empty($slide['video'])) : ?>
                             <?php echo LayoutHelper::render('itheme.video', ['video' => $slide['video']]); ?>
                         <?php elseif (!empty($slide['src'])) : ?>
-                            <?php echo $renderImage($slide['src'], $alt, 'object-fit-contain', $imageSizes); ?>
+                            <?php
+                            $imageAttributes = [];
+
+                            if ($hasLightboxImages && $type === 'image') {
+                                $lightboxUrl = $normalizeLightboxUrl((string) ($slide['lightboxSrc'] ?? $slide['src']));
+
+                                $imageAttributes = [
+                                    'data-itheme-lightbox' => $this->escape($lightboxUrl),
+                                    'role' => 'button',
+                                    'tabindex' => '0',
+                                    'aria-label' => $this->escape(Text::sprintf('TPL_ITHEME_OPEN_IMAGE_LIGHTBOX', $index + 1)),
+                                    'aria-haspopup' => 'dialog',
+                                ];
+                            }
+
+                            echo $renderImage($slide['src'], $alt, 'object-fit-contain', $imageSizes, $imageAttributes);
+                            ?>
                         <?php endif; ?>
                     </div>
                 </div>

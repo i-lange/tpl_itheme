@@ -1,0 +1,58 @@
+@import "vendor/litelight/lite-light";
+
+.itheme-gallery img[data-itheme-lightbox] {
+  cursor: zoom-in;
+}
+
+.itheme-gallery img[data-itheme-lightbox]:focus-visible {
+  outline: .2rem solid rgba(var(--primary-rgb), .28);
+  outline-offset: .25rem;
+}
+
+.lite-light {
+  --ll-overlay: rgba(var(--black-rgb, 0, 0, 0), .92);
+  --ll-radius: 0;
+  --ll-viewport-gap: 0px;
+
+  height: 100dvh;
+  z-index: 1085;
+}
+
+@supports not (height: 100dvh) {
+  .lite-light {
+    height: 100vh;
+  }
+}
+
+.lite-light img {
+  box-sizing: border-box;
+  max-width: calc(100vw - var(--ll-viewport-gap) * 2 - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px));
+  max-height: calc(100dvh - var(--ll-viewport-gap) * 2 - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+  padding: 0;
+  object-fit: contain;
+  box-shadow: none;
+}
+
+@supports not (height: 100dvh) {
+  .lite-light img {
+    max-height: calc(100vh - var(--ll-viewport-gap) * 2 - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+  }
+}
+
+.lite-light-prev.lite-light-button,
+.lite-light-next.lite-light-button,
+.lite-light-close.lite-light-button {
+  z-index: 2;
+}
+
+@media (max-width: 768px) {
+  .lite-light {
+    --ll-viewport-gap: 0px;
+  }
+
+  .lite-light img {
+    max-width: calc(100vw - var(--ll-viewport-gap) * 2 - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px));
+    max-height: calc(100dvh - var(--ll-viewport-gap) * 2 - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+    padding: 0;
+  }
+}

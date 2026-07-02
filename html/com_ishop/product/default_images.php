@@ -99,4 +99,5 @@ echo LayoutHelper::render('itheme.gallery', [
     'imageSizes' => '(max-width: 439px) 100vw, 50vw',
     'thumbSizes' => '(max-width: 767px) 4.5rem, 5rem',
     'toolsHtml'  => $toolsHtml,
+    'lightbox'   => true,
 ]);
