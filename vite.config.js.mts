@@ -18,6 +18,7 @@ const JS_ENTRY_FILES = [
   'checkout.js',
   'form-submit.js',
   'drag-scroller.js',
+  'category-sticky-toolbar.js',
   'compare-sticky.js',
   'gallery.js',
   'gallery-lightbox.js',

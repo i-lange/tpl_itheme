@@ -1,0 +1,30 @@
+.category-toolbar {
+  align-items: center;
+  gap: .75rem;
+  min-width: 0;
+  padding: .25rem 0;
+  background-color: var(--white);
+  transition: top .35s ease, box-shadow .2s ease;
+  z-index: $zindex-sticky;
+
+  > .dropdown {
+    min-width: 0;
+  }
+
+  .dropdown-toggle {
+    max-width: 100%;
+    text-align: left;
+    white-space: normal;
+  }
+
+  &.is-category-toolbar-fixed {
+    position: fixed;
+    margin-top: 0 !important;
+  }
+}
+
+.category-toolbar-spacer {
+  display: block;
+  height: 0;
+  pointer-events: none;
+}

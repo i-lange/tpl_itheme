@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
   "name": "itheme",
-  "version": "1.0.37",
+  "version": "1.0.38",
   "description": "This file contains details of the assets used by Cassiopeia, the default Joomla site template.",
   "license": "GPL-2.0-or-later",
   "assets": [
@@ -145,6 +145,15 @@
       "dependencies": [
         "tpl.drag-scroller"
       ]
+    },
+    {
+      "name": "tpl.category-sticky-toolbar",
+      "description": "Фиксация панели сортировки товаров в категории",
+      "type": "script",
+      "uri": "category-sticky-toolbar.js",
+      "attributes" : {
+        "defer": true
+      }
     },
     {
       "name": "tpl.litelight",

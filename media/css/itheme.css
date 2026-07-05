@@ -13828,6 +13828,34 @@ body {
   color: var(--primary);
 }
 
+.category-toolbar {
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+  padding: 0.25rem 0;
+  background-color: var(--white);
+  transition: top 0.35s ease, box-shadow 0.2s ease;
+  z-index: 1020;
+}
+.category-toolbar > .dropdown {
+  min-width: 0;
+}
+.category-toolbar .dropdown-toggle {
+  max-width: 100%;
+  text-align: left;
+  white-space: normal;
+}
+.category-toolbar.is-category-toolbar-fixed {
+  position: fixed;
+  margin-top: 0 !important;
+}
+
+.category-toolbar-spacer {
+  display: block;
+  height: 0;
+  pointer-events: none;
+}
+
 .module-cart .form-check-input {
   width: 1.5rem;
   height: 1.5rem;

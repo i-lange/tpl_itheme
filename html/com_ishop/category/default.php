@@ -24,7 +24,8 @@ $app = Factory::getApplication();
 $wa = $app->getDocument()->getWebAssetManager();
 $wa->getRegistry()->addExtensionRegistryFile('com_ishop');
 $wa->useScript('bootstrap.dropdown')
-    ->useScript('com_ishop.products-loader');
+    ->useScript('com_ishop.products-loader')
+    ->useScript('tpl.category-sticky-toolbar');
 
 $ordering = $this->escape($this->state->get('list.ordering', 'a.price'));
 $direction = $this->escape($this->state->get('list.direction', 'DESC'));
@@ -96,7 +97,8 @@ if ($this->state->get('filter.warehouse_id', false) !== false) {
     <p class=""><?php echo Text::_('COM_ISHOP_CATEGORY_FILTER_RESET'); ?></p>
 </div>
 <?php else: ?>
-    <div class="mb-3 d-flex justify-content-between">
+    <div class="category-toolbar mb-3 d-flex justify-content-between"
+         data-category-sticky-toolbar>
         <div class="dropdown">
             <button class="btn btn-link btn-tools dropdown-toggle"
                     type="button"
