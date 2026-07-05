@@ -41,7 +41,7 @@ if ($params->get('use_css')) {
    data-ishop-cart
    data-ishop-cart-empty-text="<?php echo htmlspecialchars(Text::_('MOD_ISHOP_CART_EMPTY'), ENT_QUOTES, 'UTF-8'); ?>">
     <span class="header__button-icon-wrap" aria-hidden="true">
-        <?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-cart']); ?>
+        <?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-cart-lg']); ?>
         <?php if ($params->get('show_count', 0)) : ?>
             <small class="badge rounded-pill header__button-badge" data-ishop-cart-count><?php echo $count; ?></small>
         <?php endif; ?>

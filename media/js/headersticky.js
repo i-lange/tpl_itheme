@@ -20,6 +20,21 @@ document.addEventListener('DOMContentLoaded', () => {
     let headerTrigger = 0;
     const delta = 8;
 
+    function setHeaderStickyOffset(offset) {
+        const safeOffset = Math.max(Number.parseFloat(offset) || 0, 0);
+
+        document.documentElement.style.setProperty('--header-sticky-offset', `${safeOffset}px`);
+        document.dispatchEvent(new CustomEvent('itheme:sticky-offset-updated', {
+            detail: {
+                offset: safeOffset
+            }
+        }));
+    }
+
+    function updateHeaderStickyOffset() {
+        setHeaderStickyOffset(header.classList.contains('is-hidden') ? 0 : header.offsetHeight);
+    }
+
     function measureHeaderHeight() {
         header.classList.remove('is-hidden', 'is-compact');
 
@@ -27,20 +42,24 @@ document.addEventListener('DOMContentLoaded', () => {
         headerTrigger = fullHeight;
 
         document.documentElement.style.setProperty('--header-offset', `${fullHeight}px`);
+        updateHeaderStickyOffset();
     }
 
     function resetHeader() {
         header.classList.remove('is-hidden', 'is-compact');
+        updateHeaderStickyOffset();
     }
 
     function hideHeader() {
         header.classList.add('is-compact');
         header.classList.add('is-hidden');
+        updateHeaderStickyOffset();
     }
 
     function showHeader() {
         header.classList.add('is-compact');
         header.classList.remove('is-hidden');
+        updateHeaderStickyOffset();
     }
 
     function updateHeader() {

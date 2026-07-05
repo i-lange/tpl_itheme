@@ -10,6 +10,38 @@
   }
 }
 
+.btn-tag {
+  --btn-padding-x: .75rem;
+  --btn-padding-y: .375rem;
+  --btn-font-size: .875rem;
+  --btn-font-weight: 400;
+  --btn-line-height: 1.5;
+  --btn-color: var(--body-color);
+  --btn-bg: transparent;
+  --btn-border-width: 1px;
+  --btn-border-color: var(--gray-600);
+  --btn-border-radius: 1rem;
+  --btn-hover-color: var(--body-color);
+  --btn-hover-bg: var(--pink);
+  --btn-hover-border-color: var(--pink);
+  --btn-active-color: var(--body-color);
+  --btn-active-bg: var(--pink);
+  --btn-active-border-color: var(--pink);
+  --btn-disabled-color: var(--gray-800);
+  --btn-disabled-bg: var(--gray-500);
+  --btn-disabled-border-color: var(--gray-500);
+
+  .btn-title {
+    text-wrap: nowrap;
+  }
+
+  .btn-close {
+    padding: 0;
+    margin-left: .25rem;
+    vertical-align: text-bottom;
+  }
+}
+
 .btn-nav-link {
   position: relative;
   display: block;

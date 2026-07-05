@@ -41,7 +41,7 @@ if ($params->get('use_css', 0)) {
    aria-label="<?php echo Text::_('MOD_ISHOP_COMPARE_COUNT'), ': ', $count; ?>"
    data-ishop-compare>
     <span class="header__button-icon-wrap" aria-hidden="true">
-        <?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-compare']); ?>
+        <?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-compare-lg']); ?>
         <?php if ($params->get('show_count', 0)) : ?>
             <small class="badge rounded-pill header__button-badge"><?php echo $count; ?></small>
         <?php endif; ?>

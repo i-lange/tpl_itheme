@@ -3,6 +3,7 @@
 
     const DEFAULT_SELECTOR = '[data-drag-scroller]';
     const IGNORE_SELECTOR = 'button, input, textarea, select, label, [contenteditable="true"], [data-drag-scroller-ignore]';
+    const INTERACTIVE_IGNORE_SELECTOR = 'input, textarea, select, [contenteditable="true"], [data-drag-scroller-ignore]';
     const DEFAULT_THRESHOLD = 6;
     const DEFAULT_DIRECTION_RATIO = 1.15;
 
@@ -92,18 +93,36 @@
             }
         },
 
+        getIgnoreSelector(slider) {
+            return slider.hasAttribute('data-drag-scroller-interactive')
+                ? INTERACTIVE_IGNORE_SELECTOR
+                : IGNORE_SELECTOR;
+        },
+
+        shouldIgnorePointerDown(target, slider) {
+            const ignoredElement = target.closest(this.getIgnoreSelector(slider));
+
+            return Boolean(ignoredElement && slider.contains(ignoredElement));
+        },
+
         handlePointerDown(event) {
             if (event.button !== 0 || event.isPrimary === false) {
                 return;
             }
 
-            if (event.target.closest(IGNORE_SELECTOR)) {
+            const target = event.target instanceof Element ? event.target : null;
+
+            if (!target) {
                 return;
             }
 
-            const slider = event.target.closest(this.selector);
+            const slider = target.closest(this.selector);
 
             if (!slider || slider.scrollWidth <= slider.clientWidth) {
+                return;
+            }
+
+            if (this.shouldIgnorePointerDown(target, slider)) {
                 return;
             }
 

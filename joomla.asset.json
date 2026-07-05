@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
   "name": "itheme",
-  "version": "1.0.36",
+  "version": "1.0.37",
   "description": "This file contains details of the assets used by Cassiopeia, the default Joomla site template.",
   "license": "GPL-2.0-or-later",
   "assets": [
@@ -133,6 +133,18 @@
       "attributes" : {
         "defer": true
       }
+    },
+    {
+      "name": "tpl.compare-sticky",
+      "description": "Фиксация панели товаров на странице сравнения",
+      "type": "script",
+      "uri": "compare-sticky.js",
+      "attributes" : {
+        "defer": true
+      },
+      "dependencies": [
+        "tpl.drag-scroller"
+      ]
     },
     {
       "name": "tpl.litelight",

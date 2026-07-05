@@ -48,6 +48,12 @@
   cursor: grabbing;
 }
 
+.scroll-items-list > .btn-tag {
+  width: fit-content;
+  min-width: fit-content;
+  text-wrap: nowrap;
+}
+
 .scroll-items-list .card {
   flex: 0 0 var(--column-width);
   max-width: var(--column-width);
