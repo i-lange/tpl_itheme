@@ -4,7 +4,12 @@
 .product-price-box {
   display: flex;
   align-items: center;
-  font-size: 1rem;
+  font-size: .75rem;
+  text-wrap: nowrap;
+
+  @include media-breakpoint-up(sm) {
+    font-size: 1rem;
+  }
 
   .price {
     display: flex;
@@ -17,6 +22,10 @@
     }
 
     @include media-breakpoint-up(md) {
+      font-size: 1.375em;
+    }
+
+    @include media-breakpoint-up(xl) {
       font-size: 1.5em;
     }
   }

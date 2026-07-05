@@ -27,15 +27,24 @@ $product_price = ($item->sale_price > 0) ? $item->sale_price : $item->price;
 $currency = $params->get('defaultCurrency', 'BYN');
 $icon = LayoutHelper::render('itheme.icon', ['icon' => 'i-' . $currency]);
 $round = (int) $params->get('roundPrice', 0);
+$formatPrice = static function ($price) use ($round): string {
+    $price = round((float) $price, $round);
+
+    if ($round <= 0) {
+        return number_format($price, 0, ',', ' ');
+    }
+
+    return rtrim(rtrim(number_format($price, $round, ',', ' '), '0'), ',');
+};
 
 if ($item->price) : ?>
 <div class="<?php echo $class; ?>">
     <div class="price <?php echo ($item->discount_size > 0) ? 'sale' : ''; ?>">
-        <span><?php echo round($product_price, $round); ?></span><span class="currency" aria-label="<?php echo $currency; ?>"><?php echo $icon; ?></span>
+        <span><?php echo $formatPrice($product_price); ?></span><span class="currency" aria-label="<?php echo $currency; ?>"><?php echo $icon; ?></span>
     </div>
     <?php if ($item->old_price > 0) : ?>
         <div class="old-price">
-            <del><?php echo round($item->old_price, $round); ?></del><span class="currency" aria-label="<?php echo $currency; ?>"><?php echo $icon; ?></span>
+            <del><?php echo $formatPrice($item->old_price); ?></del><span class="currency" aria-label="<?php echo $currency; ?>"><?php echo $icon; ?></span>
         </div>
     <?php endif; ?>
     <?php if ($item->discount_size > 0) : ?>

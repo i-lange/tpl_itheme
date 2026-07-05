@@ -13591,7 +13591,13 @@ body {
 .product-price-box {
   display: flex;
   align-items: center;
-  font-size: 1rem;
+  font-size: 0.75rem;
+  text-wrap: nowrap;
+}
+@media (min-width: 440px) {
+  .product-price-box {
+    font-size: 1rem;
+  }
 }
 .product-price-box .price {
   display: flex;
@@ -13603,6 +13609,11 @@ body {
   color: var(--primary);
 }
 @media (min-width: 768px) {
+  .product-price-box .price {
+    font-size: 1.375em;
+  }
+}
+@media (min-width: 1240px) {
   .product-price-box .price {
     font-size: 1.5em;
   }

@@ -31,7 +31,16 @@ $attribs = htmlspecialchars((!empty($attribs) ? ' ' . $attribs : ''), ENT_QUOTES
 $currency = $params->get('defaultCurrency', 'BYN');
 $icon = LayoutHelper::render('itheme.icon', ['icon' => 'i-' . $currency]);
 $round = (int) $params->get('roundPrice', 0);
+$formatPrice = static function ($price) use ($round): string {
+    $price = round((float) $price, $round);
+
+    if ($round <= 0) {
+        return number_format($price, 0, ',', ' ');
+    }
+
+    return rtrim(rtrim(number_format($price, $round, ',', ' '), '0'), ',');
+};
 ?>
 <div class="<?php echo $class; ?>">
-    <?php echo (!empty($minus) && $minus === true) ? '-' : ''; ?><span<?php echo $attribs; ?>><?php echo round($price, $round); ?></span><span class="currency" aria-label="<?php echo $currency; ?>"><?php echo $icon; ?></span>
+    <?php echo (!empty($minus) && $minus === true) ? '-' : ''; ?><span<?php echo $attribs; ?>><?php echo $formatPrice($price); ?></span><span class="currency" aria-label="<?php echo $currency; ?>"><?php echo $icon; ?></span>
 </div>
