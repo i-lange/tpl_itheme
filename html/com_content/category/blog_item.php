@@ -29,7 +29,9 @@ $assocParam = (Associations::isEnabled() && $params->get('show_associations'));
 $currentDate   = Factory::getDate()->format('Y-m-d H:i:s');
 ?>
 <div class="card card-rounded">
+    <div class="ratio ratio-16x9">
     <?php echo LayoutHelper::render('joomla.content.intro_image', $this->item); ?>
+    </div>
     <div class="card-body">
         <h3 class="card-title"><?php echo $this->item->title; ?></h3>
         <?php if (!empty($this->item->introtext)) : ?>

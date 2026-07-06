@@ -24,7 +24,7 @@ if (empty($images->image_intro)) {
 
 $imgclass   = empty($images->float_intro) ? $params->get('float_intro') : $images->float_intro;
 $layoutAttr = [
-    'class' => 'card-img-top ' . $imgclass,
+    'class' => 'object-fit-contain card-img-top ' . $imgclass,
     'src' => $images->image_intro,
     'alt' => empty($images->image_intro_alt) && empty($images->image_intro_alt_empty) ? false : $images->image_intro_alt,
     'sizes' => '(max-width: 439px) 100, 50vw',
