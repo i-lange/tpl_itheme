@@ -11839,12 +11839,19 @@ svg {
   display: flex;
   color: var(--link-color);
   font-size: 1rem;
+  line-height: 1;
+  min-height: 2rem;
   margin: 1rem 0;
 }
 .card-geo .card-title svg {
   min-width: 1.25em;
   width: 1.25em;
   height: 1.25em;
+}
+.card-geo .card-text {
+  font-size: 1rem;
+  line-height: 1.25;
+  min-height: 3.75rem;
 }
 
 .card-hover {
