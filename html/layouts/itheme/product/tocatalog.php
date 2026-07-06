@@ -12,7 +12,6 @@ defined('_JEXEC') or die;
 use Ilange\Component\Ishop\Site\Helper\RouteHelper;
 use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Language\Text;
-use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Router\Route;
 
 extract($displayData);

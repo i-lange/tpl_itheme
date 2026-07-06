@@ -66,7 +66,11 @@ $afterDisplayContent = trim(implode("\n", $results));
 
     <?php if (empty($this->lead_items) && empty($this->link_items) && empty($this->intro_items)) : ?>
         <?php if ($this->params->get('show_no_articles', 1)) : ?>
-            <div class="alert alert-info"><?php echo Text::_('COM_CONTENT_NO_ARTICLES'); ?></div>
+            <div class="d-flex flex-column min-vh-50 align-items-center justify-content-center">
+                <h3 class="h2 text-body-tertiary mb-2">Мы еще готовим материалы для этой страницы</h3>
+                <p class="">А пока можно посмотреть каталог</p>
+                <?php echo LayoutHelper::render('itheme.product.tocatalog', ['class' => 'btn-lg btn-primary']); ?>
+            </div>
         <?php endif; ?>
     <?php endif; ?>
 

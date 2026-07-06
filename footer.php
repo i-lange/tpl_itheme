@@ -7,9 +7,11 @@
  * @license    GNU General Public License version 2 or later
  */
 
+use Ilange\Component\Ishop\Site\Helper\RouteHelper;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
+use Joomla\CMS\Router\Route;
 
 defined('_JEXEC') or die;
 
@@ -142,7 +144,7 @@ defined('_JEXEC') or die;
                 <span class="visually-hidden"><?php echo Text::_('TPL_NAVIGATOR_HOME'); ?></span>
             </div>
             <div class="navigator-element">
-                <a href="/catalog">
+                <a href="<?php echo Route::_(RouteHelper::getCategoriesRoute()); ?>">
                     <?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-catalog']); ?>
                     <span class="visually-hidden"><?php echo Text::_('TPL_NAVIGATOR_CATALOG'); ?></span>
                 </a>

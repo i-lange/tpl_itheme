@@ -48,19 +48,19 @@ if ($active === 1) {
     $small_list[] = $list['pages'][$active + 1];
 }
 ?>
-<nav class="pagination__wrapper mb-3" aria-label="<?php echo Text::_('JLIB_HTML_PAGINATION'); ?>">
-    <ul class="pagination justify-content-end ms-0">
+<nav class="pagination__wrapper mt-5" aria-label="<?php echo Text::_('JLIB_HTML_PAGINATION'); ?>">
+    <ul class="pagination justify-content-center">
         <?php if ($active > 1) : ?>
             <?php echo $list['start']['data']; ?>
-            <?php echo $list['previous']['data']; ?>
         <?php endif; ?>
+        <?php echo $list['previous']['data']; ?>
 
         <?php foreach ($small_list as $page) : ?>
             <?php echo $page['data']; ?>
         <?php endforeach; ?>
 
+        <?php echo $list['next']['data']; ?>
         <?php if ($active < $count) : ?>
-            <?php echo $list['next']['data']; ?>
             <?php echo $list['end']['data']; ?>
         <?php endif; ?>
     </ul>
