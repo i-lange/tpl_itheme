@@ -26,32 +26,31 @@ $params = $this->item->params;
 $canEdit = $this->item->params->get('access-edit');
 $info    = $params->get('info_block_position', 0);
 $assocParam = (Associations::isEnabled() && $params->get('show_associations'));
-
 $currentDate   = Factory::getDate()->format('Y-m-d H:i:s');
 ?>
-<div class="card">
+<div class="card card-rounded">
     <?php echo LayoutHelper::render('joomla.content.intro_image', $this->item); ?>
     <div class="card-body">
         <h3 class="card-title"><?php echo $this->item->title; ?></h3>
         <?php if (!empty($this->item->introtext)) : ?>
-            <p class="card-text"><?php echo $this->item->introtext; ?></p>
+            <div class="card-text text-body-emphasis"><?php echo $this->item->introtext; ?></div>
         <?php endif; ?>
-        <p class="card-text">
-            <time datetime="<?php echo HTMLHelper::_('date', $this->item->publish_up, 'c'); ?>">
+        <div class="d-flex align-items-center justify-content-between">
+            <?php if ($params->get('show_readmore') && $this->item->readmore) :
+                if ($params->get('access-view')) :
+                    $link = Route::_(RouteHelper::getArticleRoute($this->item->slug, $this->item->catid, $this->item->language));
+                else :
+                    $menu = Factory::getApplication()->getMenu();
+                    $active = $menu->getActive();
+                    $itemId = $active->id;
+                    $link = new Uri(Route::_('index.php?option=com_users&view=login&Itemid=' . $itemId, false));
+                    $link->setVar('return', base64_encode(RouteHelper::getArticleRoute($this->item->slug, $this->item->catid, $this->item->language)));
+                endif; ?>
+                <?php echo LayoutHelper::render('joomla.content.readmore', ['item' => $this->item, 'params' => $params, 'link' => $link]); ?>
+            <?php endif; ?>
+            <time class="text-secondary" datetime="<?php echo HTMLHelper::_('date', $this->item->publish_up, 'c'); ?>">
                 <?php echo HTMLHelper::_('date', $this->item->publish_up, Text::_('DATE_FORMAT_LC3')); ?>
             </time>
-        </p>
-        <?php if ($params->get('show_readmore') && $this->item->readmore) :
-            if ($params->get('access-view')) :
-                $link = Route::_(RouteHelper::getArticleRoute($this->item->slug, $this->item->catid, $this->item->language));
-            else :
-                $menu = Factory::getApplication()->getMenu();
-                $active = $menu->getActive();
-                $itemId = $active->id;
-                $link = new Uri(Route::_('index.php?option=com_users&view=login&Itemid=' . $itemId, false));
-                $link->setVar('return', base64_encode(RouteHelper::getArticleRoute($this->item->slug, $this->item->catid, $this->item->language)));
-            endif; ?>
-            <?php echo LayoutHelper::render('joomla.content.readmore', ['item' => $this->item, 'params' => $params, 'link' => $link]); ?>
-        <?php endif; ?>
+        </div>
     </div>
 </div>

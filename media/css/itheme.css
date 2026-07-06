@@ -11819,13 +11819,12 @@ svg {
   text-decoration: none;
 }
 
-.card-shadow {
-  --card-border-color: var(--gray-200);
-  box-shadow: var(--box-shadow);
-}
-
 .card-rounded {
   --card-border-radius: 1.5rem;
+  overflow: hidden;
+}
+.card-rounded .card-title {
+  font-size: 1.125rem;
 }
 
 .card-geo {
@@ -11852,31 +11851,6 @@ svg {
   font-size: 1rem;
   line-height: 1.25;
   min-height: 3.75rem;
-}
-
-.card-hover {
-  --card-spacer-y: 1rem;
-  --card-spacer-x: 1rem;
-  --card-title-spacer-y: 0.5rem;
-  --card-title-color: ;
-  --card-subtitle-color: ;
-  --card-border-width: var(--border-width);
-  --card-border-radius: var(--border-radius);
-  --card-box-shadow: ;
-  --card-inner-border-radius: calc(var(--border-radius) - (var(--border-width)));
-  --card-cap-padding-y: 0.5rem;
-  --card-cap-padding-x: 1rem;
-  --card-cap-bg: rgba(var(--body-color-rgb), 0.03);
-  --card-cap-color: ;
-  --card-height: ;
-  --card-color: ;
-  --card-bg: var(--body-bg);
-  --card-img-overlay-padding: 1rem;
-  --card-group-margin: 0.75rem;
-}
-.card-hover :hover {
-  --card-border-color: var(--primary);
-  --card-box-shadow: var(--box-shadow);
 }
 
 .btn svg {
