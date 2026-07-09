@@ -17,9 +17,11 @@ use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Router\Route;
 
-$wa = Factory::getApplication()->getDocument()->getWebAssetManager();
+$app = Factory::getApplication();
+$wa = $app->getDocument()->getWebAssetManager();
 $wa->useScript('tpl.phone-masker');
 $wa->useScript('tpl.checkout');
+$UTM = $app->getSession()->get('UTM');
 $currency = strtoupper($this->params->get('defaultCurrency', 'BYN'));
 $analyticsItemsJson = '[]';
 $analyticsValue = 0.0;
@@ -183,6 +185,7 @@ if (!empty($this->checkout->products)) {
         <input type="hidden" name="module_id" value="120">
         <input type="hidden" name="metrika_client_id" value="">
         <input type="hidden" name="google_client_id" value="">
+        <?php echo LayoutHelper::render('itheme.utm_hidden_fields', ['utm' => $UTM]); ?>
         <div class="text-center mt-5"><button class="btn btn-primary btn-lg"
                                               title="<?php echo Text::_('COM_ISHOP_CHECKOUT_SUBMIT'); ?>"
                                               type="submit"><?php echo Text::_('COM_ISHOP_CHECKOUT_SUBMIT'); ?></button></div>

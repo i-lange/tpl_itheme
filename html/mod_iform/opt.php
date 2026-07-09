@@ -96,11 +96,7 @@ $formId = 'i-form-' . $module->id;
                 <input type="hidden" name="goal" value="FEEDBACK">
                 <input type="hidden" name="metrika_client_id" value="">
                 <input type="hidden" name="google_client_id" value="">
-                <?php if (is_array($UTM)) : ?>
-                    <?php foreach ($UTM as $key => $value) : ?>
-                        <input type="hidden" name="<?php echo $key; ?>" value="<?php echo $value; ?>">
-                    <?php endforeach; ?>
-                <?php endif; ?>
+                <?php echo LayoutHelper::render('itheme.utm_hidden_fields', ['utm' => $UTM]); ?>
             </fieldset>
         </form>
         <div class="form_thank_you text-center">

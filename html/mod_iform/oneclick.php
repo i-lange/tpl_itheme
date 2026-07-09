@@ -31,6 +31,7 @@ $wa->useScript('tpl.phone-masker');
 $wa->useScript('tpl.buy1click');
 $wa->useScript('tpl.submit');
 $session = Factory::getApplication()->getSession();
+$UTM = $session->get('UTM');
 $formId = 'i-form-' . $module->id;
 ?>
 <div class="modal fade" id="buy1clickModal" tabindex="-1" aria-labelledby="buy1clickLabel" aria-hidden="true">
@@ -101,6 +102,7 @@ $formId = 'i-form-' . $module->id;
                     <input type="hidden" name="module_id" value="<?php echo $module->id; ?>">
                     <input type="hidden" name="metrika_client_id" value="">
                     <input type="hidden" name="google_client_id" value="">
+                    <?php echo LayoutHelper::render('itheme.utm_hidden_fields', ['utm' => $UTM]); ?>
                 </form>
                 <div class="form_thank_you text-center">
                     <?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-smile', 'class' => 'mega primary']); ?>
