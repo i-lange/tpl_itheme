@@ -86,7 +86,7 @@ if ($this->state->get('filter.warehouse_id', false) !== false) {
     <h1><?php echo $this->escape($this->params->get('page_heading')); ?></h1>
 <?php endif; ?>
 <?php if ($this->params->get('show_category_title')) : ?>
-    <h2 class="mb-2"><?php echo $categoryTitle; ?> <span class="category-products-count"><?php echo $total; ?>&nbsp;<?php echo Text::_('COM_ISHOP_PSC'); ?></span></h2>
+    <h2 class="mb-3"><?php echo $categoryTitle; ?> <span class="category-products-count"><?php echo $total; ?>&nbsp;<?php echo Text::_('COM_ISHOP_PSC'); ?></span></h2>
 <?php endif; ?>
 <?php if ($this->maxLevel != 0 && $this->get('children')) : ?>
     <?php echo $this->loadTemplate('children'); ?>
@@ -100,7 +100,7 @@ if ($this->state->get('filter.warehouse_id', false) !== false) {
     <div class="category-toolbar mb-3 d-flex flex-column"
          data-category-sticky-toolbar>
         <?php if (!empty($this->filter_seo_links)) : ?>
-            <div class="scroll-items-list mb-3 gap-1 gap-md-2 w-100" data-drag-scroller data-drag-scroller-interactive>
+            <div class="scroll-items-list gap-1 gap-md-2 w-100" data-drag-scroller data-drag-scroller-interactive>
                 <?php foreach ($this->filter_seo_links as $link) : ?>
                     <a class="btn btn-tag<?php echo $link->active ? ' active' : ''; ?>"
                        href="<?php echo htmlspecialchars($link->url, ENT_COMPAT, 'UTF-8'); ?>"<?php echo $link->active ? ' aria-current="page"' : ''; ?>>
