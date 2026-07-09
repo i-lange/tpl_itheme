@@ -14,56 +14,56 @@ use Joomla\CMS\Layout\LayoutHelper;
 ?>
 <h1><?php echo $this->item->title; ?></h1>
     <div class="warhouse-full mb-3">
-        <div class="row gy-2">
-            <div class="col-12 col-md-5 col-lg-6">
+        <div class="row gy-4">
+            <div class="col-12 col-md-6">
                 <?php echo $this->loadTemplate('images'); ?>
             </div>
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                <div class="card">
-                    <div class="card-header">Наш адрес</div>
-                    <div class="card-body">
-                        <p class="card-text"><?php echo $this->item->address; ?></p>
-                        <p class="card-title">Телефон</p>
-                        <p class="card-text">
-                            <a href="tel:+<?php echo preg_replace('/[^0-9]/', '', $this->item->phone); ?>"
-                           class="text-decoration-none"
-                           aria-label="<?php echo Text::_('TPL_ITHEME_PHONE_ARIA_LABEL'), ': ', $this->item->phone; ?>"><?php echo $this->item->phone; ?></a>
+            <div class="col-12 col-md-6">
+                <div class="card card-rounded border-0 bg-light h-100">
+                    <div class="card-body p-4">
+                        <p class="h1"><?php echo $this->item->address; ?></p>
+                        <p class="card-text mb-2">
+                            <a class="btn text-decoration-none ps-0"
+                               href="tel:+<?php echo preg_replace('/[^0-9]/', '', $this->item->phone); ?>"
+                               aria-label="<?php echo Text::_('TPL_ITHEME_PHONE_ARIA_LABEL'), ': ', $this->item->phone; ?>"
+                               rel="nofollow">
+                                <?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-phone', 'class' => 'text-primary me-1']); ?>
+                                <span><?php echo $this->item->phone; ?></span>
+                            </a>
                         </p>
-                        <p><?php echo $this->item->introtext; ?></p>
-                        <a class="btn btn-primary btn-lg"
+                        <div class="mb-2">
+                            <?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-clock', 'class' => 'text-primary me-1']); ?>
+                            <?php echo $this->item->introtext; ?>
+                        </div>
+                        <div class="mt-4"><a class="btn btn-primary btn-lg"
                        href="https://yandex.ru/maps/?rtext=~<?php echo $this->item->latitude,',',$this->item->longitude; ?>"
-                       target="_blank"><?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-geo', 'class' => 'me-1']); ?>Маршрут</a>
+                       target="_blank"><?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-route', 'class' => 'me-1']); ?>Построить маршрут</a></div>
                     </div>
                 </div>
             </div>
-            <?php if (!empty($this->stock)) : ?>
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="card">
-                        <div class="card-header">Товары в наличии</div>
-                        <ul class="list-group list-group-flush">
-                            <?php foreach ($this->stock as $category) : ?>
-                            <li class="list-group-item">
-                                <a class="text-decoration-none"
-                                   href="#category-link-<?php echo $category->alias; ?>"><?php echo $category->title; ?></a>
-                            </li>
-                            <?php endforeach; ?>
-                        </ul>
-                    </div>
-                </div>
-            <?php endif; ?>
         </div>
     </div>
 <?php if (!empty($this->item->fulltext)) : ?>
     <div class="my-5"><?php echo $this->item->fulltext; ?></div>
 <?php endif; ?>
  <?php if (!empty($this->stock)) : ?>
+    <h2 class="mt-5">Товары в наличии</h2>
+    <div class="scroll-items-list mb-3 gap-1 gap-md-2" data-drag-scroller data-drag-scroller-interactive>
+        <button class="btn btn-tag active" type="button">
+            <span class="btn-title">Все товары</span>
+        </button>
+    <?php foreach ($this->stock as $category) : ?>
+        <button class="btn btn-tag" type="button" data-instock-category="<?php echo $category->alias; ?>">
+            <span class="btn-title"><?php echo $category->title; ?>&nbsp;(<?php echo $category->count; ?>)</span>
+        </button>
+    <?php endforeach; ?>
+    </div>
+    <div class="products__grid mb-5">
     <?php foreach ($this->stock as $category) : ?>
         <?php if (!$category->count) continue; ?>
-        <h2 id="category-link-<?php echo $category->alias; ?>"><?php echo $category->title; ?></h2>
-        <div class="products__grid mb-5">
-            <?php foreach ($category->products as $product) : ?>
-                <?php echo LayoutHelper::render('itheme.product.small', ['item' => $product, 'params' => $this->params]) ?>
-            <?php endforeach; ?>
-        </div>
+        <?php foreach ($category->products as $product) : ?>
+            <?php echo LayoutHelper::render('itheme.product.small', ['item' => $product, 'params' => $this->params]) ?>
+        <?php endforeach; ?>
     <?php endforeach; ?>
+    </div>
 <?php endif; ?>

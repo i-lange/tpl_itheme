@@ -52,10 +52,11 @@ if (empty($slides)) {
 }
 
 echo LayoutHelper::render('itheme.gallery', [
-    'id'         => 'warehouseSlider',
+    'id'         => 'warehouseFullSlider',
     'slides'     => $slides,
-    'class'      => 'warhouse-full__gallery',
-    'ratioClass' => 'ratio ratio-3x4',
+    'class'      => 'warehouse-full__gallery',
+    'ratioClass' => 'ratio ratio-16x9',
     'imageSizes' => '(max-width: 439px) 100vw, 50vw',
     'thumbSizes' => '(max-width: 767px) 4.5rem, 5rem',
+    'lightbox'   => true,
 ]);
