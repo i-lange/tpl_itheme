@@ -36,7 +36,6 @@ if (isUpdate) {
 }
 
 for (const file of [
-    'analytics.php',
     'component.php',
     'error.php',
     'footer.php',

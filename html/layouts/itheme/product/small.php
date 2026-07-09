@@ -50,7 +50,10 @@ if ($params->get('use_js', true) && $params->get('use_wishlist', false)) {
         </div>
         <?php echo LayoutHelper::render('itheme.product.prices', ['item' => $item]); ?>
         <?php echo LayoutHelper::render('itheme.product.title', ['item' => $item]); ?>
-        <a class="product-small__link" href="<?php echo Route::_(RouteHelper::getProductRoute((int)$item->id, (int)$item->catid)); ?>">
+        <a class="product-small__link"
+           href="<?php echo Route::_(RouteHelper::getProductRoute((int)$item->id, (int)$item->catid)); ?>"
+           data-isiteanalytics-select-item
+           data-isiteanalytics-product-id="<?php echo (int) $item->id; ?>">
             <span class="visually-hidden"><?php echo $this->escape($item->fullname); ?></span>
         </a>
     </div>

@@ -21,10 +21,12 @@ $wa = Factory::getApplication()->getDocument()->getWebAssetManager();
 $wa->useScript('tpl.phone-masker');
 $wa->useScript('tpl.checkout');
 $currency = strtoupper($this->params->get('defaultCurrency', 'BYN'));
+$analyticsItemsJson = '[]';
+$analyticsValue = 0.0;
 
 if (!empty($this->checkout->products)) {
     $forMail = [];
-    $dataLayerItems = [];
+    $analyticsItems = [];
     foreach ($this->checkout->products as $i => $product) {
         $forMail[] = [
             'product_id' => $product->id,
@@ -34,7 +36,7 @@ if (!empty($this->checkout->products)) {
             'price' => ($product->sale_price > 0) ? $product->sale_price : $product->price . ' руб.'
         ];
 
-        $dataLayerItems[] = [
+        $analyticsItems[] = [
             'item_id'       => $product->id,
             'item_name'     => $this->escape($product->fullname),
             'discount'      => $product->discount_size,
@@ -46,11 +48,24 @@ if (!empty($this->checkout->products)) {
         ];
     }
 
-    $jsonLayerItems = json_encode($dataLayerItems, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-    $dataLayer = 'const dataLayerItems = ' . $jsonLayerItems . ';';
-    $wa->addInlineScript($dataLayer);
-    $dataLayer = 'gtag("event","begin_checkout",{currency:"' . $currency . '",value:"' . $this->checkout->summary . '",items:dataLayerItems});';
-    $wa->addInlineScript($dataLayer);
+    $analyticsItemsJson = json_encode($analyticsItems, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+    $analyticsValue = (float) $this->checkout->summary;
+    $analyticsContext = json_encode([
+        'page'   => 'checkout',
+        'items'  => $analyticsItems,
+        'source' => 'tpl_itheme.checkout',
+    ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+    $analyticsEvent = json_encode([
+        'event'    => 'begin_checkout',
+        'currency' => $currency,
+        'value'    => $analyticsValue,
+        'items'    => $analyticsItems,
+        'source'   => 'tpl_itheme.checkout',
+    ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+    $wa->addInlineScript(
+        'document.dispatchEvent(new CustomEvent("isiteanalytics:context",{bubbles:true,detail:' . $analyticsContext . '}));' .
+        'document.dispatchEvent(new CustomEvent("isiteanalytics:ecommerce",{bubbles:true,detail:' . $analyticsEvent . '}));'
+    );
 }
 ?>
 <div class="container pb-5">
@@ -66,7 +81,10 @@ if (!empty($this->checkout->products)) {
     <form id="checkout-submit"
           action="<?php echo Route::_(RouteHelper::getCheckoutRoute()); ?>"
           method="post"
-          name="checkout-submit">
+          name="checkout-submit"
+          data-isiteanalytics-items="<?php echo htmlspecialchars($analyticsItemsJson, ENT_QUOTES, 'UTF-8'); ?>"
+          data-isiteanalytics-currency="<?php echo $this->escape($currency); ?>"
+          data-isiteanalytics-value="<?php echo $this->escape((string) $analyticsValue); ?>">
         <div class="checkout-grid">
             <div>
                 <h3><?php echo Text::_('COM_ISHOP_CHECKOUT_CLIENT'); ?></h3>

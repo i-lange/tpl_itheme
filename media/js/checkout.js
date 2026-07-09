@@ -372,19 +372,17 @@
                 return;
             }
 
-            try {
-                if (typeof gtag === 'function') {
-                    gtag('event', 'purchase', {
-                        transaction_id: Date.now().toString(16),
-                        value: formData.get('total'),
-                        shipping: 0,
-                        currency: 'BYN',
-                        items: typeof dataLayerItems !== 'undefined' ? dataLayerItems : []
-                    });
+            document.dispatchEvent(new CustomEvent('isiteanalytics:ecommerce', {
+                bubbles: true,
+                detail: {
+                    event: 'purchase',
+                    transaction_id: Date.now().toString(16),
+                    value: form.dataset.isiteanalyticsValue || formData.get('total'),
+                    currency: form.dataset.isiteanalyticsCurrency || 'BYN',
+                    items: parseAnalyticsItems(form),
+                    source: 'tpl.checkout'
                 }
-            } catch (e) {
-                console.log('Error goal[ORDER]');
-            }
+            }));
 
             form.reset();
             form.classList.add('d-none');
@@ -397,6 +395,21 @@
         };
 
         xhr.send(formData);
+    }
+
+    function parseAnalyticsItems(form) {
+        if (!form || !form.dataset.isiteanalyticsItems) {
+            return [];
+        }
+
+        try {
+            const items = JSON.parse(form.dataset.isiteanalyticsItems);
+
+            return Array.isArray(items) ? items : [];
+        } catch (e) {
+            console.error('Invalid checkout analytics items', e);
+            return [];
+        }
     }
 
     function bindCheckoutForm(form) {

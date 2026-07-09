@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
   "name": "itheme",
-  "version": "1.0.42",
+  "version": "1.0.43",
   "description": "This file contains details of the assets used by Cassiopeia, the default Joomla site template.",
   "license": "GPL-2.0-or-later",
   "assets": [
@@ -21,42 +21,6 @@
       }
     },
     {
-      "name": "tpl.analytics",
-      "description": "Отслеживание событий для систем аналитики",
-      "type": "script",
-      "uri": "analytics.js",
-      "attributes" : {
-        "defer": true
-      }
-    },
-    {
-      "name": "tpl.google",
-      "description": "Локальный файл счетчика Google Аналитики",
-      "type": "script",
-      "uri": "google.js",
-      "attributes" : {
-        "async": true
-      }
-    },
-    {
-      "name": "tpl.yandex",
-      "description": "Локальный файл счетчика Яндекс Метрики",
-      "type": "script",
-      "uri": "metrika.js",
-      "attributes" : {
-        "async": true
-      }
-    },
-    {
-      "name": "tpl.tiktok",
-      "description": "Локальный файл пикселя TikTok",
-      "type": "script",
-      "uri": "tiktok.js",
-      "attributes" : {
-        "async": true
-      }
-    },
-    {
       "name": "tpl.itheme",
       "description": "Основной файл скриптов для данного шаблона",
       "type": "script",
@@ -68,7 +32,6 @@
       "dependencies": [
         "core",
         "tpl.lazyload",
-        "tpl.analytics",
         "tpl.drag-scroller"
       ]
     },

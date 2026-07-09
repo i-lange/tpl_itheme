@@ -9,7 +9,6 @@ const __dirname = path.dirname(__filename)
 
 const JS_ENTRY_FILES = [  
   'itheme.js',
-  'analytics.js',
   'headersticky.js',
   'offcanvas-slider.js',
   'phone_masker.js',

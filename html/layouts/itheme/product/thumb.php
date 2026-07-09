@@ -25,7 +25,10 @@ extract($displayData);
         <?php echo LayoutHelper::render('itheme.image_product_small', $item); ?>
     </div>
     <div class="product-thumb__title"><?php echo $item->title; ?></div>
-    <a class="stretched-link" href="<?php echo Route::_(RouteHelper::getProductRoute((int)$item->id, (int)$item->catid)); ?>">
+    <a class="stretched-link"
+       href="<?php echo Route::_(RouteHelper::getProductRoute((int)$item->id, (int)$item->catid)); ?>"
+       data-isiteanalytics-select-item
+       data-isiteanalytics-product-id="<?php echo (int) $item->id; ?>">
         <span class="visually-hidden"><?php echo $this->escape($item->fullname); ?></span>
     </a>
 </div>

@@ -34,23 +34,34 @@ $product = $this->item;
 $this->getModel()->hit($product->id);
 
 $currency = strtoupper($this->params->get('defaultCurrency', 'BYN'));
-$dataLayerItems = [];
-$dataLayerPrice = ($product->sale_price > 0) ? $product->sale_price : $product->price;
-$dataLayerItems[] = [
+$analyticsItems = [];
+$analyticsPrice = ($product->sale_price > 0) ? $product->sale_price : $product->price;
+$analyticsItems[] = [
     'item_id'       => $product->id,
     'item_name'     => $this->escape($product->fullname),
     'discount'      => $product->discount_size,
     'index'         => 1,
     'item_brand'    => $product->manufacturer_title,
     'item_category' => $product->category_title,
-    'price'         => $dataLayerPrice,
+    'price'         => $analyticsPrice,
     'quantity'      => 1,
 ];
-$jsonLayerItems = json_encode($dataLayerItems, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-$dataLayer = 'const dataLayerItems = ' . $jsonLayerItems . ';';
-$wa->addInlineScript($dataLayer);
-$dataLayer = 'gtag("event","view_item",{currency:"' . $currency . '",value:"' . $dataLayerPrice . '",items:dataLayerItems});';
-$wa->addInlineScript($dataLayer);
+$analyticsContext = json_encode([
+    'page'   => 'product',
+    'items'  => $analyticsItems,
+    'source' => 'tpl_itheme.product',
+], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+$analyticsEvent = json_encode([
+    'event'    => 'view_item',
+    'currency' => $currency,
+    'value'    => $analyticsPrice,
+    'items'    => $analyticsItems,
+    'source'   => 'tpl_itheme.product',
+], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+$wa->addInlineScript(
+    'document.dispatchEvent(new CustomEvent("isiteanalytics:context",{bubbles:true,detail:' . $analyticsContext . '}));' .
+    'document.dispatchEvent(new CustomEvent("isiteanalytics:ecommerce",{bubbles:true,detail:' . $analyticsEvent . '}));'
+);
 
 $showMobileActions = !empty($product->available);
 ?>

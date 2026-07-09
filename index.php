@@ -51,7 +51,6 @@ $hasSidebar = $hasSidebarLeft || $hasSidebarRight;
 <?php if ($this->params->get('setJivo', false) && ($jivo = $this->params->get('jivoUrl', false))) : ?>
     <script src="<?php echo $jivo; ?>" async></script>
 <?php endif; ?>
-<?php require JPATH_THEMES . '/itheme/analytics.php'; ?>
 	<jdoc:include type="scripts" />
 </head>
 <body class="<?php echo $page_class; ?>">

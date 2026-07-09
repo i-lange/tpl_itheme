@@ -7,11 +7,10 @@
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>pavel@ilange.ru</authorEmail>
     <authorUrl>https://ilange.ru/en/contact</authorUrl>
-    <version>1.0.42</version>
+    <version>1.0.43</version>
     <description>TPL_ITHEME_XML_DESCRIPTION</description>
     <inheritable>1</inheritable>
     <files>
-        <filename>analytics.php</filename>
         <filename>component.php</filename>
         <filename>error.php</filename>
         <filename>footer.php</filename>
@@ -1616,53 +1615,6 @@
                        type="text"
                        default=""
                        label="TPL_ITHEME_CONTACTS_YOUTUBE_LABEL"
-                       filter="string" />
-            </fieldset>
-            <fieldset name="analytics" label="TPL_ITHEME_ANALYTICS_FIELDSET_LABEL">
-                <field name="setGoogle"
-                       type="radio"
-                       label="TPL_ITHEME_ANALYTICS_GOOGLE_LABEL"
-                       layout="joomla.form.field.radio.switcher"
-                       default="0"
-                       filter="integer">
-                    <option value="0">JNO</option>
-                    <option value="1">JYES</option>
-                </field>
-                <field name="googleId"
-                       type="text"
-                       default=""
-                       label="TPL_ITHEME_ANALYTICS_GOOGLE_ID_LABEL"
-                       showon="setGoogle:1"
-                       filter="string" />
-                <field name="setYandex"
-                       type="radio"
-                       label="TPL_ITHEME_ANALYTICS_YANDEX_LABEL"
-                       layout="joomla.form.field.radio.switcher"
-                       default="0"
-                       filter="integer">
-                    <option value="0">JNO</option>
-                    <option value="1">JYES</option>
-                </field>
-                <field name="yandexId"
-                       type="text"
-                       default=""
-                       label="TPL_ITHEME_ANALYTICS_YANDEX_ID_LABEL"
-                       showon="setYandex:1"
-                       filter="string" />
-                <field name="setTiktok"
-                       type="radio"
-                       label="TPL_ITHEME_ANALYTICS_TIKTOK_LABEL"
-                       layout="joomla.form.field.radio.switcher"
-                       default="0"
-                       filter="integer">
-                    <option value="0">JNO</option>
-                    <option value="1">JYES</option>
-                </field>
-                <field name="tiktokId"
-                       type="text"
-                       default=""
-                       label="TPL_ITHEME_ANALYTICS_TIKTOK_ID_LABEL"
-                       showon="setTiktok:1"
                        filter="string" />
             </fieldset>
             <fieldset name="seo" label="TPL_ITHEME_SEO_FIELDSET_LABEL">

@@ -16,10 +16,9 @@ $app = Factory::getApplication();
 $doc = $app->getDocument();
 $wa = $doc->getWebAssetManager();
 $currency = strtoupper($this->params->get('defaultCurrency', 'BYN'));
-
-$dataLayerItems = [];
+$analyticsItems = [];
 foreach ($this->items as $i => $product) {
-    $dataLayerItems[] = [
+    $analyticsItems[] = [
         'item_id'       => $product->id,
         'item_name'     => $this->escape($product->fullname),
         'discount'      => $product->discount_size,
@@ -30,11 +29,28 @@ foreach ($this->items as $i => $product) {
         'quantity'      => 1,
     ];
 }
-$jsonLayerItems = json_encode($dataLayerItems, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-$dataLayer = 'window.dataLayerItems=' . $jsonLayerItems . ';window.iThemePendingEcommerceItems=(window.iThemePendingEcommerceItems||[]).concat(window.dataLayerItems);if(window.iTheme&&typeof window.iTheme.registerEcommerceItems==="function"){window.iTheme.registerEcommerceItems(window.dataLayerItems);}';
-$wa->addInlineScript($dataLayer);
-$dataLayer = 'gtag("event","view_item_list",{currency:"' . $currency . '",item_list_id:"' . $this->category->id . '",item_list_name:"' . $this->category->title . '",items:window.dataLayerItems});';
-$wa->addInlineScript($dataLayer);
+
+$analyticsList = [
+    'item_list_id'   => (string) $this->category->id,
+    'item_list_name' => (string) $this->category->title,
+];
+$analyticsContext = json_encode([
+    'page'   => 'category',
+    'list'   => $analyticsList,
+    'items'  => $analyticsItems,
+    'source' => 'tpl_itheme.category',
+], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+$analyticsEvent = json_encode([
+    'event'    => 'view_item_list',
+    'currency' => $currency,
+    'list'     => $analyticsList,
+    'items'    => $analyticsItems,
+    'source'   => 'tpl_itheme.category',
+], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+$wa->addInlineScript(
+    'document.dispatchEvent(new CustomEvent("isiteanalytics:context",{bubbles:true,detail:' . $analyticsContext . '}));' .
+    'document.dispatchEvent(new CustomEvent("isiteanalytics:ecommerce",{bubbles:true,detail:' . $analyticsEvent . '}));'
+);
 ?>
 <?php foreach ($this->items as $product) : ?>
     <?php echo LayoutHelper::render('itheme.product.small', ['item' => $product, 'params' => $this->params]) ?>

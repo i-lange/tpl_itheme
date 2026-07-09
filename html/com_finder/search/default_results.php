@@ -47,10 +47,10 @@ if ($this->total > 0) {
     $results = $model->getItems();
 
     $currency = strtoupper($this->params->get('defaultCurrency', 'BYN'));
-    $dataLayerItems = [];
+    $analyticsItems = [];
 
     foreach ((array) $results as $i => $product) {
-        $dataLayerItems[] = [
+        $analyticsItems[] = [
             'item_id'       => (int) $product->id,
             'item_name'     => $this->escape($product->fullname),
             'discount'      => (float) $product->discount_size,
@@ -62,12 +62,27 @@ if ($this->total > 0) {
         ];
     }
 
-    $jsonLayerItems = json_encode($dataLayerItems, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-    $jsonListName = json_encode((string) $this->query->input, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-    $dataLayer = 'window.iThemePendingEcommerceItems=(window.iThemePendingEcommerceItems||[]).concat(' . $jsonLayerItems . ');';
-    $dataLayer .= 'if(window.iTheme&&typeof window.iTheme.registerEcommerceItems==="function"){window.iTheme.registerEcommerceItems(' . $jsonLayerItems . ');}';
-    $dataLayer .= 'if(typeof gtag==="function"){gtag("event","view_item_list",{currency:"' . $currency . '",item_list_id:"finder",item_list_name:' . $jsonListName . ',items:' . $jsonLayerItems . '});}';
-    $app->getDocument()->getWebAssetManager()->addInlineScript($dataLayer);
+    $analyticsList = [
+        'item_list_id'   => 'finder',
+        'item_list_name' => (string) $this->query->input,
+    ];
+    $analyticsContext = json_encode([
+        'page'   => 'finder',
+        'list'   => $analyticsList,
+        'items'  => $analyticsItems,
+        'source' => 'tpl_itheme.finder',
+    ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+    $analyticsEvent = json_encode([
+        'event'    => 'view_item_list',
+        'currency' => $currency,
+        'list'     => $analyticsList,
+        'items'    => $analyticsItems,
+        'source'   => 'tpl_itheme.finder',
+    ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+    $app->getDocument()->getWebAssetManager()->addInlineScript(
+        'document.dispatchEvent(new CustomEvent("isiteanalytics:context",{bubbles:true,detail:' . $analyticsContext . '}));' .
+        'document.dispatchEvent(new CustomEvent("isiteanalytics:ecommerce",{bubbles:true,detail:' . $analyticsEvent . '}));'
+    );
 }
 
 $limit = max(1, (int) $this->pagination->limit);

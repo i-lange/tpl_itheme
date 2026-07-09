@@ -143,6 +143,60 @@
 		delete button.dataset.previousAriaBusy;
 	}
 
+	function parseProductQuantity(value) {
+		var quantity = parseInt(value, 10);
+
+		return Number.isFinite(quantity) && quantity > 0 ? quantity : 1;
+	}
+
+	function parsePurchaseItems(formData) {
+		var rawProducts = formData.get('products');
+		var items = [];
+
+		if (rawProducts) {
+			try {
+				var products = JSON.parse(rawProducts);
+				if (Array.isArray(products)) {
+					items = products.map(function (product, index) {
+						return {
+							item_id: product.item_id || product.product_id || product.id,
+							item_name: product.item_name || product.product_name || product.name || '',
+							price: product.price || product.product_price || 0,
+							quantity: parseProductQuantity(product.quantity || product.count || 1),
+							index: index
+						};
+					}).filter(function (item) {
+						return item.item_id;
+					});
+				}
+			} catch (e) {
+				console.error('Invalid form analytics products', e);
+			}
+		}
+
+		return items;
+	}
+
+	function getCurrentAnalyticsProductId() {
+		var history = window.iSiteAnalytics && Array.isArray(window.iSiteAnalytics.history)
+			? window.iSiteAnalytics.history
+			: [];
+
+		for (var index = history.length - 1; index >= 0; index -= 1) {
+			var payload = history[index];
+
+			if (!payload || payload.type !== 'ecommerce' || payload.event !== 'view_item') {
+				continue;
+			}
+
+			if (Array.isArray(payload.items) && payload.items[0] && payload.items[0].item_id) {
+				return payload.items[0].item_id;
+			}
+		}
+
+		return '';
+	}
+
 	function iformProcess(form) {
 		if (!window.iTheme || typeof window.iTheme.Validate !== 'function') {
 			console.error('iTheme.Validate is not available');
@@ -202,13 +256,20 @@
 				return;
 			}
 
-			try {
-				if (window.iTheme && typeof window.iTheme.setEcommerce === 'function') {
-					window.iTheme.setEcommerce('purchase', formData.get('item_id'), 1);
+			var productId = formData.get('item_id') || getCurrentAnalyticsProductId();
+
+			document.dispatchEvent(new CustomEvent('isiteanalytics:ecommerce', {
+				bubbles: true,
+				detail: {
+					event: 'purchase',
+					transaction_id: Date.now().toString(16),
+					product_id: productId,
+					quantity: 1,
+					value: formData.get('total') || undefined,
+					items: parsePurchaseItems(formData),
+					source: 'tpl.form-submit'
 				}
-			} catch (e) {
-				console.error('Ecommerce tracking error', e);
-			}
+			}));
 
 			showThankYou(form);
 		};

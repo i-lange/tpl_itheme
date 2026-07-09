@@ -20,9 +20,9 @@ use Ilange\Component\Ishop\Site\Helper\ImageHelper;
 $wa = $this->getDocument()->getWebAssetManager();
 
 $currency = strtoupper($this->params->get('defaultCurrency', 'BYN'));
-$dataLayerItems = [];
+$analyticsItems = [];
 foreach ($this->products as $i => $product) {
-    $dataLayerItems[] = [
+    $analyticsItems[] = [
             'item_id'       => $product->id,
             'item_name'     => $this->escape($product->fullname),
             'discount'      => $product->discount_size,
@@ -32,11 +32,28 @@ foreach ($this->products as $i => $product) {
             'quantity'      => 1,
     ];
 }
-$jsonLayerItems = json_encode($dataLayerItems, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-$dataLayer = 'const dataLayerItems = ' . $jsonLayerItems . ';';
-$wa->addInlineScript($dataLayer);
-$dataLayer = 'gtag("event","view_item_list",{currency:"' . $currency . '",item_list_id:"0",item_list_name:"' . Text::_('TPL_ITHEME_BEST_PRODUCTS') . '",items:dataLayerItems});';
-$wa->addInlineScript($dataLayer);
+
+$analyticsList = [
+    'item_list_id'   => '0',
+    'item_list_name' => Text::_('TPL_ITHEME_BEST_PRODUCTS'),
+];
+$analyticsContext = json_encode([
+    'page'   => 'frontpage',
+    'list'   => $analyticsList,
+    'items'  => $analyticsItems,
+    'source' => 'tpl_itheme.frontpage',
+], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+$analyticsEvent = json_encode([
+    'event'    => 'view_item_list',
+    'currency' => $currency,
+    'list'     => $analyticsList,
+    'items'    => $analyticsItems,
+    'source'   => 'tpl_itheme.frontpage',
+], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+$wa->addInlineScript(
+    'document.dispatchEvent(new CustomEvent("isiteanalytics:context",{bubbles:true,detail:' . $analyticsContext . '}));' .
+    'document.dispatchEvent(new CustomEvent("isiteanalytics:ecommerce",{bubbles:true,detail:' . $analyticsEvent . '}));'
+);
 ?>
 <h2><?php echo Text::_('TPL_ITHEME_BEST_PRODUCTS'); ?></h2>
 
