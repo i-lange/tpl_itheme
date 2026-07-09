@@ -9,8 +9,12 @@
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
+
+$wa = Factory::getApplication()->getDocument()->getWebAssetManager();
+$wa->useScript('tpl.warehouse-stock-filter');
 ?>
 <h1><?php echo $this->item->title; ?></h1>
     <div class="warhouse-full mb-3">
@@ -48,22 +52,26 @@ use Joomla\CMS\Layout\LayoutHelper;
 <?php endif; ?>
  <?php if (!empty($this->stock)) : ?>
     <h2 class="mt-5">Товары в наличии</h2>
-    <div class="scroll-items-list mb-3 gap-1 gap-md-2" data-drag-scroller data-drag-scroller-interactive>
-        <button class="btn btn-tag active" type="button">
-            <span class="btn-title">Все товары</span>
-        </button>
-    <?php foreach ($this->stock as $category) : ?>
-        <button class="btn btn-tag" type="button" data-instock-category="<?php echo $category->alias; ?>">
-            <span class="btn-title"><?php echo $category->title; ?>&nbsp;(<?php echo $category->count; ?>)</span>
-        </button>
-    <?php endforeach; ?>
-    </div>
-    <div class="products__grid mb-5">
-    <?php foreach ($this->stock as $category) : ?>
-        <?php if (!$category->count) continue; ?>
-        <?php foreach ($category->products as $product) : ?>
-            <?php echo LayoutHelper::render('itheme.product.small', ['item' => $product, 'params' => $this->params]) ?>
+    <div data-warehouse-stock-filter>
+        <div class="scroll-items-list mb-3 gap-1 gap-md-2" data-drag-scroller data-drag-scroller-interactive>
+            <button class="btn btn-tag active" type="button" data-instock-category="" aria-pressed="true">
+                <span class="btn-title">Все товары</span>
+            </button>
+        <?php foreach ($this->stock as $category) : ?>
+            <?php $categoryAlias = (string) $category->alias; ?>
+            <button class="btn btn-tag" type="button" data-instock-category="<?php echo htmlspecialchars($categoryAlias, ENT_COMPAT, 'UTF-8'); ?>" aria-pressed="false">
+                <span class="btn-title"><?php echo $category->title; ?>&nbsp;(<?php echo $category->count; ?>)</span>
+            </button>
         <?php endforeach; ?>
-    <?php endforeach; ?>
+        </div>
+        <div class="products__grid mb-5">
+        <?php foreach ($this->stock as $category) : ?>
+            <?php if (!$category->count) continue; ?>
+            <?php $categoryAlias = (string) $category->alias; ?>
+            <?php foreach ($category->products as $product) : ?>
+                <?php echo LayoutHelper::render('itheme.product.small', ['item' => $product, 'params' => $this->params, 'instockCategory' => $categoryAlias]) ?>
+            <?php endforeach; ?>
+        <?php endforeach; ?>
+        </div>
     </div>
 <?php endif; ?>

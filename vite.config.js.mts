@@ -17,6 +17,7 @@ const JS_ENTRY_FILES = [
   'checkout.js',
   'form-submit.js',
   'drag-scroller.js',
+  'warehouse-stock-filter.js',
   'category-sticky-toolbar.js',
   'compare-sticky.js',
   'gallery.js',

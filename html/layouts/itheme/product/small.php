@@ -26,6 +26,11 @@ if (empty($params)) {
     $params = ComponentHelper::getParams('com_ishop');
 }
 
+$instockCategory = isset($instockCategory) ? (string) $instockCategory : '';
+$instockCategoryAttribute = $instockCategory !== ''
+    ? ' data-instock-product-category="' . htmlspecialchars($instockCategory, ENT_COMPAT, 'UTF-8') . '"'
+    : '';
+
 $wa = Factory::getApplication()->getDocument()->getWebAssetManager();
 $wa->getRegistry()->addExtensionRegistryFile('com_ishop');
 
@@ -41,7 +46,7 @@ if ($params->get('use_js', true) && $params->get('use_wishlist', false)) {
     $wa->useScript('com_ishop.addtowishlist');
 }
 ?>
-<article class="product-small" data-product-id="<?php echo $item->id; ?>">
+<article class="product-small" data-product-id="<?php echo $item->id; ?>"<?php echo $instockCategoryAttribute; ?>>
     <div class="product-small__body">
         <div class="product-small__image ratio ratio-3x4 <?php echo ($item->discount_size > 0) ? 'sale' : '' ;?>">
             <?php echo LayoutHelper::render('itheme.image_product_small', $item); ?>
