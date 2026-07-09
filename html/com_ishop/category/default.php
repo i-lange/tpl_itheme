@@ -102,7 +102,12 @@ if ($this->state->get('filter.warehouse_id', false) !== false) {
         <?php if (!empty($this->filter_seo_links)) : ?>
             <div class="scroll-items-list gap-1 gap-md-2 w-100" data-drag-scroller data-drag-scroller-interactive>
                 <?php foreach ($this->filter_seo_links as $link) : ?>
-                    <a class="btn btn-tag<?php echo $link->active ? ' active' : ''; ?>"
+                    <?php
+                    $linkClass = 'btn btn-tag';
+                    $linkClass .= !empty($link->is_all) ? ' btn-tag-all' : '';
+                    $linkClass .= $link->active ? ' active' : '';
+                    ?>
+                    <a class="<?php echo $linkClass; ?>"
                        href="<?php echo htmlspecialchars($link->url, ENT_COMPAT, 'UTF-8'); ?>"<?php echo $link->active ? ' aria-current="page"' : ''; ?>>
                         <span class="btn-title"><?php echo $this->escape($link->title); ?></span>
                     </a>
