@@ -97,52 +97,64 @@ if ($this->state->get('filter.warehouse_id', false) !== false) {
     <p class=""><?php echo Text::_('COM_ISHOP_CATEGORY_FILTER_RESET'); ?></p>
 </div>
 <?php else: ?>
-    <div class="category-toolbar mb-3 d-flex justify-content-between"
+    <div class="category-toolbar mb-3 d-flex flex-column"
          data-category-sticky-toolbar>
-        <div class="dropdown">
-            <button class="btn btn-link btn-tools dropdown-toggle"
-                    type="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                <?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-sort-' . $sort]); ?>
-                <?php echo Text::_('COM_ISHOP_ORDER_' . $text); ?></button>
-            <ul class="dropdown-menu">
-                <?php foreach ($orderingList as $item) : ?>
-                    <?php
-                    $full = $item->field . ' ' . $item->dir;
-                    $attribs = ($full == $fullOrdering)
-                            ? ' class="dropdown-item active"'
-                            : ' class="dropdown-item" onclick="document.getElementById(\'filter_ordering\').value=\'' . $item->field .
-                            '\';document.getElementById(\'filter_direction\').value=\'' . $item->dir .
-                            '\';document.getElementById(\'category-ordering\').submit();"';
-                    ?>
-                    <li><a <?php echo $attribs; ?> href="#"><?php echo Text::_('COM_ISHOP_ORDER_' . ltrim($item->field, 'a.')  . '_' . $item->dir); ?></a></li>
+        <?php if (!empty($this->filter_seo_links)) : ?>
+            <div class="scroll-items-list mb-3 gap-1 gap-md-2 w-100" data-drag-scroller data-drag-scroller-interactive>
+                <?php foreach ($this->filter_seo_links as $link) : ?>
+                    <a class="btn btn-tag<?php echo $link->active ? ' active' : ''; ?>"
+                       href="<?php echo htmlspecialchars($link->url, ENT_COMPAT, 'UTF-8'); ?>"<?php echo $link->active ? ' aria-current="page"' : ''; ?>>
+                        <span class="btn-title"><?php echo $this->escape($link->title); ?></span>
+                    </a>
                 <?php endforeach; ?>
-            </ul>
-        </div>
-        <form id="category-ordering"
-              class="d-none"
-              action="<?php echo htmlspecialchars(Uri::getInstance()->toString()); ?>"
-              method="post"
-              name="category-ordering">
-            <input type="hidden" name="filter_order" id="filter_ordering" value="<?php echo $ordering; ?>">
-            <input type="hidden" name="filter_order_Dir" id="filter_direction" value="<?php echo $direction; ?>">
-        </form>
-        <?php if ($showFilter) : ?>
-            <button class="btn btn-link btn-tools d-lg-none"
-                    type="button"
-                    data-bs-toggle="offcanvas"
-                    data-bs-target="#moduleFilter"
-                    aria-controls="moduleFilter"
-                    aria-label="<?php echo Text::_('TPL_ITHEME_FILTER_ANCHOR'); ?>"
-                    title="<?php echo Text::_('COM_ISHOP_MSG_OPEN_FILTER'); ?>">
-                <?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-funnel']); ?>
-                <span><?php echo Text::_('TPL_ITHEME_FILTER_ANCHOR'); ?></span>
-                <?php if ($this->filter_object->active_count > 0) : ?>
-                    <small class="badge text-bg-primary rounded-pill"><?php echo $this->filter_object->active_count; ?></small>
-                <?php endif; ?>
-            </button>
+            </div>
         <?php endif; ?>
+        <div class="category-toolbar__controls d-flex justify-content-between w-100">
+            <div class="dropdown">
+                <button class="btn btn-link btn-tools dropdown-toggle"
+                        type="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                    <?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-sort-' . $sort]); ?>
+                    <?php echo Text::_('COM_ISHOP_ORDER_' . $text); ?></button>
+                <ul class="dropdown-menu">
+                    <?php foreach ($orderingList as $item) : ?>
+                        <?php
+                        $full = $item->field . ' ' . $item->dir;
+                        $attribs = ($full == $fullOrdering)
+                                ? ' class="dropdown-item active"'
+                                : ' class="dropdown-item" onclick="document.getElementById(\'filter_ordering\').value=\'' . $item->field .
+                                '\';document.getElementById(\'filter_direction\').value=\'' . $item->dir .
+                                '\';document.getElementById(\'category-ordering\').submit();"';
+                        ?>
+                        <li><a <?php echo $attribs; ?> href="#"><?php echo Text::_('COM_ISHOP_ORDER_' . ltrim($item->field, 'a.')  . '_' . $item->dir); ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+            <form id="category-ordering"
+                  class="d-none"
+                  action="<?php echo htmlspecialchars(Uri::getInstance()->toString()); ?>"
+                  method="post"
+                  name="category-ordering">
+                <input type="hidden" name="filter_order" id="filter_ordering" value="<?php echo $ordering; ?>">
+                <input type="hidden" name="filter_order_Dir" id="filter_direction" value="<?php echo $direction; ?>">
+            </form>
+            <?php if ($showFilter) : ?>
+                <button class="btn btn-link btn-tools d-lg-none"
+                        type="button"
+                        data-bs-toggle="offcanvas"
+                        data-bs-target="#moduleFilter"
+                        aria-controls="moduleFilter"
+                        aria-label="<?php echo Text::_('TPL_ITHEME_FILTER_ANCHOR'); ?>"
+                        title="<?php echo Text::_('COM_ISHOP_MSG_OPEN_FILTER'); ?>">
+                    <?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-funnel']); ?>
+                    <span><?php echo Text::_('TPL_ITHEME_FILTER_ANCHOR'); ?></span>
+                    <?php if ($this->filter_object->active_count > 0) : ?>
+                        <small class="badge text-bg-primary rounded-pill"><?php echo $this->filter_object->active_count; ?></small>
+                    <?php endif; ?>
+                </button>
+            <?php endif; ?>
+        </div>
     </div>
     <div class="products__grid"
          data-ishop-products
