@@ -7,7 +7,7 @@
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>pavel@ilange.ru</authorEmail>
     <authorUrl>https://ilange.ru/en/contact</authorUrl>
-    <version>1.0.43</version>
+    <version>1.0.44</version>
     <description>TPL_ITHEME_XML_DESCRIPTION</description>
     <inheritable>1</inheritable>
     <files>
@@ -1525,6 +1525,11 @@
                        default=""
                        label="TPL_ITHEME_CONTACTS_UNP_LABEL"
                        filter="string" />
+                <field name="siteAccount"
+                       type="text"
+                       default=""
+                       label="TPL_ITHEME_CONTACTS_ACCOUNT_LABEL"
+                       filter="string" />
                 <field name="siteRegistration"
                        type="text"
                        default=""
@@ -1616,6 +1621,16 @@
                        default=""
                        label="TPL_ITHEME_CONTACTS_YOUTUBE_LABEL"
                        filter="string" />
+                <field name="siteWildberries"
+                       type="url"
+                       default=""
+                       label="TPL_ITHEME_CONTACTS_WILDBERRIES_LABEL"
+                       filter="url" />
+                <field name="siteOzon"
+                       type="url"
+                       default=""
+                       label="TPL_ITHEME_CONTACTS_OZON_LABEL"
+                       filter="url" />
             </fieldset>
             <fieldset name="seo" label="TPL_ITHEME_SEO_FIELDSET_LABEL">
                 <field name="googleVerification"

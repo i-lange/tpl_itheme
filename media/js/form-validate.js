@@ -28,14 +28,20 @@
         });
 
         if(!error) {
-            // выбираем все обязательные Email-поля
             const emails = form.querySelectorAll('input[type=email]');
             emails.forEach(function(email) {
-                if (emailPattern.test(email.value)) {
+                const value = email.value.trim();
+
+                if (value === '' && !email.required) {
+                    email.classList.remove('is-invalid');
+                    return;
+                }
+
+                if (emailPattern.test(value)) {
                     email.classList.remove('is-invalid');
                 }
                 else {
-                    email.parentNode.classList.add('is-invalid');
+                    email.classList.add('is-invalid');
                     error = true;
                 }
             });

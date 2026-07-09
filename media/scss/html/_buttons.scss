@@ -129,3 +129,27 @@
   --btn-active-bg: color-mix(in srgb, #000 20%, #7360f2 100%);
   --btn-active-border-color: color-mix(in srgb, #000 25%, #7360f2 100%);
 }
+
+.btn-youtube {
+  --btn-color: var(--white);
+  --btn-bg: #ff0000;
+  --btn-border-color: #ff0000;
+  --btn-hover-color: var(--white);
+  --btn-hover-bg: #cc0000;
+  --btn-hover-border-color: #cc0000;
+  --btn-active-color: var(--white);
+  --btn-active-bg: #b30000;
+  --btn-active-border-color: #b30000;
+}
+
+.btn-wildberries {
+  --btn-color: var(--white);
+  --btn-bg: #cb11ab;
+  --btn-border-color: #cb11ab;
+  --btn-hover-color: var(--white);
+  --btn-hover-bg: #a60d8c;
+  --btn-hover-border-color: #a60d8c;
+  --btn-active-color: var(--white);
+  --btn-active-bg: #8f0b79;
+  --btn-active-border-color: #8f0b79;
+}

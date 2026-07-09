@@ -105,7 +105,7 @@ $formId = 'i-form-' . $module->id;
         </form>
         <div class="form_thank_you text-center">
             <?php echo LayoutHelper::render('itheme.icon', ['icon' => 'i-smile', 'class' => 'mega primary']); ?>
-            <span class="mt-1"><?php echo Text::_('TPL_ITHEME_FEEDBACK_THANK'); ?></span>
+            <p class="mt-1"><?php echo Text::_('TPL_ITHEME_FEEDBACK_THANK'); ?></p>
         </div>
     </div>
     <?php if ($params->get('show_text')) : ?>

@@ -36,7 +36,7 @@ $doc = Factory::getApplication()->getDocument();
 $rend = $doc->loadRenderer('module');
 $sidebar = (isset(ModuleHelper::getModules('sidebar-news')[0])) ? ModuleHelper::getModules('sidebar-news')[0] : false;
 ?>
-<div class="row gy-4">
+<div class="row gy-4 gx-5">
 <article class="col-12 <?php echo ($sidebar) ? 'col-md-7 col-lg-9 ' : ''; ?><?php echo $this->pageclass_sfx; ?>">
     <meta itemprop="inLanguage" content="<?php echo ($this->item->language === '*') ? Factory::getApplication()->get('language') : $this->item->language; ?>">
     <?php if (!empty($this->item->pagination) && !$this->item->paginationposition && $this->item->paginationrelative) {
