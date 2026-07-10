@@ -14355,7 +14355,8 @@ body {
 }
 .offcanvas-body .btn-back {
   position: relative;
-  width: stretch;
+  min-width: 100%;
+  width: -webkit-fill-available;
   text-align: left;
   --btn-color: var(--body-color);
   --btn-hover-bg: var(--gray-100);
