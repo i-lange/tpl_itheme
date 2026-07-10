@@ -13089,6 +13089,10 @@ body {
   }
 }
 
+.vw_frontpage .template-main {
+  padding-top: 0;
+}
+
 .vw_product .template-main {
   padding-top: 0;
 }
