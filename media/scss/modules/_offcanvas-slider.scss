@@ -73,14 +73,15 @@
 
   .btn-back {
     position: relative;
-    width: 100%;
+    width: stretch;
     text-align: left;
     --btn-color: var(--body-color);
     --btn-hover-bg: var(--gray-100);
     border: none;
-    padding-top: 0;
-    padding-left: 0;
-    margin: 0;
+    padding-left: 1.5rem;
+    margin: -1rem -1rem 1rem;
+    border-radius: 0;
+    border-bottom: 1px solid var(--border-color);
 
     &:before {
       content: "";
