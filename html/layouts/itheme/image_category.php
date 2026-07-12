@@ -23,7 +23,7 @@ if (empty($src)) {
 $layoutAttr = [
     'src' => $src,
     'alt' => $params->get('image_alt'),
-    'class' => 'w-100',
+    'class' => 'object-fit-cover',
     'sizes' => '(max-width: 439px) 100vw, 50vw',
 ];
 

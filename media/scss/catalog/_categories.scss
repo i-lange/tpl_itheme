@@ -2,56 +2,20 @@
 // Карточки для списка категорий
 // =============================================================================
 .catalog__card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  position: relative;
   text-decoration: none;
-  background-color: $white;
-  border: 1px solid $gray-200;
-  border-radius: $border-radius-lg;
-  overflow: hidden;
-  transition:
-          box-shadow 0.2s ease,
-          border-color 0.2s ease,
-          transform 0.2s ease;
-
-  &:hover {
-    box-shadow: 0 .25rem 1.25rem rgba($gray-900, 0.1);
-    border-color: rgba($primary, 0.25);
-    transform: translateY(-2px);
-    text-decoration: none;
-  }
 }
 
 .catalog__card-img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
   overflow: hidden;
-  background-color: $gray-100;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-    transition: transform 0.3s ease;
-  }
-
-  .catalog__card:hover & img {
-    transform: scale(1.04);
-  }
+  border-radius: $border-radius-lg;
 }
 
 .catalog__card-title {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: $gray-800;
+  font-size: 1rem;
+  font-weight: 400;
   text-align: center;
-  padding: 0.625rem 0.625rem 0.75rem;
-  line-height: 1.3;
-  width: 100%;
-  transition: color 0.15s ease;
+  margin-top: .5rem;
 
   .catalog__card:hover & {
     color: var(--primary);

@@ -22,16 +22,17 @@ use Ilange\Component\Ishop\Site\Helper\ImageHelper;
 <div class="catalog__grid">
 <?php if (count($this->categories) > 0) : ?>
     <?php foreach ($this->categories as $id => $item) : ?>
-        <a href="<?php echo Route::_(RouteHelper::getCategoryRoute($item->id, $item->language)); ?>"
-           class="catalog__card"
-           aria-label="<?php echo $this->escape($item->title); ?>">
+        <div class="catalog__card">
             <?php if ($this->params->get('show_description_image') && $item->getParams()->get('image')) : ?>
-                <div class="catalog__card-img">
+                <div class="catalog__card-img ratio ratio-1x1">
                     <?php echo LayoutHelper::render('itheme.image_category', $item); ?>
                 </div>
             <?php endif; ?>
-            <span class="catalog__card-title"><?php echo $this->escape($item->title); ?></span>
-        </a>
+            <h3 class="catalog__card-title"><?php echo $this->escape($item->title); ?></h3>
+            <a class="stretched-link"
+               aria-label="<?php echo $this->escape($item->title); ?>"
+               href="<?php echo Route::_(RouteHelper::getCategoryRoute($item->id, $item->language)); ?>"></a>
+        </div>
     <?php endforeach; ?>
 <?php endif; ?>
 </div>
