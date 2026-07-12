@@ -12694,18 +12694,30 @@ body {
   margin: 0 auto;
 }
 .promo-carousel .carousel-indicators [data-bs-target] {
+  position: relative;
   flex: 1 1 0;
   width: auto;
-  height: 0.1875rem;
+  height: 2.75rem;
   margin: 0;
   border: 0;
-  border-radius: 1rem;
-  opacity: 0.55;
-  background-color: #fefefe;
+  opacity: 1;
+  background-color: transparent;
   background-clip: border-box;
-  transition: opacity 0.2s ease, background-color 0.2s ease;
 }
-.promo-carousel .carousel-indicators [data-bs-target].active {
+.promo-carousel .carousel-indicators [data-bs-target]:before {
+  position: absolute;
+  content: "";
+  top: 50%;
+  right: 0;
+  left: 0;
+  height: 0.1875rem;
+  border-radius: 1rem;
+  background-color: #fefefe;
+  opacity: 0.55;
+  transform: translateY(-50%);
+  transition: opacity 0.2s ease;
+}
+.promo-carousel .carousel-indicators [data-bs-target].active:before {
   opacity: 1;
 }
 @media (min-width: 768px) {
@@ -13179,6 +13191,7 @@ body {
 
 .vw_frontpage .template-main {
   padding-top: 0;
+  padding-bottom: 0;
 }
 
 .vw_product .template-main {

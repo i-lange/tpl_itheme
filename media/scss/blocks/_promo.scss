@@ -22,20 +22,31 @@
     margin: 0 auto;
 
     [data-bs-target] {
+      position: relative;
       flex: 1 1 0;
       width: auto;
-      height: .1875rem;
+      height: 2.75rem;
       margin: 0;
       border: 0;
-      border-radius: 1rem;
-      opacity: .55;
-      background-color: $white;
+      opacity: 1;
+      background-color: transparent;
       background-clip: border-box;
-      transition:
-              opacity .2s ease,
-              background-color .2s ease;
 
-      &.active {
+      &:before {
+        position: absolute;
+        content: "";
+        top: 50%;
+        right: 0;
+        left: 0;
+        height: .1875rem;
+        border-radius: 1rem;
+        background-color: $white;
+        opacity: .55;
+        transform: translateY(-50%);
+        transition: opacity .2s ease;
+      }
+
+      &.active:before {
         opacity: 1;
       }
     }

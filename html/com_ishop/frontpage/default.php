@@ -24,16 +24,18 @@ defined('_JEXEC') or die;
     </div>
 </div>
 <?php endif; ?>
-<div class="container py-5">
-    <?php if ($this->params->get('frontpage_show_products')) : ?>
+<?php if ($this->params->get('frontpage_show_products')) : ?>
+    <div class="container py-5">
         <?php echo $this->loadTemplate('products'); ?>
-    <?php endif; ?>
-    <?php if ($this->params->get('frontpage_show_article') && !empty($this->text)) : ?>
-    <div class="mt-5">
-        <?php if ($this->params->get('show_page_heading')) : ?>
-            <h1><?php echo $this->params->get('page_heading'); ?></h1>
-        <?php endif; ?>
-        <?php echo $this->text->introtext . $this->text->fulltext; ?>
     </div>
-    <?php endif; ?>
-</div>
+<?php endif; ?>
+<?php if ($this->params->get('frontpage_show_article') && !empty($this->text)) : ?>
+    <div class="bg-light py-5 mt-5">
+        <div class="container">
+            <?php if ($this->params->get('show_page_heading')) : ?>
+                <h1><?php echo $this->params->get('page_heading'); ?></h1>
+            <?php endif; ?>
+            <?php echo $this->text->introtext . $this->text->fulltext; ?>
+        </div>
+    </div>
+<?php endif; ?>
