@@ -12,9 +12,9 @@ defined('_JEXEC') or die;
 <?php if ($this->params->get('frontpage_show_slider')) : ?>
     <?php echo $this->loadTemplate('slider'); ?>
 <?php endif; ?>
-<?php if ($this->params->get('frontpage_show_services')) : ?>
+<?php if ($this->params->get('frontpage_show_services') || $this->params->get('frontpage_show_brand')) : ?>
 <div class="container py-5">
-        <?php echo $this->loadTemplate('services'); ?>
+    <?php echo $this->loadTemplate('services'); ?>
 </div>
 <?php endif; ?>
 <?php if ($this->params->get('frontpage_show_categories')) : ?>
