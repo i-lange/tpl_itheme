@@ -13,15 +13,15 @@ use Joomla\CMS\Layout\LayoutHelper;
 
 extract($displayData);
 
-if (empty($image)) {
+if (empty($bg_image)) {
     return;
 }
 
 $layoutAttr = [
-    'src' => $image,
-    'alt' => empty($title) ? false : $title,
-    'class' => 'w-100',
-    'sizes' => '(max-width: 439px) 100vw, 50vw',
+    'src' => $bg_image,
+    'alt' => false,
+    'class' => 'promo__slide-bg-image w-100 h-100 object-fit-cover',
+    'sizes' => '100vw',
 ];
 
 echo LayoutHelper::render('itheme.image', $layoutAttr);

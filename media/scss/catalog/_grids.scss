@@ -73,6 +73,7 @@
 .vw_product {
   .template-main {
     padding-top: 0;
+    padding-bottom: 0;
 
     @include media-breakpoint-up(sm) {
       padding-top: 1.25rem;
