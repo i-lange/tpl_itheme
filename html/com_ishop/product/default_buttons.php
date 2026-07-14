@@ -58,7 +58,7 @@ $user = Factory::getApplication()->getIdentity();
                 <?php if (!empty($this->item->delivery_date) && !empty($this->item->delivery)) : ?>
                     <?php $today = new DateTime(); ?>
                     <?php $date = new DateTime($this->item->delivery_date); ?>
-                    <?php if ($date >= $today) : ?>
+                    <?php if ($date->format('Y-m-d') >= $today->format('Y-m-d')) : ?>
                     <li class="list-group-item small"><span class="text-body-emphasis">Доставим</span> <?php echo $this->item->delivery; ?></li>
                     <?php endif; ?>
                 <?php endif; ?>
