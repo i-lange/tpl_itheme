@@ -98,7 +98,11 @@ $formId = 'i-form-' . $module->id;
                     <input type="hidden" name="products" value=''>
                     <input type="hidden" name="total" value="">
                     <input type="hidden" name="item_id" value="">
-                    <input type="hidden" name="title" value="Magazin-Gefest.BY - Заказ в 1 клик">
+                    <?php if ($title = $params->get('send_bitrix24_description', false)) : ?>
+                        <input type="hidden" name="title" value="<?php echo $title; ?>">
+                    <?php else : ?>
+                        <input type="hidden" name="title" value="Заказ в 1 клик">
+                    <?php endif; ?>
                     <input type="hidden" name="module_id" value="<?php echo $module->id; ?>">
                     <input type="hidden" name="metrika_client_id" value="">
                     <input type="hidden" name="google_client_id" value="">

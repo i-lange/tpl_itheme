@@ -91,9 +91,12 @@ $formId = 'i-form-' . $module->id;
                     </div>
                 <?php endif; ?>
                 <?php echo HTMLHelper::_('form.token'); ?>
-                <input type="hidden" name="title" value="Magazin-Gefest.BY - Запрос оптового прайса">
+                <?php if ($title = $params->get('send_bitrix24_description', false)) : ?>
+                    <input type="hidden" name="title" value="<?php echo $title; ?>">
+                <?php else : ?>
+                    <input type="hidden" name="title" value="Запрос оптового прайса">
+                <?php endif; ?>
                 <input type="hidden" name="module_id" value="<?php echo $module->id; ?>">
-                <input type="hidden" name="goal" value="FEEDBACK">
                 <input type="hidden" name="metrika_client_id" value="">
                 <input type="hidden" name="google_client_id" value="">
                 <?php echo LayoutHelper::render('itheme.utm_hidden_fields', ['utm' => $UTM]); ?>

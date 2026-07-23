@@ -181,7 +181,7 @@ if (!empty($this->checkout->products)) {
         <?php echo HTMLHelper::_('form.token'); ?>
         <input type="hidden" name="products" value='<?php echo json_encode($forMail); ?>'>
         <input type="hidden" name="total" value="<?php echo $this->checkout->summary; ?>&nbsp;руб.">
-        <input type="hidden" name="title" value="Magazin-Gefest.BY - Заказ из корзины">
+        <input type="hidden" name="title" value="Заказ из корзины">
         <input type="hidden" name="module_id" value="120">
         <input type="hidden" name="metrika_client_id" value="">
         <input type="hidden" name="google_client_id" value="">
