@@ -86,7 +86,7 @@ if ($this->state->get('filter.warehouse_id', false) !== false) {
     <h1><?php echo $this->escape($this->params->get('page_heading')); ?></h1>
 <?php endif; ?>
 <?php if ($this->params->get('show_category_title')) : ?>
-    <h2 class="mb-3"><?php echo $categoryTitle; ?> <span class="category-products-count"><?php echo $total; ?>&nbsp;<?php echo Text::_('COM_ISHOP_PSC'); ?></span></h2>
+    <h2 class="mb-3<?php echo ($total === 0 ) ? ' text-center' : ''; ?>"><?php echo $categoryTitle; ?> <span class="category-products-count"><?php echo $total; ?>&nbsp;<?php echo Text::_('COM_ISHOP_PSC'); ?></span></h2>
 <?php endif; ?>
 <?php if ($this->maxLevel != 0 && $this->get('children')) : ?>
     <?php echo $this->loadTemplate('children'); ?>
